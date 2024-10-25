@@ -1,5 +1,18 @@
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Home from "./pages/home/Home";
+import Detail from "./pages/detail/Detail";
+import Modify from "./pages/modify/Modify";
+
 function App() {
-  return <>루트화면입니다.</>;
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/home" element={<Home />} />
+        <Route path="/detail" element={<Detail />} />
+        <Route path="/modify" element={<Modify />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
 export default App;
