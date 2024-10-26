@@ -1,5 +1,5 @@
 import React from "react";
-import "./Color.css";
+import "../../css/Color.css";
 
 const Home = () => {
   return <div>home 화면입니다.</div>;
