@@ -9,7 +9,8 @@ body {
 
 @font-face {
   font-family: "Pretendard";
-  src: url("./src/fonts/Pretendard-Regular.ttf") format("truetype");
-  font-weight: 400;
+  src: url("../fonts/Pretendard-Regular.ttf") format("truetype");
+  /* 최상단 경로는 scr 폴더이후 인식됩니다. 크롬창에 폰트 인식되있는지 확인 */
+  font-weight: normal;
   font-style: normal;
 }
