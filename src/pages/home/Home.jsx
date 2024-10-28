@@ -1,11 +1,13 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
-import Header from "../../components/common/Header";
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import Header from '../../components/common/Header';
+import ShopCard from './ShopCard';
+import shopData from './ShopData';
 
 const Home = () => {
   const navigate = useNavigate();
   const handleButtonClick = () => {
-    navigate("/modify");
+    navigate('/modify');
   };
 
   return (
@@ -16,10 +18,12 @@ const Home = () => {
         <br />
         <br />
         <br />
-        <br />
         <a href="/detail">detail - 임시링크</a>
         <br />
         <a href="/modify">modify - 임시링크</a>
+        <div>
+          <ShopCard shopData={shopData} />
+        </div>
       </div>
     </>
   );
