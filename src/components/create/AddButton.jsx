@@ -1,7 +1,9 @@
+import './AddButton.css';
+
 function AddButton() {
   return (
     <>
-      <button>추가</button>
+      <button className="addButton">추가</button>
     </>
   );
 }

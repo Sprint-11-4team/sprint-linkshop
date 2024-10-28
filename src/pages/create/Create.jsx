@@ -1,14 +1,17 @@
-import React, { useState } from "react";
-import CreateForm from "../../components/create/CreateForm";
-import CreateFormPackage from "../../components/create/CreateFormPackage";
-import AddButton from "../../components/create/AddButton";
-import CreateButton from "../../components/create/CreateButton";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Header from '../../components/common/Header';
+import CreateForm from '../../components/create/CreateForm';
+import AddButton from '../../components/create/AddButton';
+import CreateFormPackage from '../../components/create/CreateFormPackage';
+import CreateButton from '../../components/create/CreateButton';
+import '../../components/create/Title.css';
 
 function Create() {
   const [userInfo, setUserInfo] = useState({
-    name: "",
-    id: "",
-    password: "",
+    name: '',
+    userId: '',
+    password: '',
   });
 
   const handleInputChange = (e) => {
@@ -19,15 +22,19 @@ function Create() {
     }));
   };
 
-  const { name, id, password } = userInfo;
+  const { name, userId, password } = userInfo;
+
+  const navigate = useNavigate();
+  const handleButtonClick = () => {
+    navigate('/');
+  };
 
   return (
     <div>
-      <form>
-        Head Components
+      <Header buttonName="돌아가기" onButtonClick={handleButtonClick} />
+      <form className="formBody">
         <div>
           <CreateForm
-            id="name"
             label="이름"
             name="name"
             value={name}
@@ -35,32 +42,34 @@ function Create() {
             onChange={handleInputChange}
           />
           <CreateForm
-            id="id"
             label="아이디"
-            name="id"
-            value={id}
+            name="userId"
+            value={userId}
             placeholder="아이디를 입력해주세요."
             onChange={handleInputChange}
           />
           <CreateForm
-            id="password"
             label="비밀번호"
             name="password"
             value={password}
             placeholder="숫자 4자리를 입력해주세요."
             onChange={handleInputChange}
           />
-          <h3>대표 상품</h3>
+          <h3 className="createH3">
+            대표 상품
+            <AddButton />
+          </h3>
           {/* h3 대신 SectionTitle로? */}
-          <AddButton />
           <CreateFormPackage />
           <CreateFormPackage />
-          <h3>내 쇼핑몰</h3>
-          <AddButton />
+          <h3 className="createH3">
+            내 쇼핑몰
+            <AddButton />
+          </h3>
           <CreateFormPackage />
+          <CreateButton />
         </div>
       </form>
-      <CreateButton />
     </div>
   );
 }
