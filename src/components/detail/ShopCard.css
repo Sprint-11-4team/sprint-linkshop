@@ -1,0 +1,60 @@
+.shopcard-containter {
+  background-color: #fafafb;
+}
+
+.shopcard-content {
+  padding: 20px 24px;
+}
+
+.shopcard-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.shopcard-header__heart {
+  display: flex;
+  gap: 6px;
+}
+
+.shopcard-header__iconarea {
+  display: flex;
+  gap: 16px;
+}
+
+.heart-image {
+  width: 21px;
+  height: 19px;
+}
+
+.share-image .edit-image {
+  width: 23px;
+  height: 23px;
+}
+
+.shop-image {
+  width: 84px;
+  height: 84px;
+}
+
+.shopcard-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding-top: 18px;
+}
+
+.shopcard-center__image {
+  width: 84px;
+  height: 84px;
+}
+
+.shopcard-center__name {
+  font-weight: 800;
+  font-size: 32px;
+}
+
+.shopcard-center__id {
+  font-weight: 400;
+  font-size: 16px;
+}
