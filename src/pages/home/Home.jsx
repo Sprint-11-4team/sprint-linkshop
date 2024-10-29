@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
+
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../../components/common/Header';
+import ShopCard from './ShopCard';
+import shopData from './ShopData';
 import ToastPopup from '../../components/common/ToastPopup';
 import Modal from '../../components/common/Modal';
 
@@ -12,6 +15,7 @@ const Home = () => {
   const navigate = useNavigate();
   const handleButtonClick = () => {
     navigate('/modify');
+
   };
 
   const handleOkClick = () => {
@@ -28,10 +32,12 @@ const Home = () => {
         <br />
         <br />
         <br />
-        <br />
         <a href="/detail">detail - 임시링크</a>
         <br />
         <a href="/modify">modify - 임시링크</a>
+        <div>
+          <ShopCard shopData={shopData} />
+        </div>
       </div>
       <div>
         <br />
