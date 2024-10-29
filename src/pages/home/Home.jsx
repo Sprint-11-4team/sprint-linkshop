@@ -12,6 +12,7 @@ const Home = () => {
   const handleButtonClick = () => {
     navigate('/modify');
   };
+
   const handleOkClick = () => {
     // 다른동작
     console.log('동작진행');
