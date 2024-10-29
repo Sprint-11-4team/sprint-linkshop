@@ -1,22 +1,13 @@
-
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../../components/common/Header';
 import SearchInput from '../../components/home/SearchInput';
 import CardList from './CardList';
-import ToastPopup from '../../components/common/ToastPopup';
-import Modal from '../../components/common/Modal';
 
 const Home = () => {
   const navigate = useNavigate();
   const handleButtonClick = () => {
     navigate('/modify');
-  };
-
-  const handleOkClick = () => {
-    // 다른동작
-    console.log('동작진행');
-    setOpenPopupTwo(false);
   };
 
   return (
