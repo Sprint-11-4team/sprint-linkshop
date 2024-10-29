@@ -11,6 +11,10 @@ import search from "./search.png";
 import share from "./share.png";
 import heartEmpty from "./heart-empty.png";
 import heartFill from "./heart-fill.png";
+import passwordToggleOn from "./password-toggle-on.png"
+import passwordToggleOff from "./password-toggle-off.png"
+
+
 
 export {
   bannerDesktop,
@@ -26,4 +30,6 @@ export {
   share,
   heartEmpty,
   heartFill,
+  passwordToggleOff,
+  passwordToggleOn
 };
