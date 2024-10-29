@@ -4,6 +4,7 @@ import Header from '../../components/common/Header';
 import SearchInput from '../../components/home/SearchInput';
 import CardList from './CardList';
 
+
 const Home = () => {
   const navigate = useNavigate();
   const handleButtonClick = () => {
