@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import ToastPopup from '../../components/common/ToastPopup';
-import Modal from '../../components/common/Modal';
-import Header from '../../components/common/Header';
+import ToastPopup from '../components/common/ToastPopup';
+import Modal from '../components/common/Modal';
+import Header from '../components/common/Header';
 import { useNavigate } from 'react-router-dom';
 
 const RootPage = () => {

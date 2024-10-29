@@ -3,7 +3,9 @@ import { edit, heartEmpty, share } from '../../images/icons';
 import shopImg from '../../images/shopInfo.png';
 import './ShopCard.css';
 
-const ShopCard = () => {
+const ShopCard = ({ onClickModify }) => {
+  const handleHeartClick = () => {};
+
   return (
     <div className="shopcard-containter">
       <div className="shopcard-content">
@@ -14,11 +16,16 @@ const ShopCard = () => {
               alt="좋아요아이콘"
               className="heart-image"
             ></img>
-            <div>65</div>
+            <div onClick={handleHeartClick}>65</div>
           </div>
           <div className="shopcard-header__iconarea">
             <img src={share} alt="공유하기아이콘" className="share-image"></img>
-            <img src={edit} alt="작성하기아이콘" className="edit-image"></img>
+            <img
+              src={edit}
+              alt="작성하기아이콘"
+              onClick={onClickModify}
+              className="edit-image"
+            ></img>
           </div>
         </div>
         <div className="shopcard-center">

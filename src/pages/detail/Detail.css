@@ -22,6 +22,26 @@
   height: 14px;
 }
 
+.detail-modal {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding-bottom: 35px;
+}
+
+.detail-modal__label {
+  font-weight: 600;
+  font-size: 20px;
+  padding-bottom: 14px;
+}
+
+.detail-modal__text {
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--black-color);
+  line-height: 19px;
+}
+
 /* TABLET */
 @media (min-width: 768px) and (max-width: 1199px) {
   .detail-container {
