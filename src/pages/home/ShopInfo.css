@@ -1,0 +1,58 @@
+.shop-card-info {
+  max-width: 587px;
+  max-height: 237px;
+  background-color: #fafafb;
+  padding: 24px;
+  margin: 24px;
+  border-radius: 25px;
+}
+
+.shop-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.shop-profile {
+  display: flex;
+  gap: 7px;
+  align-items: center;
+}
+
+.shop-image {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
+.shop-name {
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.shop-id {
+  font-weight: 400;
+  font-size: 16px;
+  color: #888790;
+}
+
+.shop-profile-products {
+  display: flex;
+  gap: 5px;
+  flex-direction: column;
+}
+
+.shop-products {
+  font-weight: 500;
+  font-size: 15px;
+  margin: 8px 0;
+}
+
+.like-button {
+  display: flex;
+  gap: 5px;
+}
+
+.likes-count {
+  font-weight: 500;
+  font-size: 16px;
+}
