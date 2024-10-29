@@ -1,3 +1,6 @@
-.createH3 {
+@import url('../../css/typography.css');
+
+.create-h3 {
   font-family: --font-pretendard-semibold-16;
+  margin: 40px 0 16px 0;
 }

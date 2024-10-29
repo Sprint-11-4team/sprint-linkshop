@@ -1,11 +1,11 @@
 import './AddButton.css';
 
-function AddButton() {
+const AddButton = () => {
   return (
     <>
-      <button className="addButton">추가</button>
+      <button className="add-button">추가</button>
     </>
   );
-}
+};
 
 export default AddButton;

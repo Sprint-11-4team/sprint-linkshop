@@ -1,0 +1,11 @@
+@import url('../../css/typography.css');
+
+.create-input-package {
+  background-color: #fafafb;
+  border-radius: 25px;
+  margin: 16px;
+}
+
+.create-input-package .create-label {
+  margin: 0;
+}
