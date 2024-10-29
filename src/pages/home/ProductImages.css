@@ -1,0 +1,10 @@
+.product-images {
+  display: flex;
+}
+
+.product-images img {
+  width: 95px;
+  height: 95px;
+  border-radius: 8px;
+  margin-right: 8px;
+}

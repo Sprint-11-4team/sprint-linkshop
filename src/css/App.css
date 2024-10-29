@@ -1,8 +1,10 @@
+@import './reset.css';
+
 * {
   box-sizing: border-box;
 }
 
 body {
   background-color: white;
-  font-family: "Pretendard";
+  font-family: 'Pretendard';
 }
