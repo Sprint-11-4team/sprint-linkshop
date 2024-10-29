@@ -33,8 +33,8 @@ const CardList = () => {
   if (error) return <div>{error}</div>;
 
   return (
-    <div className="shop-card-list">
-      <div>
+    <div className="shop-card-list-parent">
+      <div className="shop-card-list">
         {shopCardList.map((shop) => (
           <ShopCard key={shop.id} shopData={shop} />
         ))}
