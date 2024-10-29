@@ -1,0 +1,9 @@
+.CreateButton {
+  width: 696px;
+  border: none;
+  border-radius: 37px;
+  padding: 15px 135px;
+  color: var(--white-color);
+  background-color: var(--gray-700);
+  font: var(--font-pretendard-regular-18);
+}
