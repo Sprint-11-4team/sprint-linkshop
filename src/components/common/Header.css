@@ -40,3 +40,15 @@
 .headerButton:hover {
   background-color: #2c30a3;
 }
+
+@media (min-width: 768px) and (max-width: 1199px) {
+  .header-container {
+    padding-right: 55px;
+  }
+}
+
+@media (min-width: 365px) and (max-width: 767px) {
+  .header-container {
+    padding-right: 35px;
+  }
+}
