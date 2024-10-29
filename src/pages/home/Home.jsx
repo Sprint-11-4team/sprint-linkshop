@@ -1,7 +1,7 @@
-
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../../components/common/Header';
+import SearchInput from '../../components/home/SearchInput';
 import ShopCard from './ShopCard';
 import shopData from './ShopData';
 import ToastPopup from '../../components/common/ToastPopup';
@@ -15,7 +15,6 @@ const Home = () => {
   const navigate = useNavigate();
   const handleButtonClick = () => {
     navigate('/modify');
-
   };
 
   const handleOkClick = () => {
@@ -27,7 +26,9 @@ const Home = () => {
   return (
     <>
       <Header buttonName="생성하기" onButtonClick={handleButtonClick} />
+      <SearchInput />
       <div>
+        <br />
         <br />
         <br />
         <br />
