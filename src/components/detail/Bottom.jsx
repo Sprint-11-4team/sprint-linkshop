@@ -1,48 +1,41 @@
-import React, { useState, useEffect } from "react";
-import "../../css/bottom.css";
+import React, { useState, useEffect } from 'react';
+import './bottom.css';
 
-function ProductGallery() {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+function MainProduct() {
+  const [Product, setProduct] = useState(null);
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await fetch(""); // API 주소
-        if (!response.ok) {
-          throw new Error("데이터를 가져오지 못했습니다.");
-        }
-        const data = await response.json();
-        setProducts(data);
-      } catch (error) {
-        setError(error.message);
-      } finally {
-        setLoading(false);
-      }
+    const Product = async () => {
+      // const response = await fetch('API_ENDPOINT');
+      // const data = await response.json();
+
+      // API데이터
+      const data = {
+        image: "https://example.com/featured-image.png",
+        name: "아디다스 신발 - PZ379",
+        price: "₩134,000"
+      };
+
+      setProduct(data);
     };
 
-    fetchProducts();
+    Product();
   }, []);
 
-  if (loading) return <p>로딩 중...</p>;
-  if (error) return <p>에러 발생: {error}</p>;
+  // 로딩 상태를 처리
+  if (!Product) {
+    return <p>로딩 중...</p>;
+  }
 
   return (
     <div className="product">
-      {products.map((product) => (
-        <div key={product.id} className="product-item">
-          <img
-            src={product.image}
-            alt={product.name}
-            className="product-image"
-          />
-          <p>{product.name}</p>
-          <p>{product.price.toLocaleString()}원</p>
-        </div>
-      ))}
+      <img src={Product.image} alt={Product.name} className="image" />
+      <div className="info">
+        <h2 className="name">{Product.name}</h2>
+        <p className="price">{Product.price}</p>
+      </div>
     </div>
   );
 }
 
-export default Product;
+export default MainProduct;
