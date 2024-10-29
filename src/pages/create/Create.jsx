@@ -26,7 +26,7 @@ function Create() {
 
   const navigate = useNavigate();
   const handleButtonClick = () => {
-    navigate('/');
+    navigate('/list');
   };
 
   return (
