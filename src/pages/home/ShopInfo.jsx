@@ -5,7 +5,7 @@ import './ShopInfo.css';
 
 const ShopInfo = ({ shop, likes, productsCount, products, onLikeChange }) => {
   return (
-    <div className="shop-card">
+    <div className="shop-card-info">
       <div className="shop-container">
         <div className="shop-profile-products">
           <div className="shop-profile">
@@ -16,7 +16,7 @@ const ShopInfo = ({ shop, likes, productsCount, products, onLikeChange }) => {
             />
             <div className="shop-name-id">
               <p className="shop-name">{shop.urlName}</p>
-              <p className="shop-id">@{shop.id}</p>
+              <p className="shop-id">@{shop.userId}</p>
             </div>
           </div>
           <p className="shop-products">대표 상품 {productsCount}</p>

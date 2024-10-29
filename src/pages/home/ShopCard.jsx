@@ -21,5 +21,3 @@ const ShopCard = ({ shopData }) => {
 };
 
 export default ShopCard;
-
-// map 반복.

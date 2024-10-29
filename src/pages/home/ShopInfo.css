@@ -1,8 +1,9 @@
-.shop-card {
+.shop-card-info {
   max-width: 587px;
   max-height: 237px;
   background-color: #fafafb;
-  padding: 12px;
+  padding: 24px;
+  margin: 24px;
   border-radius: 25px;
 }
 
@@ -43,6 +44,7 @@
 .shop-products {
   font-weight: 500;
   font-size: 15px;
+  margin: 8px 0;
 }
 
 .like-button {
