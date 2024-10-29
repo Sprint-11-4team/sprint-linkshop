@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from '../../components/common/Header';
+
 import MainProductList from './MainProductList';
 import MyProductList from './MyProductList';
 import UserInfoForm from './UserInfoForm';
