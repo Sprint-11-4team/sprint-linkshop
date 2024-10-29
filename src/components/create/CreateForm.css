@@ -1,0 +1,27 @@
+@import url('../../css/typography.css');
+
+.formBody {
+  margin: 140px 612px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.createLabel {
+  display: flex;
+  flex-direction: column;
+  margin: 16px 0;
+  font-family: var(--font-pretendard-semibold-14);
+  background-color: #fafafb;
+  padding: 20px 28px;
+  border-radius: 25px;
+  width: 696px;
+  gap: 10px;
+}
+
+.createInput {
+  font-family: var(--font-pretendard-regular-17);
+  background-color: #fafafb;
+  color: #888790;
+  border: none;
+}

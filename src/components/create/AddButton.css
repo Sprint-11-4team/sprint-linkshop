@@ -1,0 +1,9 @@
+@import url('../../css/typography.css');
+
+.addButton {
+  background-color: var(--white-color);
+  border: none;
+  color: var(--Primary-blue);
+  font-family: var(--font-pretendard-bold-16);
+  float: right;
+}
