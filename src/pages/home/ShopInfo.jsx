@@ -10,8 +10,6 @@ const ShopInfo = ({ shop, likes, productsCount, products, onLikeChange }) => {
         <div className="shop-profile-products">
           <div className="shop-profile">
             <img
-              onClick={() => window.open(shop.shopUrl, '_blank')}
-              style={{ cursor: 'pointer' }}
               src={shop.imageUrl}
               alt={shop.urlName}
               className="shop-image-url"
