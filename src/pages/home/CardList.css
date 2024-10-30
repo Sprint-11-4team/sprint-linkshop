@@ -1,13 +1,16 @@
 .shop-card-list {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
   justify-content: center;
-  display: flex;
-  align-items: center;
   flex-wrap: wrap;
-  align-items: flex-start;
 }
 
 .shop-card {
   width: 587px;
-  max-width: 1500px;
+}
+
+.shop-card-list-parent {
+  display: flex;
+  justify-content: center;
 }
