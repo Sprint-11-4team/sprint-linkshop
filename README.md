@@ -16,4 +16,4 @@
 - 구민진 : 메인 페이지담당
 
 ## 배포 주소
-https://project-linkshop.netlify.app/list
+https://project-linkshop.netlify.app
