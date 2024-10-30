@@ -32,13 +32,13 @@ const CardList = ({ shops }) => {
   // if (error) return <div>{error}</div>;
 
   return (
-
     <div className="shop-card-list-parent">
       <div className="shop-card-list">
-        {shopCardList.map((shop) => (
+        <div>
           {shops.map((shop) => (
             <ShopCard key={shop.id} shopData={shop} />
           ))}
+        </div>
       </div>
     </div>
   );
