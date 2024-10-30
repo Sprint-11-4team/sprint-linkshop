@@ -8,6 +8,9 @@
   display: flex;
   align-items: center;
   padding: 25px 0 20px;
+  cursor: pointer;
+  text-decoration: none;
+  width: 80px;
 }
 
 .detail-container__back .text {

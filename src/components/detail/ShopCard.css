@@ -24,11 +24,19 @@
 .heart-image {
   width: 21px;
   height: 19px;
+  cursor: pointer;
 }
 
-.share-image .edit-image {
+.share-image {
   width: 23px;
   height: 23px;
+  cursor: pointer;
+}
+
+.edit-image {
+  width: 23px;
+  height: 23px;
+  cursor: pointer;
 }
 
 .shop-image {
