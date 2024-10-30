@@ -4,11 +4,12 @@ import ShopCard from '../../components/detail/ShopCard';
 import './Detail.css';
 import { back } from '../../images/icons';
 import Modal from '../../components/common/Modal';
-import CreateInput from '../../components/create/CreateInput';
+import CreateInput from '../../components/create/CreateInput'
 import CreateButton from '../../components/create/CreateButton';
 import { Link } from 'react-router-dom';
 import { fetchDetailData, fetchLike } from '../../api/detailApi';
 import useAsync from '../../api/useAsync';
+import Bottom from '../../components/detail/Bottom'
 
 const Detail = () => {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -91,6 +92,7 @@ const Detail = () => {
           </div>
         </Modal>
       </div>
+      <Bottom />
     </div>
   );
 };
