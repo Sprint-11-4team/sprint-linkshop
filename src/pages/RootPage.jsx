@@ -17,7 +17,7 @@ const RootPage = () => {
   };
 
   const handleButtonClick = () => {
-    navigate('/modify');
+    navigate('/create');
   };
 
   return (
