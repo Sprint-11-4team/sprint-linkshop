@@ -1,0 +1,29 @@
+.product-list {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    padding: 20px;
+}
+
+.product-card {
+    border: 1px solid #FAFAFB;
+    border-radius: 24px;
+    width: 588px;
+    height: 127px;
+}
+
+.product-image {
+    width: 100%;
+}
+
+.product-name{
+    font-weight: 400px;
+    font-size: 17px;
+    line-height: 20.29px;
+}
+
+.product-price{
+    font-weight: 700px;
+    font-size: 20px;
+    line-height: 23.87px;
+}
