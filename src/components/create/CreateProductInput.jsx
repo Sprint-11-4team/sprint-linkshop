@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import CreateInput from './CreateInput';
-import './CreateInputPackage.css';
+import './CreateProductInput.css';
 import ItemImgInput from './ItemImgInput';
 
-const CreateInputPackage = () => {
+const CreateProductInput = () => {
   // const [itemImg, setItemImg] = useState('');
   const [itemName, setItemName] = useState([]);
   const [price, setPrice] = useState('');
@@ -29,4 +29,4 @@ const CreateInputPackage = () => {
   );
 };
 
-export default CreateInputPackage;
+export default CreateProductInput;

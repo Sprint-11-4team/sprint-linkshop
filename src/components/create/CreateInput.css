@@ -10,7 +10,7 @@
 .create-label {
   display: flex;
   flex-direction: column;
-  margin: 16px 0;
+  margin: 8px 0;
   font-family: var(--font-pretendard-semibold-14);
   background-color: #fafafb;
   padding: 20px 28px;

@@ -1,9 +1,9 @@
 @import url('../../css/typography.css');
 
 .create-input-package {
+  margin: 8px 0;
   background-color: #fafafb;
   border-radius: 25px;
-  margin: 16px;
 }
 
 .create-input-package .create-label {

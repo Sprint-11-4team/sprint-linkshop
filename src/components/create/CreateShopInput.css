@@ -1,0 +1,9 @@
+.create-shop-input-package {
+  margin: 8px 0 54px 0;
+  background-color: #fafafb;
+  border-radius: 25px;
+}
+
+.create-shop-input-package .create-label {
+  margin: 0;
+}
