@@ -12,7 +12,7 @@ const ShopInfo = ({ shop, likes, productsCount, products, onLikeChange }) => {
             <img
               src={shop.imageUrl}
               alt={shop.urlName}
-              className="shop-image"
+              className="shop-image-url"
             />
             <div className="shop-name-id">
               <p className="shop-name">{shop.urlName}</p>

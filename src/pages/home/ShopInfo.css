@@ -1,9 +1,9 @@
 .shop-card-info {
-  max-width: 587px;
+  width: 587px;
   max-height: 237px;
   background-color: #fafafb;
   padding: 24px;
-  margin: 24px;
+  margin: 12px;
   border-radius: 25px;
 }
 
@@ -14,11 +14,11 @@
 
 .shop-profile {
   display: flex;
-  gap: 7px;
+  gap: 15px;
   align-items: center;
 }
 
-.shop-image {
+.shop-image-url {
   width: 60px;
   height: 60px;
   border-radius: 50%;
