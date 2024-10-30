@@ -2,7 +2,7 @@ import React from 'react';
 import './Modal.css';
 import { close } from '../../images/icons';
 
-const Modal = ({ isOpen, onClose }) => {
+const Modal = ({ isOpen, onClose, children }) => {
   if (!isOpen) return null;
 
   return (
@@ -14,6 +14,7 @@ const Modal = ({ isOpen, onClose }) => {
           className="close-button"
           onClick={onClose}
         ></img>
+        {children}
       </div>
     </div>
   );
