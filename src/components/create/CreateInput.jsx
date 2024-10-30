@@ -1,8 +1,15 @@
 import './CreateInput.css';
 
-const CreateInput = ({ label, name, value, onChange, placeholder }) => {
+const CreateInput = ({
+  label,
+  name,
+  value,
+  onChange,
+  placeholder,
+  message,
+}) => {
   return (
-    <div>
+    <>
       <label className="create-label">
         {label}
         <input
@@ -14,7 +21,8 @@ const CreateInput = ({ label, name, value, onChange, placeholder }) => {
           required
         />
       </label>
-    </div>
+      <p className="message">{message}</p>
+    </>
   );
 };
 

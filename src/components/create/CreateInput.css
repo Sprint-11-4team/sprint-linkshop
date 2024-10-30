@@ -24,7 +24,11 @@
   background-color: #fafafb;
   color: #888790;
   border: none;
+  outline: none;
 }
 
-/* .passwordInput {
-} */
+.input-value-check-message {
+  color: #fb545b;
+  font-size: 12px;
+  font-weight: 400;
+}
