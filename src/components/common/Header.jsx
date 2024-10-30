@@ -8,7 +8,7 @@ const Header = ({ buttonName, onButtonClick }) => {
     <header className="header">
       <div className="header-container">
         <div className="logoContainer">
-          <Link to="/">
+          <Link to="/list">
             <img src={logo} className="logo" alt="Logo" />
           </Link>
         </div>
