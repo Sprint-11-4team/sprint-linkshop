@@ -12,7 +12,9 @@ const Home = () => {
   const [searchShop, setSearchShop] = useState(''); // 검색어 상태
   const [shopList, setShopList] = useState([]); // 전체 샵 목록
   const [visibleShops, setVisibleShops] = useState([]); // 화면에 보이는 샵 목록 상태
+  const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
+  const itemsPerPage = 12;
 
   // 데이터 가져오기
   useEffect(() => {
@@ -20,7 +22,7 @@ const Home = () => {
       try {
         const shopData = await fetchShopData();
         setShopList(shopData);
-        setVisibleShops(shopData);
+        setVisibleShops(shopData.slice(0, itemsPerPage));
       } catch (err) {
         console.error(err.message);
       } finally {
@@ -35,16 +37,34 @@ const Home = () => {
     const filtered = shopList.filter((shop) =>
       shop.name.toLowerCase().includes(searchShop.toLowerCase()),
     );
-    setVisibleShops(filtered);
-  }, [searchShop, shopList]);
+    setVisibleShops(filtered.slice(0, page * itemsPerPage));
+  }, [searchShop, shopList, page]);
 
   const handleSearchChange = (value) => {
     setSearchShop(value); // 검색어 업데이트
+    setPage(1);
   };
 
   const handleButtonClick = () => {
     navigate('/create');
   };
+
+  // 스크롤 이벤트 핸들러
+  const handleScroll = () => {
+    if (
+      window.innerHeight + document.documentElement.scrollTop >=
+      document.documentElement.scrollHeight - 200
+    ) {
+      setPage((prevPage) => prevPage + 1); // 페이지 증가
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   if (loading) {
     return (
@@ -62,14 +82,6 @@ const Home = () => {
         onSearchChange={handleSearchChange}
       />
       <div>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <a href="/detail">detail - 임시링크</a>
-        <br />
-        <a href="/modify">modify - 임시링크</a>
         <div>
           {visibleShops.length > 0 ? (
             <CardList shops={visibleShops} />
