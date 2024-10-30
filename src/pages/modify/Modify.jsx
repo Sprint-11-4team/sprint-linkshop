@@ -3,8 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import Header from '../../components/common/Header';
 import CreateInput from '../../components/create/CreateInput';
 import AddButton from '../../components/create/AddButton';
-import CreateInputPackage from '../../components/create/CreateInputPackage';
-import '../../components/create/Title.css';
 import CreatePasswordButton from '../../components/create/CreatePasswordButton';
 import ModifyButton from '../../components/create/ModifyButton';
 
@@ -65,13 +63,10 @@ const Modify = () => {
             <AddButton />
           </h3>
           {/* h3 대신 SectionTitle로? */}
-          <CreateInputPackage />
-          <CreateInputPackage />
           <h3 className="create-h3">
             내 쇼핑몰
             <AddButton />
           </h3>
-          <CreateInputPackage />
           <ModifyButton />
         </div>
       </form>
