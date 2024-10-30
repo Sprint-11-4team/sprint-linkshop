@@ -1,6 +1,6 @@
 @import url('../../css/typography.css');
 
-.addButton {
+.add-button {
   background-color: var(--white-color);
   border: none;
   color: var(--Primary-blue);

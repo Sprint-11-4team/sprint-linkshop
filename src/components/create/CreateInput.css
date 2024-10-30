@@ -1,13 +1,13 @@
 @import url('../../css/typography.css');
 
-.formBody {
+.form-body {
   margin: 140px 612px 0;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.createLabel {
+.create-label {
   display: flex;
   flex-direction: column;
   margin: 16px 0;
@@ -19,9 +19,12 @@
   gap: 10px;
 }
 
-.createInput {
+.create-input {
   font-family: var(--font-pretendard-regular-17);
   background-color: #fafafb;
   color: #888790;
   border: none;
 }
+
+/* .passwordInput {
+} */

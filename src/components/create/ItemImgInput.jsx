@@ -1,7 +1,7 @@
 // import { useState } from 'react';
 import './ItemImgInput.css';
 
-function ItemImgInput() {
+const ItemImgInput = () => {
   // const [itemImg, setItemImg] = useState();
   // const [imagePreviewUrl, setImagePreviewUrl] = useState('');
 
@@ -18,17 +18,26 @@ function ItemImgInput() {
   //   };
 
   return (
-    <label>
-      <input
-        className="itemImgInput"
-        type="file"
-        placeholder="상품 이미지를 첨부해주세요."
-        accept="image/*"
-        // onChange={handleFileChange}
-      />
-      <button>파일 첨부</button>
-    </label>
+    <div className="img-box">
+      <label className="item-img-title">
+        상품 대표 이미지
+        <p>상품 이미지를 첨부해 주세요.</p>
+      </label>
+      <div>
+        <label htmlFor="itemImgFile" className="item-img-label">
+          파일 첨부
+        </label>
+        <input
+          id="itemImgFile"
+          name="itemImgFile"
+          className="item-img-input"
+          type="file"
+          accept="image/*"
+          // onChange={handleFileChange}
+        />
+      </div>
+    </div>
   );
-}
+};
 
 export default ItemImgInput;

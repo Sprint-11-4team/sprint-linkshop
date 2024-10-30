@@ -4,7 +4,7 @@ import ShopCard from '../../components/detail/ShopCard';
 import './Detail.css';
 import { back } from '../../images/icons';
 import Modal from '../../components/common/Modal';
-import CreateForm from '../../components/create/CreateForm';
+import CreateInput from '../../components/create/CreateInput';
 import CreateButton from '../../components/create/CreateButton';
 import { Link } from 'react-router-dom';
 import { fetchDetailData, fetchLike } from '../../api/detailApi';
@@ -82,7 +82,7 @@ const Detail = () => {
             <div className="detail-modal__text">
               편집하기 위해 설정한 비밀번호를 입력하세요
             </div>
-            <CreateForm
+            <CreateInput
               label="비밀번호"
               placeholder="비밀번호를 입력해 주세요."
             />

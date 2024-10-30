@@ -1,11 +1,11 @@
-import "./CreateButton.css";
+import './CreateButton.css';
 
-function CreateButton() {
+const CreateButton = () => {
   return (
     <div>
-      <button className="CreateButton">생성하기</button>
+      <button className="create-button">생성하기</button>
     </div>
   );
-}
+};
 
 export default CreateButton;
