@@ -14,7 +14,7 @@ const Home = () => {
   const [visibleShops, setVisibleShops] = useState([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
-  const itemsPerPage = 12;
+  const itemsPerPage = 10;
 
   useEffect(() => {
     const fetchShops = async () => {
@@ -47,6 +47,12 @@ const Home = () => {
     navigate('/create');
   };
 
+  const loadMoreShops = () => {
+    if (visibleShops.length < shopList.length) {
+      setPage((prevPage) => prevPage + 1);
+    }
+  };
+
   if (loading) {
     return <LoadingSpinner />;
   }
@@ -59,7 +65,7 @@ const Home = () => {
         onSearchChange={handleSearchChange}
       />
       <ShopList visibleShops={visibleShops} />
-      <ScrollHandler setPage={setPage} />
+      <ScrollHandler loadMore={loadMoreShops} />
     </>
   );
 };
