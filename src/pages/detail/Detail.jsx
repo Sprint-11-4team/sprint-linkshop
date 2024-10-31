@@ -12,7 +12,7 @@ import {
 } from '../../api/detailApi';
 import useAsync from '../../api/useAsync';
 import Bottom from '../../components/detail/Bottom';
-import LoadingSpinner from '../home/LoadingSpinner';
+import LoadingSpinner from '../../components/common/LoadingSpinner';
 import ModalContent from '../../components/detail/ModalContent';
 import ShopListBtn from '../../components/detail/ShopListBtn';
 

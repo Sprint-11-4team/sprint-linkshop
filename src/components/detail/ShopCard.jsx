@@ -1,7 +1,7 @@
 import React from 'react';
 import { edit, share } from '../../images/icons';
 import './ShopCard.css';
-import LikeButton from '../../pages/home/LikeButton';
+import LikeButton from '../home/LikeButton';
 
 const ShopCard = ({
   onClickModify,
