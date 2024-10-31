@@ -1,10 +1,11 @@
 import React from 'react';
-import { edit, heartEmpty, share } from '../../images/icons';
+import { edit, share } from '../../images/icons';
 import './ShopCard.css';
+import LikeButton from '../../pages/home/LikeButton';
 
 const ShopCard = ({
   onClickModify,
-  onClickHeart,
+  onLikeChange,
   onShareClick,
   detailData,
   likes,
@@ -15,20 +16,13 @@ const ShopCard = ({
 
   const { name, userId, shop } = detailData;
 
-  const handleHeartClick = () => {};
-
   return (
     <div className="shopcard-containter">
       <div className="shopcard-content">
         <div className="shopcard-header">
           <div className="shopcard-header__heart">
-            <img
-              src={heartEmpty}
-              alt="좋아요아이콘"
-              className="heart-image"
-              onClick={onClickHeart}
-            ></img>
-            <div onClick={handleHeartClick}>{likes}</div>
+            <LikeButton initialLikes={likes} onLikeChange={onLikeChange} />
+            <p className="likes-count">{likes}</p>
           </div>
           <div className="shopcard-header__iconarea">
             <img
