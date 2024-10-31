@@ -36,3 +36,23 @@ export const fetchLike = async ({ teamId = '', linkShopId = '' }) => {
     throw new Error(error.message);
   }
 };
+
+// 링크샵에 좋아오 해제
+export const fetchDeleteLike = async ({ teamId = '', linkShopId = '' }) => {
+  try {
+    const response = await fetch(
+      `${BASE_URL}/${teamId}/linkshops/${linkShopId}/like`,
+      {
+        method: 'DELETE',
+      },
+    );
+    if (!response.ok) {
+      throw new Error('네트워크가 응답하지 않습니다.');
+    }
+    const data = await response.json();
+    console.log(data); // 데이터확인
+    return data;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};

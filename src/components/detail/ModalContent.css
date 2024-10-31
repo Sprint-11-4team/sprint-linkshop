@@ -1,0 +1,49 @@
+.detail-modal {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding-bottom: 35px;
+}
+
+.detail-modal__label {
+  font-weight: 600;
+  font-size: 20px;
+  padding-bottom: 14px;
+}
+
+.detail-modal__text {
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--black-color);
+  line-height: 19px;
+}
+
+/* 임시사용 */
+.detail-create-label {
+  display: flex;
+  flex-direction: column;
+  margin: 16px 0;
+  font-family: var(--font-pretendard-semibold-14);
+  background-color: #fafafb;
+  padding: 20px 28px;
+  border-radius: 25px;
+  gap: 10px;
+}
+
+.detail-create-input {
+  font-family: var(--font-pretendard-regular-17);
+  background-color: #fafafb;
+  color: #888790;
+  border: none;
+}
+
+.detail-create-button {
+  border: none;
+  border-radius: 37px;
+  padding: 15px 150px;
+  color: var(--white-color);
+  background-color: var(--Primary-blue);
+  font: var(--font-pretendard-regular-18);
+}
+
+/* ----- */
