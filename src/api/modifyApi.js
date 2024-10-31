@@ -1,7 +1,9 @@
 const teamId = '10-4';
 const linkShopId = 54;
 
-async function updateLinkShop(teamId, linkShopId, updatedData) {
+// modify 조회 api
+
+export async function updateLinkShop(teamId, linkShopId, updatedData) {
   const url = `https://linkshop-api.vercel.app/${teamId}/linkshops/${linkShopId}`;
   const res = await fetch(url, {
     method: 'PUT',
@@ -19,4 +21,26 @@ async function updateLinkShop(teamId, linkShopId, updatedData) {
   return data;
 }
 
-export default updateLinkShop;
+// modify 조회 api
+
+export async function lookupLinkShop(teamId, linkShopId) {
+  const url = `https://linkshop-api.vercel.app/${teamId}/linkshops/${linkShopId}`;
+
+  try {
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error(
+        `리소스를 조회하는 데 실패했습니다. 상태 코드: ${response.status}`,
+      );
+    }
+
+    const data = await response.json();
+    const result = { name: data.name, id: data.id };
+    console.log('조회 성공:', result);
+    return result;
+  } catch (error) {
+    console.error('조회 실패:', error);
+    throw error;
+  }
+}
