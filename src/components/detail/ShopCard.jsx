@@ -46,7 +46,7 @@ const ShopCard = ({
             className="shopcard-center__image"
           ></img>
           <div className="shopcard-center__name">{name}</div>
-          <div className="shopcard-center__id">{userId}</div>
+          <div className="shopcard-center__id">@{userId}</div>
         </div>
       </div>
     </div>
