@@ -1,8 +1,8 @@
 const BASE_URL = 'https://linkshop-api.vercel.app/11-4/linkshops';
 
-export const addLike = async (shopId) => {
+export const addLike = async (linkShopId) => {
   try {
-    const response = await fetch(`${BASE_URL}/${shopId}/like`, {
+    const response = await fetch(`${BASE_URL}/${linkShopId}/like`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -22,9 +22,9 @@ export const addLike = async (shopId) => {
   }
 };
 
-export const removeLike = async (shopId) => {
+export const removeLike = async (linkShopId) => {
   try {
-    const response = await fetch(`${BASE_URL}/${shopId}/like`, {
+    const response = await fetch(`${BASE_URL}/${linkShopId}/like`, {
       method: 'DELETE',
       headers: {
         Accept: 'application/json',
