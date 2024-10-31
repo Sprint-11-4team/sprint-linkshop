@@ -1,50 +1,45 @@
 @font-face {
-  font-family: "Pretendard";
+  font-family: 'Pretendard';
   font-weight: 400;
-  src: url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-regular.woff2")
-    format("woff2");
+  src: url('./fonts/Pretendard-Regular.woff2') format('woff2');
 }
 
 @font-face {
-  font-family: "Pretendard";
+  font-family: 'Pretendard';
   font-weight: 500;
-  src: url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-medium.woff2")
-    format("woff2");
+  src: url('./fonts/Pretendard-Medium.woff2') format('woff2');
 }
 
 @font-face {
-  font-family: "Pretendard";
+  font-family: 'Pretendard';
   font-weight: 600;
-  src: url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-semibold.woff2")
-    format("woff2");
+  src: url('./fonts/Pretendard-SemiBold.woff2') format('woff2');
 }
 
 @font-face {
-  font-family: "Pretendard";
+  font-family: 'Pretendard';
   font-weight: 700;
-  src: url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard-bold.woff2")
-    format("woff2");
+  src: url('./fonts/Pretendard-Bold.woff2') format('woff2');
 }
 
 :root {
-  --font-pretendard-bold-20: 20pt "Pretendard", 700; /* bold is 700 */
+  --font-pretendard-bold-20: 20pt 'Pretendard', 700;
+  --font-pretendard-medium-18: 18pt 'Pretendard', 500;
+  --font-pretendard-regular-18: 18pt 'Pretendard', 400;
 
-  --font-pretendard-medium-18: 18pt "Pretendard", 500;
-  --font-pretendard-regular-18: 18pt "Pretendard", 400;
+  --font-pretendard-semibold-17: 17pt 'Pretendard', 600;
+  --font-pretendard-medium-17: 17pt 'Pretendard', 500;
+  --font-pretendard-regular-17: 17pt 'Pretendard', 400;
 
-  --font-pretendard-semibold-17: 17pt "Pretendard", 600;
-  --font-pretendard-medium-17: 17pt "Pretendard", 500;
-  --font-pretendard-regular-17: 17pt "Pretendard", 400;
+  --font-pretendard-bold-16: 16pt 'Pretendard', 700;
+  --font-pretendard-semibold-16: 16pt 'Pretendard', 600;
+  --font-pretendard-medium-16: 16pt 'Pretendard', 500;
+  --font-pretendard-regular-16: 16pt 'Pretendard', 400;
 
-  --font-pretendard-bold-16: 16pt "Pretendard", 700;
-  --font-pretendard-semibold-16: 16pt "Pretendard", 600;
-  --font-pretendard-medium-16: 16pt "Pretendard", 500;
-  --font-pretendard-regular-16: 16pt "Pretendard", 400;
+  --font-pretendard-semibold-15: 15pt 'Pretendard', 600;
+  --font-pretendard-medium-15: 15pt 'Pretendard', 500;
 
-  --font-pretendard-semibold-15: 15pt "Pretendard", 600;
-  --font-pretendard-medium-15: 15pt "Pretendard", 500;
-
-  --font-pretendard-semibold-14: 14pt "Pretendard", 600;
+  --font-pretendard-semibold-14: 14pt 'Pretendard', 600;
 }
 
 /* 
