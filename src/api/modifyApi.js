@@ -1,8 +1,8 @@
-const BASE_URL = 'https://linkshop-api.vercel.app';
-const LINK_SHOP_ID = '56';
+const teamId = '10-4';
+const linkShopId = 54;
 
 async function updateLinkShop(teamId, linkShopId, updatedData) {
-  const url = `https://yourapi.com/${teamId}/linkshops/${linkShopId}`;
+  const url = `https://linkshop-api.vercel.app/${teamId}/linkshops/${linkShopId}`;
   const res = await fetch(url, {
     method: 'PUT',
     headers: {
@@ -18,3 +18,5 @@ async function updateLinkShop(teamId, linkShopId, updatedData) {
   const data = await res.json();
   return data;
 }
+
+export default updateLinkShop;
