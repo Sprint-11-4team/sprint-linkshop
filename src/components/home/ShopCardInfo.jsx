@@ -13,8 +13,9 @@ const ShopCardInfo = ({ shopData }) => {
   const handleCardClick = () => {
     detailNavigate(`/detail/${shopData.id}`);
   };
+
   return (
-    <div className="shop-card" onClick={handleCardClick}>
+    <div className="shop-card">
       <ShopInfo
         shop={shopData.shop}
         userId={shopData.userId}
@@ -22,6 +23,8 @@ const ShopCardInfo = ({ shopData }) => {
         productsCount={shopData.productsCount}
         products={shopData.products}
         onLikeChange={handleLikeChange}
+        onCardClick={handleCardClick}
+        linkShopId={shopData.id}
       />
     </div>
   );
