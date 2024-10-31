@@ -47,7 +47,7 @@
   }
 }
 
-@media (min-width: 365px) and (max-width: 767px) {
+@media (max-width: 767px) {
   .header-container {
     padding-right: 35px;
   }

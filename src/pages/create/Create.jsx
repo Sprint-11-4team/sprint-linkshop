@@ -3,9 +3,10 @@ import { useNavigate } from 'react-router-dom';
 import Header from '../../components/common/Header';
 import CreateInput from '../../components/create/CreateInput';
 import AddButton from '../../components/create/AddButton';
-import CreateInputPackage from '../../components/create/CreateInputPackage';
+import CreateProductInput from '../../components/create/CreateProductInput';
 import CreateButton from '../../components/create/CreateButton';
-import '../../components/create/Title.css';
+import CreateShopInput from '../../components/create/CreateShopInput';
+import '../../components/create/Create.css';
 import CreatePasswordButton from '../../components/create/CreatePasswordButton';
 
 function Create() {
@@ -23,7 +24,7 @@ function Create() {
     }));
   };
 
-  const { name, userId, password } = userInfo;
+  const { name, userId } = userInfo;
 
   const navigate = useNavigate();
   const handleButtonClick = () => {
@@ -34,7 +35,7 @@ function Create() {
     <div>
       <Header buttonName="돌아가기" onButtonClick={handleButtonClick} />
       <form className="form-body">
-        <div>
+        <div className="create-input-wrapper">
           <CreateInput
             label="이름"
             name="name"
@@ -49,29 +50,22 @@ function Create() {
             placeholder="아이디를 입력해주세요."
             onChange={handleInputChange}
           />
-          <div>
-            <CreateInput
-              className="passwordInput"
-              label="비밀번호"
-              name="password"
-              value={password}
-              placeholder="숫자 4자리를 입력해주세요."
-              onChange={handleInputChange}
-            />
-            <CreatePasswordButton />
+          <CreatePasswordButton />
+          <div className="create-input-package-wrapper">
+            <div className="create-input-package-title">
+              <h3>대표 상품</h3>
+              <AddButton />
+            </div>
+            <CreateProductInput />
+            <CreateProductInput />
           </div>
-          <h3 className="create-h3">
-            대표 상품
-            <AddButton />
-          </h3>
-          {/* h3 대신 SectionTitle로? */}
-          <CreateInputPackage />
-          <CreateInputPackage />
-          <h3 className="create-h3">
-            내 쇼핑몰
-            <AddButton />
-          </h3>
-          <CreateInputPackage />
+          <div className="create-input-package-wrapper">
+            <div className="create-input-package-title">
+              <h3>내 쇼핑몰</h3>
+              <AddButton />
+            </div>
+            <CreateShopInput />
+          </div>
           <CreateButton />
         </div>
       </form>

@@ -1,0 +1,34 @@
+@import url('../../css/typography.css');
+
+.create-form-body {
+  margin: 140px 612px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.create-input-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* .create-input-package-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+} */
+
+.create-input-package-wrapper {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-between; */
+}
+
+.create-input-package-title {
+  font-family: var(--font-pretendard-semibold-16);
+  margin: 24px 0 8px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

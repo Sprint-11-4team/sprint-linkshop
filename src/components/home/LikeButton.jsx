@@ -13,7 +13,7 @@ const LikeButton = ({ initialLikes, onLikeChange }) => {
     setIsLiked((prev) => !prev);
     const newCount = !isLiked ? countLikes + 1 : countLikes - 1;
     setCountLikes(newCount);
-    onLikeChange(newCount);
+    onLikeChange(newCount, !isLiked);
   };
 
   return (

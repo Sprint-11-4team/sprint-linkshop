@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../../components/common/Header';
 import SearchInput from '../../components/home/SearchInput';
-import ShopList from './ShopList';
-import LoadingSpinner from './LoadingSpinner';
-import ScrollHandler from './ScrollHandler';
+import ShopList from '../../components/home/ShopList';
+import LoadingSpinner from '../../components/common/LoadingSpinner';
+import ScrollHandler from '../../components/home/ScrollHandler';
 import { fetchShopData } from '../../api/homeApi';
 
 const Home = () => {
@@ -14,7 +14,7 @@ const Home = () => {
   const [visibleShops, setVisibleShops] = useState([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
-  const itemsPerPage = 12;
+  const itemsPerPage = 10;
 
   useEffect(() => {
     const fetchShops = async () => {
@@ -47,6 +47,12 @@ const Home = () => {
     navigate('/create');
   };
 
+  const loadMoreShops = () => {
+    if (visibleShops.length < shopList.length) {
+      setPage((prevPage) => prevPage + 1);
+    }
+  };
+
   if (loading) {
     return <LoadingSpinner />;
   }
@@ -59,7 +65,7 @@ const Home = () => {
         onSearchChange={handleSearchChange}
       />
       <ShopList visibleShops={visibleShops} />
-      <ScrollHandler setPage={setPage} />
+      <ScrollHandler loadMore={loadMoreShops} />
     </>
   );
 };
