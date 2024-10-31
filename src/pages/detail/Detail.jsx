@@ -83,6 +83,9 @@ const Detail = () => {
           likes={likes}
         />
         <ShopListBtn />
+        <div className="bottom-text">
+          대표 상품
+        </div>
         <Bottom />
       </div>
       <Modal

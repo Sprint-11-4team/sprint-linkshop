@@ -25,6 +25,14 @@
   height: 14px;
 }
 
+.bottom-text{
+  width: 600px;
+  font-size: 16px;
+  margin-bottom: 16px;
+  margin-top: 40px;
+  line-height: 19.90px;
+}
+
 /* TABLET */
 @media (min-width: 768px) and (max-width: 1199px) {
   .detail-container {
