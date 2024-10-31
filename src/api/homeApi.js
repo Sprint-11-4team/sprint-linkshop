@@ -6,8 +6,8 @@ export const fetchShopData = async () => {
     if (!response.ok) {
       throw new Error('네트워크가 응답하지 않습니다.');
     }
-    const shopdata = await response.json();
-    return shopdata.list;
+    const shopData = await response.json();
+    return shopData.list;
   } catch (error) {
     throw new Error(error.message);
   }

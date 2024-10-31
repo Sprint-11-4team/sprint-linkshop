@@ -11,6 +11,7 @@ const ShopCard = ({ shopData }) => {
     <div className="shop-card">
       <ShopInfo
         shop={shopData.shop}
+        userId={shopData.userId}
         likes={likes}
         productsCount={shopData.productsCount}
         products={shopData.products}

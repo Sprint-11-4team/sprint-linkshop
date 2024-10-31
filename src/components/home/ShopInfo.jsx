@@ -3,7 +3,14 @@ import LikeButton from './LikeButton';
 import ProductImages from './ProductImages';
 import './ShopInfo.css';
 
-const ShopInfo = ({ shop, likes, productsCount, products, onLikeChange }) => {
+const ShopInfo = ({
+  shop,
+  userId,
+  likes,
+  productsCount,
+  products,
+  onLikeChange,
+}) => {
   return (
     <div className="shop-card-info">
       <div className="shop-container">
@@ -16,7 +23,7 @@ const ShopInfo = ({ shop, likes, productsCount, products, onLikeChange }) => {
             />
             <div className="shop-name-id">
               <p className="shop-name">{shop.urlName}</p>
-              <p className="shop-id">@{shop.userId}</p>
+              <p className="shop-id">@{userId}</p>
             </div>
           </div>
           <p className="shop-products">대표 상품 {productsCount}</p>
