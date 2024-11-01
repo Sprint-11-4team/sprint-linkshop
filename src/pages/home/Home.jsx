@@ -55,7 +55,12 @@ const Home = () => {
   };
 
   const handleSortDataChange = (sortData) => {
-    setVisibleShops(sortData.slice(0, page * itemsPerPage));
+    setShopList(sortData);
+    setPage(1);
+    const filtered = sortData.filter((shop) =>
+      shop.name.toLowerCase().includes(searchShop.toLowerCase()),
+    );
+    setVisibleShops(filtered.slice(0, itemsPerPage));
   };
 
   if (loading) {
