@@ -5,7 +5,6 @@ import Modify from './pages/modify/Modify';
 import Create from './pages/create/Create';
 import RootPage from './pages/RootPage';
 
-
 function App() {
   return (
     <BrowserRouter>
@@ -14,7 +13,7 @@ function App() {
         <Route path="/list" element={<Home />} />
         <Route path="/detail" element={<Detail />} />
         <Route path="/modify" element={<Modify />} />
-        <Route path="/create" element={<Create />} />
+        <Route path="/linkpost" element={<Create />} />
       </Routes>
     </BrowserRouter>
   );
