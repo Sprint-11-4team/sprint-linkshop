@@ -45,7 +45,7 @@ const Home = () => {
   };
 
   const handleButtonClick = () => {
-    navigate('/create');
+    navigate('/linkpost');
   };
 
   const loadMoreShops = () => {

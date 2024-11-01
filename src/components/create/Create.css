@@ -1,16 +1,18 @@
 @import url('../../css/typography.css');
 
 .create-form-body {
-  margin: 140px 612px;
+  /* margin: 140px 612px; */
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
 
 .create-input-wrapper {
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
+  /* margin: auto; */
 }
 
 /* .create-input-package-box {
@@ -19,16 +21,36 @@
   justify-content: space-between;
 } */
 
-.create-input-package-wrapper {
+/* .create-input-package-wrapper {
   display: flex;
   flex-direction: column;
-  /* justify-content: space-between; */
-}
+  justify-content: space-between;
+} */
 
-.create-input-package-title {
+.create-input-title {
   font-family: var(--font-pretendard-semibold-16);
   margin: 24px 0 8px 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
+
+.create-input-my-shop-wrapper {
+  margin: 8px 0;
+  background-color: #fafafb;
+  border-radius: 25px;
+}
+
+.create-input-my-shop-wrapper label {
+  margin: 0;
+}
+
+.create-input-my-shop-wrapper div {
+  margin: 0;
+}
+
+/* .create-input-my-shop-wrapper .password-message {
+  margin: 0;
+  background-color: white;
+  border-radius: 25px;
+} */

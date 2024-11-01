@@ -1,17 +1,20 @@
 .product-list {
     margin: auto;
     max-width: 1200px;
+    display: grid;
+    grid-template-columns: repeat(2, 0.5fr);
+    justify-content: center;
 }
 
 .product-card {
     display: flex;
     align-items: center;
-    height: 127px;
+    max-height: 127px;
     border-radius: 24px;
-    margin: 12px 0;
+    margin: 6px 12px;
     background-color: #FAFAFB;
     text-align: left;
-    width: 100%;
+    width: 588px;
     max-width: 100%;
 }
 
@@ -39,4 +42,28 @@
     color: #14151A;
     font-weight: 700;
     line-height: 23.87px;
+}
+
+@media (min-width: 457px) and (max-width: 1199px){
+    .product-list{
+        width: 100%;
+        grid-template-columns: 1fr;
+    }
+
+    .product-card{
+        width: 100%;
+        margin: 5px auto;
+    }
+}
+
+@media (max-width: 456px) {
+.product-list{
+        width: 100%;
+        grid-template-columns: 1fr;
+}
+
+.product-card{
+        width: 100%;
+        margin: 5px auto;
+}
 }

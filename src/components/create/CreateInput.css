@@ -22,13 +22,31 @@
 .create-input {
   font-family: var(--font-pretendard-regular-17);
   background-color: #fafafb;
-  color: #888790;
   border: none;
   outline: none;
+  transition: border-color 0.3s ease;
 }
 
-.input-value-check-message {
+.create-input::placeholder {
+  color: #888790;
+}
+
+.create-label.error {
+  border: 1px solid #fb545b;
+}
+
+.create-label.valid {
+  border: 1px solid #3e45ec;
+}
+
+.errorUserId {
   color: #fb545b;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.validUserId {
+  color: #3e45ec;
   font-size: 12px;
   font-weight: 400;
 }
