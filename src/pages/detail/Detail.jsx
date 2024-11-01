@@ -97,7 +97,7 @@ const Detail = () => {
           onShareClick={handleShareClick}
           likes={likes}
         />
-        <Bottom linkShopId={id} />
+        <Bottom linkShopId={id}/>
       </div>
       <Modal
         modalType="none"
