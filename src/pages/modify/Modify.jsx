@@ -42,13 +42,14 @@ const Modify = () => {
 
   return (
     <div>
-      <Header buttonName="내 스토어" onButtonClick={handleButtonClick} />
+      <Header buttonName="돌아가기" onButtonClick={handleButtonClick} />
       <form className="form-body">
-        <div>
-          <h3 className="create-h3">
-            대표 상품
+        <div className="create-input-wrapper">
+          {/* <div className="create-input-package-wrapper"> */}
+          <div className="create-input-title">
+            <h3>대표 상품</h3>
             <AddButton />
-          </h3>
+          </div>
           <CreateProductInput />
           <CreateProductInput />
           {/* h3 대신 SectionTitle로? */}
