@@ -1,4 +1,5 @@
 .shopcard-containter {
+  position: relative;
   background-color: #fafafb;
 }
 
@@ -19,6 +20,27 @@
 .shopcard-header__iconarea {
   display: flex;
   gap: 16px;
+}
+
+.shopcard-header__dropdown {
+  position: absolute;
+  top: 47px;
+  right: 22px;
+}
+
+.dropdown-box-up,
+.dropdown-box-down {
+  width: 160px;
+  padding: 18px 46px;
+  border-radius: 6px 6px 0 0;
+  border: 1px solid #dddddd;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.dropdown-box-down {
+  border-radius: 0 0 6px 6px;
+  border-top: none;
 }
 
 .heart-image {
