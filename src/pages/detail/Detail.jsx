@@ -4,7 +4,7 @@ import ShopCard from '../../components/detail/ShopCard';
 import './Detail.css';
 import { back } from '../../images/icons';
 import Modal from '../../components/common/Modal';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import {
   fetchDeleteLike,
   fetchDetailData,
@@ -14,16 +14,18 @@ import useAsync from '../../api/useAsync';
 import Bottom from '../../components/detail/Bottom';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
 import ModalContent from '../../components/detail/ModalContent';
-import ShopListBtn from '../../components/detail/ShopListBtn';
 
 const Detail = () => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [detailData, setDetailData] = useState();
   const [likes, setLikes] = useState(0);
+  let { id } = useParams();
+
   const params = {
-    teamId: '10-4',
-    linkShopId: '55',
+    teamId: '11-4',
+    linkShopId: id,
   };
+
   const [isLoading, loadingError, getReviewsAsync] = useAsync(() =>
     fetchDetailData(params),
   );
@@ -82,8 +84,7 @@ const Detail = () => {
           onShareClick={handleShareClick}
           likes={likes}
         />
-        <ShopListBtn />
-        <Bottom />
+        <Bottom linkShopId={id} />
       </div>
       <Modal
         modalType="none"
