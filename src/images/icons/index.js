@@ -12,9 +12,9 @@ import share from './share.png';
 import heartEmpty from './heart-empty.png';
 import heartFill from './heart-fill.png';
 import checkIcon from './check-icon.png';
-import passwordToggleOn from "./password-toggle-on.png";
-import passwordToggleOff from "./password-toggle-off.png";
-
+import passwordToggleOn from './password-toggle-on.png';
+import passwordToggleOff from './password-toggle-off.png';
+import meatball from './meatball.png';
 
 export {
   bannerDesktop,
@@ -33,4 +33,5 @@ export {
   passwordToggleOff,
   passwordToggleOn,
   checkIcon,
+  meatball,
 };

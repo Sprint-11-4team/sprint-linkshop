@@ -4,7 +4,7 @@ import ShopCard from '../../components/detail/ShopCard';
 import './Detail.css';
 import { back } from '../../images/icons';
 import Modal from '../../components/common/Modal';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   fetchDeleteLike,
   fetchDetailData,
@@ -14,16 +14,21 @@ import useAsync from '../../api/useAsync';
 import Bottom from '../../components/detail/Bottom';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
 import ModalContent from '../../components/detail/ModalContent';
-import ShopListBtn from '../../components/detail/ShopListBtn';
+import ToastPopup from '../../components/common/ToastPopup';
 
 const Detail = () => {
   const [isModalOpen, setModalOpen] = useState(false);
-  const [detailData, setDetailData] = useState();
+  const [detailData, setDetailData] = useState({});
+  const [openPopup, setOpenPopup] = useState(false);
+  const [openDelPopup, setOpenDelPopup] = useState(false);
   const [likes, setLikes] = useState(0);
+  const [types, setTypes] = useState();
+  const navigate = useNavigate();
   const params = {
     teamId: '10-4',
     linkShopId: '55',
   };
+
   const [isLoading, loadingError, getReviewsAsync] = useAsync(() =>
     fetchDetailData(params),
   );
@@ -77,12 +82,18 @@ const Detail = () => {
         </Link>
         <ShopCard
           detailData={detailData}
-          onClickModify={() => setModalOpen(true)}
+          onClickDelete={() => {
+            setModalOpen(true);
+            setTypes('delete');
+          }}
+          onClickModify={() => {
+            setModalOpen(true);
+            setTypes('modify');
+          }}
           onLikeChange={handleLikeChange}
           onShareClick={handleShareClick}
           likes={likes}
         />
-        <ShopListBtn />
         <Bottom />
       </div>
       <Modal
@@ -93,8 +104,26 @@ const Detail = () => {
         isOpen={isModalOpen}
         onClose={() => setModalOpen(false)}
       >
-        <ModalContent />
+        <ModalContent
+          types={types}
+          detailData={detailData}
+          onSuccessDel={() => setOpenPopup(true)}
+          onFailDel={() => setOpenDelPopup(true)}
+        />
       </Modal>
+      <ToastPopup
+        isOpen={openPopup}
+        onClose={() => setOpenPopup(false)}
+        text="삭제가 완료되었습니다."
+        isBtnOne={true}
+        onClick={() => navigate('/list')}
+      ></ToastPopup>
+      <ToastPopup
+        isOpen={openDelPopup}
+        onClose={() => setOpenDelPopup(false)}
+        text="유효한 비밀번호가 아닙니다."
+        isBtnOne={true}
+      ></ToastPopup>
     </div>
   );
 };
