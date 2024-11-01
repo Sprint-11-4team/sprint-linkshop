@@ -11,7 +11,7 @@ import ShopSort from '../../components/home/ShopSort';
 const Home = () => {
   const navigate = useNavigate();
   const [searchShop, setSearchShop] = useState('');
-  const [sortedShops, setSortedShops] = useState([]);
+  const [shopList, setShopList] = useState([]);
   const [visibleShops, setVisibleShops] = useState([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
@@ -21,7 +21,7 @@ const Home = () => {
     const fetchShops = async () => {
       try {
         const shopData = await fetchShopData();
-        setSortedShops(shopData);
+        setShopList(shopData);
         setVisibleShops(shopData.slice(0, itemsPerPage));
       } catch (err) {
         console.error(err.message);
@@ -33,11 +33,11 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
-    const filtered = sortedShops.filter((shop) =>
+    const filtered = shopList.filter((shop) =>
       shop.name.toLowerCase().includes(searchShop.toLowerCase()),
     );
     setVisibleShops(filtered.slice(0, page * itemsPerPage));
-  }, [searchShop, sortedShops, page]);
+  }, [searchShop, shopList, page]);
 
   const handleSearchChange = (value) => {
     setSearchShop(value);
@@ -49,18 +49,14 @@ const Home = () => {
   };
 
   const loadMoreShops = () => {
-    if (visibleShops.length < sortedShops.length) {
+    if (visibleShops.length < shopList.length) {
       setPage((prevPage) => prevPage + 1);
     }
   };
 
   const handleSortDataChange = (sortData) => {
-    setSortedShops(sortData);
+    setShopList(sortData);
     setPage(1);
-    const filtered = sortData.filter((shop) =>
-      shop.name.toLowerCase().includes(searchShop.toLowerCase()),
-    );
-    setVisibleShops(filtered.slice(0, itemsPerPage));
   };
 
   if (loading) {
