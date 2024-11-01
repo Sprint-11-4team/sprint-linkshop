@@ -1,13 +1,6 @@
 import './CreateInput.css';
 
-const CreateInput = ({
-  label,
-  name,
-  value,
-  onChange,
-  placeholder,
-  message,
-}) => {
+const CreateInput = ({ label, name, value, placeholder, onChange, onBlur }) => {
   return (
     <>
       <label className="create-label">
@@ -17,11 +10,15 @@ const CreateInput = ({
           name={name}
           value={value}
           onChange={onChange}
+          onBlur={onBlur}
           placeholder={placeholder}
           required
         />
       </label>
-      <p className="message">{message}</p>
+      {/* <label
+        className={`create-label ${value === '' ? '' : isUserId ? 'valid' : 'error'}`}
+      ></label>
+      <p className={isUserId ? 'validUserId' : 'errorUserId'}></p> */}
     </>
   );
 };

@@ -11,9 +11,9 @@ function App() {
         <Route path="/" element={<Navigate to="/list" replace />} />
         <Route path="/list" element={<Home />} />
         <Route path="/detail" element={<Detail />} />
+        <Route path="/linkpost" element={<Create />} />
         <Route path="/detail/:id" element={<Detail />} />
         <Route path="/link/:id/edit" element={<Modify />} />
-        <Route path="/create" element={<Create />} />
       </Routes>
     </BrowserRouter>
   );
