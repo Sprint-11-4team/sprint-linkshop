@@ -66,7 +66,7 @@ const ShopCard = ({
             <div className="placeholder-image">이미지가 없습니다</div>
           )}
           <div className="shopcard-center__name">{name}</div>
-          <div className="shopcard-center__id">{userId}</div>
+          <div className="shopcard-center__id">@{userId}</div>
         </div>
       </div>
     </div>

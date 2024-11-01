@@ -4,7 +4,7 @@ import ShopCard from '../../components/detail/ShopCard';
 import './Detail.css';
 import { back } from '../../images/icons';
 import Modal from '../../components/common/Modal';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import {
   fetchDeleteLike,
   fetchDetailData,
@@ -24,9 +24,12 @@ const Detail = () => {
   const [likes, setLikes] = useState(0);
   const [types, setTypes] = useState();
   const navigate = useNavigate();
+  
+  let { id } = useParams();
+
   const params = {
-    teamId: '10-4',
-    linkShopId: '55',
+    teamId: '11-4',
+    linkShopId: id,
   };
 
   const [isLoading, loadingError, getReviewsAsync] = useAsync(() =>
@@ -94,7 +97,7 @@ const Detail = () => {
           onShareClick={handleShareClick}
           likes={likes}
         />
-        <Bottom />
+        <Bottom linkShopId={id} />
       </div>
       <Modal
         modalType="none"

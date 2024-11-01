@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { heartEmpty, heartFill } from '../../images/icons';
+import { addLike, removeLike } from '../../api/likeApi';
 
-const LikeButton = ({ initialLikes, onLikeChange }) => {
+const LikeButton = ({ initialLikes, onLikeChange, linkShopId }) => {
   const [isLiked, setIsLiked] = useState(false);
   const [countLikes, setCountLikes] = useState(initialLikes);
 
@@ -9,11 +10,20 @@ const LikeButton = ({ initialLikes, onLikeChange }) => {
     setCountLikes(initialLikes);
   }, [initialLikes]);
 
-  const handleLikeChange = () => {
-    setIsLiked((prev) => !prev);
-    const newCount = !isLiked ? countLikes + 1 : countLikes - 1;
-    setCountLikes(newCount);
-    onLikeChange(newCount, !isLiked);
+  const handleLikeChange = async () => {
+    try {
+      if (isLiked) {
+        await removeLike(linkShopId);
+        setCountLikes((prev) => prev - 1);
+      } else {
+        await addLike(linkShopId);
+        setCountLikes((prev) => prev + 1);
+      }
+      setIsLiked((prev) => !prev);
+      onLikeChange(countLikes + (isLiked ? -1 : 1));
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

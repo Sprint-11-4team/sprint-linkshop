@@ -6,6 +6,7 @@ import ShopList from '../../components/home/ShopList';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
 import ScrollHandler from '../../components/home/ScrollHandler';
 import { fetchShopData } from '../../api/homeApi';
+import ShopSort from '../../components/home/ShopSort';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -53,6 +54,10 @@ const Home = () => {
     }
   };
 
+  const handleSortDataChange = (sortData) => {
+    setVisibleShops(sortData.slice(0, page * itemsPerPage));
+  };
+
   if (loading) {
     return <LoadingSpinner />;
   }
@@ -64,6 +69,7 @@ const Home = () => {
         searchTerm={searchShop}
         onSearchChange={handleSearchChange}
       />
+      <ShopSort onSortDataChange={handleSortDataChange} />
       <ShopList visibleShops={visibleShops} />
       <ScrollHandler loadMore={loadMoreShops} />
     </>
