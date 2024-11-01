@@ -56,3 +56,25 @@ export const fetchDeleteLike = async ({ teamId = '', linkShopId = '' }) => {
     throw new Error(error.message);
   }
 };
+
+// 삭제 api
+export const fetchDelete = async ({ teamId = '', linkShopId = '' }) => {
+  try {
+    const response = await fetch(
+      `${BASE_URL}/${teamId}/linkshops/${linkShopId}`,
+      {
+        method: 'DELETE',
+      },
+    );
+    const data = await response.json();
+    if (!response.ok) {
+      if (response.status === 400) {
+        return { error: data.message };
+      }
+    }
+    console.log(data); // 데이터확인
+    return data;
+  } catch (error) {
+    throw new Error(error.message);
+  }
+};

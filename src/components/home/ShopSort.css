@@ -1,0 +1,75 @@
+.sort-container {
+  max-width: 1200px;
+  align-content: center;
+  margin: 0 auto;
+  display: flex;
+  padding: 40px 0 8px;
+}
+
+.shop-sort-filter {
+  display: flex;
+  align-items: center;
+}
+
+span {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 21.48px;
+  margin-right: 4px;
+}
+
+.detail-filter {
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+  padding: 0;
+}
+
+.filter-divider {
+  border: 1px solid #dddcdf;
+}
+
+.filter-name {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 19.09px;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+  padding: 25px 0 15px;
+  flex-grow: 1;
+}
+
+.filter {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 19.09px;
+  text-align: left;
+}
+
+.sort-modal {
+  width: 375px;
+  height: 300px;
+  border-radius: 24px;
+}
+
+.sort-option {
+  display: flex;
+  align-items: center;
+}
+
+.selecte-image {
+  width: 23px;
+  height: 20px;
+}
+
+.filter-name.selecte {
+  color: #fb545b;
+}

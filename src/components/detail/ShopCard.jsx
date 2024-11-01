@@ -1,20 +1,18 @@
-import React from 'react';
-import { edit, share } from '../../images/icons';
+import React, { useState } from 'react';
+import { meatball, share } from '../../images/icons';
 import './ShopCard.css';
 import LikeButton from '../home/LikeButton';
 
 const ShopCard = ({
   onClickModify,
+  onClickDelete,
   onLikeChange,
   onShareClick,
   detailData,
   likes,
 }) => {
-  if (!detailData) {
-    return <div>데이터를 불러오는 중입니다...</div>;
-  }
-
-  const { name, userId, shop } = detailData;
+  const { name, userId, shop, id } = detailData || {};
+  const [hovered, setHovered] = useState(false);
 
   return (
     <div className="shopcard-containter">
@@ -31,22 +29,44 @@ const ShopCard = ({
               onClick={onShareClick}
               className="share-image"
             ></img>
-            <img
-              src={edit}
-              alt="작성하기아이콘"
-              onClick={onClickModify}
-              className="edit-image"
-            ></img>
+            <div>
+              <img
+                alt="메뉴바"
+                src={meatball}
+                onMouseOver={() => {
+                  setHovered((prevHovered) => !prevHovered);
+                }}
+                onTouchStart={() => setHovered(true)}
+                onTouchEnd={() => setHovered(false)}
+              ></img>
+            </div>
+            {hovered && (
+              <div className="shopcard-header__dropdown show">
+                <div className="dropdown-box-up" onClick={onClickModify}>
+                  수정하기
+                </div>
+                <div
+                  className="dropdown-box-down"
+                  onClick={() => onClickDelete(id)}
+                >
+                  삭제하기
+                </div>
+              </div>
+            )}
           </div>
         </div>
         <div className="shopcard-center">
-          <img
-            src={shop.imageUrl}
-            alt="샵대표이미지"
-            className="shopcard-center__image"
-          ></img>
+          {shop && shop.imageUrl ? (
+            <img
+              src={shop.imageUrl}
+              alt="샵대표이미지"
+              className="shopcard-center__image"
+            />
+          ) : (
+            <div className="placeholder-image">이미지가 없습니다</div>
+          )}
           <div className="shopcard-center__name">{name}</div>
-          <div className="shopcard-center__id">{userId}</div>
+          <div className="shopcard-center__id">@{userId}</div>
         </div>
       </div>
     </div>
