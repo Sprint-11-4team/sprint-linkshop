@@ -19,8 +19,11 @@ function Create() {
 
   // const [userIdMessage, setUserIdMessage] = useState('');
 
-  // 유효성 검사 위한 상태 저장
-  // const [isUserId, setIsUserId] = useState(null);
+
+  // 유효성 검사
+  // eslint-disable-next-line
+  const [isUserId, setIsUserId] = useState(false);
+  // 이름, 상품 가격, 쇼핑몰 URL 에도 유효성 검사를 해야 하는지 고민
 
   // 이름, 쇼핑몰 URL 에도 유효성 검사를 해야 하는지 고민
 

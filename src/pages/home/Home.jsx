@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../../components/common/Header';
 import SearchInput from '../../components/home/SearchInput';
-import ShopList from './ShopList';
-import LoadingSpinner from './LoadingSpinner';
-import ScrollHandler from './ScrollHandler';
+import ShopList from '../../components/home/ShopList';
+import LoadingSpinner from '../../components/common/LoadingSpinner';
+import ScrollHandler from '../../components/home/ScrollHandler';
 import { fetchShopData } from '../../api/homeApi';
+import ShopSort from '../../components/home/ShopSort';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -14,7 +15,7 @@ const Home = () => {
   const [visibleShops, setVisibleShops] = useState([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
-  const itemsPerPage = 12;
+  const itemsPerPage = 10;
 
   useEffect(() => {
     const fetchShops = async () => {
@@ -44,7 +45,22 @@ const Home = () => {
   };
 
   const handleButtonClick = () => {
-    navigate('/create');
+    navigate('/linkpost');
+  };
+
+  const loadMoreShops = () => {
+    if (visibleShops.length < shopList.length) {
+      setPage((prevPage) => prevPage + 1);
+    }
+  };
+
+  const handleSortDataChange = (sortData) => {
+    setShopList(sortData);
+    setPage(1);
+    const filtered = sortData.filter((shop) =>
+      shop.name.toLowerCase().includes(searchShop.toLowerCase()),
+    );
+    setVisibleShops(filtered.slice(0, itemsPerPage));
   };
 
   if (loading) {
@@ -58,8 +74,9 @@ const Home = () => {
         searchTerm={searchShop}
         onSearchChange={handleSearchChange}
       />
+      <ShopSort onSortDataChange={handleSortDataChange} />
       <ShopList visibleShops={visibleShops} />
-      <ScrollHandler setPage={setPage} />
+      <ScrollHandler loadMore={loadMoreShops} />
     </>
   );
 };

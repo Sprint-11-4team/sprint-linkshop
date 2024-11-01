@@ -1,4 +1,4 @@
-import ShopCard from './ShopCard';
+import ShopCardInfo from './ShopCardInfo';
 import './CardList.css';
 
 const CardList = ({ shops }) => {
@@ -6,7 +6,7 @@ const CardList = ({ shops }) => {
     <div className="shop-card-list-parent">
       <div className="shop-card-list">
         {shops.map((shop) => (
-          <ShopCard key={shop.id} shopData={shop} />
+          <ShopCardInfo key={shop.id} shopData={shop} />
         ))}
       </div>
     </div>

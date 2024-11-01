@@ -25,24 +25,12 @@
   height: 14px;
 }
 
-.detail-modal {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  padding-bottom: 35px;
-}
-
-.detail-modal__label {
-  font-weight: 600;
-  font-size: 20px;
-  padding-bottom: 14px;
-}
-
-.detail-modal__text {
-  font-weight: 400;
+.bottom-text{
+  width: 600px;
   font-size: 16px;
-  color: var(--black-color);
-  line-height: 19px;
+  margin-bottom: 16px;
+  margin-top: 40px;
+  line-height: 19.90px;
 }
 
 /* TABLET */
