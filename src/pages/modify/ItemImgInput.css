@@ -1,0 +1,32 @@
+@import url('../../css/typography.css');
+
+.img-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fafafb;
+  padding: 20px 28px;
+  border-radius: 25px;
+}
+
+/* '상품 대표 이미지' & '상품 이미지를 첨부해주세요.' 글자 */
+.item-img-title {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.item-img-title p {
+  color: #888790;
+}
+
+.item-img-label {
+  color: #3e45ec;
+  border: 1px solid #3e45ec;
+  border-radius: 8px;
+  padding: 6px 12px;
+}
+
+.item-img-input {
+  display: none;
+}
