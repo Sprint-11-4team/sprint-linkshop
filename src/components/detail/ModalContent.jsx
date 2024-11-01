@@ -21,7 +21,7 @@ const ModalContent = ({ types, detailData, onSuccessDel, onFailDel }) => {
   };
 
   const handleGopageClick = () => {
-    navigate(`/modify?pwd=${inputRef.current.value}`);
+    navigate(`/link/${detailData.id}/edit?pwd=${inputRef.current.value}`);
   };
 
   const handleDelete = async () => {
