@@ -1,6 +1,6 @@
 const BASE_URL = 'https://linkshop-api.vercel.app/11-4/linkshops';
 
-export const fetchShops = async (orderBy) => {
+export const fetchSortData = async (orderBy) => {
   try {
     const response = await fetch(`${BASE_URL}?orderBy=${orderBy}`);
 
