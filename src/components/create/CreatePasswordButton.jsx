@@ -4,6 +4,7 @@ import './CreatePasswordButton.css';
 
 const CreatePasswordButton = ({ value, onChange }) => {
   const [password, setPassword] = useState('');
+  // eslint-disable-next-line
   const [isPassword, setIsPassword] = useState(false);
 
   const [passwordMessage, setPasswordMessage] = useState('');
