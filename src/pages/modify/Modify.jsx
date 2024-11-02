@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import Header from '../../components/common/Header';
 // import CreateInput from '../../components/create/CreateInput';
@@ -6,7 +6,10 @@ import AddButton from '../../components/create/AddButton';
 // import CreatePasswordButton from '../../components/create/CreatePasswordButton';
 import ModifyButton from '../../components/create/ModifyButton';
 import CreateProductInput from '../../components/create/CreateProductInput';
-import MyproductList from './MyProductList';
+// import MyproductList from './MyProductList';
+import ItemImgInput from '../../components/create/ItemImgInput';
+import CreateInput from '../../components/create/CreateInput';
+import CreatePasswordButton from '../../components/create/CreatePasswordButton';
 
 const Modify = () => {
   // const [userInfo, setUserInfo] = useState({
@@ -22,7 +25,8 @@ const Modify = () => {
   //     [name]: value,
   //   }));
   // };
-
+  const [shopName, setShopName] = useState();
+  const [Url, setUrl] = useState();
   const { id } = useParams();
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
@@ -38,46 +42,36 @@ const Modify = () => {
 
   return (
     <div>
-      <Header buttonName="내 스토어" onButtonClick={handleButtonClick} />
+      <Header buttonName="돌아가기" onButtonClick={handleButtonClick} />
       <form className="form-body">
-        <div>
-          {/* <CreateInput
-            label="이름"
-            name="name"
-            value={name}
-            placeholder="표시하고 싶은 이름을 적어 주세요."
-            onChange={handleInputChange}
-          />
-          <CreateInput
-            label="아이디"
-            name="userId"
-            value={userId}
-            placeholder="아이디를 입력해주세요."
-            onChange={handleInputChange}
-          />
-          <div>
+        <div className="create-input-wrapper">
+          {/* <div className="create-input-package-wrapper"> */}
+          <div className="create-input-title">
+            <h3>대표 상품</h3>
+            <AddButton />
+          </div>
+          <CreateProductInput />
+          <CreateProductInput />
+          {/* h3 대신 SectionTitle로? */}
+          <h3 className="create-h3">내 쇼핑몰</h3>
+          <div className="create-input-my-shop-wrapper">
+            <ItemImgInput />
             <CreateInput
-              className="passwordInput"
-              label="비밀번호"
-              name="password"
-              value={password}
-              placeholder="숫자 4자리를 입력해주세요."
-              onChange={handleInputChange}
+              label="이름"
+              name="shopName"
+              value={shopName}
+              placeholder="표시하고 싶은 이름을 적어 주세요."
+              onChange={(e) => setShopName(e.target.value)}
+            />
+            <CreateInput
+              label="Url"
+              name="Url"
+              value={Url}
+              placeholder="Url을 입력해 주세요."
+              onChange={(e) => setUrl(e.target.value)}
             />
             <CreatePasswordButton />
-          </div> */}
-          <h3 className="create-h3">
-            대표 상품
-            <AddButton />
-            <CreateProductInput />
-            <CreateProductInput />
-          </h3>
-          {/* h3 대신 SectionTitle로? */}
-          <h3 className="create-h3">
-            내 쇼핑몰
-            <AddButton />
-            <MyproductList />
-          </h3>
+          </div>
           <ModifyButton />
         </div>
       </form>
