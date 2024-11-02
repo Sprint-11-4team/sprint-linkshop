@@ -5,12 +5,12 @@ import './CreatePasswordButton.css';
 
 const CreatePasswordButton = ({ onChange }) => {
   const [password, setPassword] = useState('');
-  const [isPassword, setIsPassword] = useState(false);
   const [showPassword, setShowPassword] = useState({
     type: 'password',
     visible: false,
   });
 
+  const [isPassword, setIsPassword] = useState(false);
   const [passwordMessage, setPasswordMessage] = useState('');
 
   const showPasswordHandle = (e) => {
