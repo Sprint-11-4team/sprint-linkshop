@@ -8,11 +8,12 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<RootPage />} />
+        <Route path="/" element={<Navigate to="/list" replace />} />
         <Route path="/list" element={<Home />} />
         <Route path="/detail" element={<Detail />} />
-        <Route path="/modify" element={<Modify />} />
         <Route path="/linkpost" element={<Create />} />
+        <Route path="/detail/:id" element={<Detail />} />
+        <Route path="/link/:id/edit" element={<Modify />} />
       </Routes>
     </BrowserRouter>
   );
