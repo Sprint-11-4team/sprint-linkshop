@@ -10,7 +10,7 @@ const SearchInput = ({ searchShop, onSearchChange }) => {
           <input
             type="text"
             className="search-input"
-            placeholder="제목으로 검색해 보세요."
+            placeholder="샵 이름으로 검색해 보세요."
             value={searchShop}
             onChange={(e) => onSearchChange(e.target.value)} // 검색어 변경 시 필터링
           />

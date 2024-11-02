@@ -3,11 +3,20 @@ import LikeButton from './LikeButton';
 import ProductImages from './ProductImages';
 import './ShopInfo.css';
 
-const ShopInfo = ({ shop, likes, productsCount, products, onLikeChange }) => {
+const ShopInfo = ({
+  shop,
+  userId,
+  likes,
+  productsCount,
+  products,
+  onLikeChange,
+  onCardClick,
+  linkShopId,
+}) => {
   return (
     <div className="shop-card-info">
       <div className="shop-container">
-        <div className="shop-profile-products">
+        <div className="shop-profile-products" onClick={onCardClick}>
           <div className="shop-profile">
             <img
               src={shop.imageUrl}
@@ -16,17 +25,23 @@ const ShopInfo = ({ shop, likes, productsCount, products, onLikeChange }) => {
             />
             <div className="shop-name-id">
               <p className="shop-name">{shop.urlName}</p>
-              <p className="shop-id">@{shop.userId}</p>
+              <p className="shop-id">@{userId}</p>
             </div>
           </div>
           <p className="shop-products">대표 상품 {productsCount}</p>
         </div>
         <div className="like-button">
-          <LikeButton initialLikes={likes} onLikeChange={onLikeChange} />
+          <LikeButton
+            initialLikes={likes}
+            onLikeChange={onLikeChange}
+            linkShopId={linkShopId}
+          />
           <p className="likes-count">{likes}</p>
         </div>
       </div>
-      <ProductImages products={products} />
+      <div onClick={onCardClick}>
+        <ProductImages products={products} />
+      </div>
     </div>
   );
 };

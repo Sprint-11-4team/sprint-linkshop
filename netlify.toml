@@ -1,5 +1,0 @@
-[[redirects]]
-  from = "/*"
-  to = "/list"
-  status = 200
-  force = true

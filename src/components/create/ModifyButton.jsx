@@ -1,9 +1,9 @@
-import React from 'react';
+import './CreateButton.css';
 
 const ModifyButton = () => {
   return (
     <div>
-      <button>수정하기</button>
+      <button className="create-button">수정하기</button>
     </div>
   );
 };

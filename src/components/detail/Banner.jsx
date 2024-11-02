@@ -9,7 +9,7 @@ const Banner = () => {
     const updateBannerImage = () => {
       const width = window.innerWidth;
 
-      if (width >= 1920) {
+      if (width >= 1240) {
         setBannerImage(bannerDesktop);
       } else if (width >= 744) {
         setBannerImage(bannerTablet);
