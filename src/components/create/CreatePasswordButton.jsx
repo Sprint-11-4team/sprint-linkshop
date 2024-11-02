@@ -5,14 +5,10 @@ import './CreatePasswordButton.css';
 
 const CreatePasswordButton = ({ onChange }) => {
   const [password, setPassword] = useState('');
-<<<<<<< Updated upstream
-  const [isPassword, setIsPassword] = useState(false);
-=======
   const [showPassword, setShowPassword] = useState({
     type: 'password',
     visible: false,
   });
->>>>>>> Stashed changes
 
   const [isPassword, setIsPassword] = useState(false);
   const [passwordMessage, setPasswordMessage] = useState('');
