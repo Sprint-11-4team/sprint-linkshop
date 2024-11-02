@@ -17,7 +17,7 @@ const RootPage = () => {
   };
 
   const handleButtonClick = () => {
-    navigate('/create');
+    navigate('/linkpost');
   };
 
   return (
@@ -36,7 +36,7 @@ const RootPage = () => {
           <br />
           <Link to="/modify">modify - 임시링크</Link>
           <br />
-          <Link to="/create">create - 임시링크</Link>
+          <Link to="/linkpost">create - 임시링크</Link>
           <div>
             <br />
             <br />

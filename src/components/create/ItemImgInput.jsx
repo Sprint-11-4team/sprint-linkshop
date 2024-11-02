@@ -1,8 +1,9 @@
-// import { useState } from 'react';
+// import { useEffect, useState } from 'react';
 import './ItemImgInput.css';
 
-const ItemImgInput = () => {
+const ItemImgInput = ({ name, value, onChange }) => {
   // const [itemImg, setItemImg] = useState();
+
   // const [imagePreviewUrl, setImagePreviewUrl] = useState('');
 
   // const handleFileChange = (e) => {
@@ -17,8 +18,23 @@ const ItemImgInput = () => {
   //     setImagePreviewURL('');
   //   };
 
+  const handleFileChange = (e) => {
+    const nextitemImg = e.target.files[0];
+    onChange(name, nextitemImg);
+  };
+
+  // const [preview, setPreview] = useState();
+
+  // side effect
+  // useEffect(() => {
+  //   if (!itemImg) return;
+  //   const nextPreview = URL.createObjectURL(itemImg);
+  //   setPreview(nextPreview);
+  // }, [itemImg]);
+
   return (
     <div className="img-box">
+      {/* <img src={preview} alt="이미지 미리보기" /> */}
       <label className="item-img-title">
         상품 대표 이미지
         <p>상품 이미지를 첨부해 주세요.</p>
@@ -32,8 +48,9 @@ const ItemImgInput = () => {
           name="itemImgFile"
           className="item-img-input"
           type="file"
+          // value={itemImg} // 비제어 컴포넌트
           accept="image/*"
-          // onChange={handleFileChange}
+          onChange={handleFileChange}
         />
       </div>
     </div>

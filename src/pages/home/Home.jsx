@@ -44,7 +44,7 @@ const Home = () => {
   };
 
   const handleButtonClick = () => {
-    navigate('/create');
+    navigate('/linkpost');
   };
 
   if (loading) {
