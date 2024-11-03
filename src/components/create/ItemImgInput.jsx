@@ -1,43 +1,46 @@
-// import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './ItemImgInput.css';
+import CloseIcon from '../../images/icons/close.png';
 
-const ItemImgInput = ({ name, value, onChange }) => {
-  // const [itemImg, setItemImg] = useState();
+const ItemImgInput = () => {
+  const [imgPreviewUrl, setImgPreviewUrl] = useState('');
+  const fileInputRef = useRef(null);
 
-  // const [imagePreviewUrl, setImagePreviewUrl] = useState('');
-
-  // const handleFileChange = (e) => {
-  //   const file = e.target.files[0];
-  //   if (file) {
-  //     const itemImageURL = URL.createObjectURL(file);
-  //     setImagePreviewUrl(itemImageURL);
-  //   }
-  // };
-
-  //   const handleDelete = () => {
-  //     setImagePreviewURL('');
-  //   };
-
-  const handleFileChange = (e) => {
-    const nextitemImg = e.target.files[0];
-    onChange(name, nextitemImg);
+  const handleImgChange = (e) => {
+    if (!e.target.files) return;
+    const file = e.target.files[0];
+    if (file) {
+      const itemImgURL = URL.createObjectURL(file);
+      setImgPreviewUrl(itemImgURL);
+    }
   };
 
-  // const [preview, setPreview] = useState();
+  const handleImgDelete = () => {
+    setImgPreviewUrl('');
+    if (fileInputRef.current) {
+      fileInputRef.current.value = ''; // input 값 초기화
+    }
+  };
 
-  // side effect
-  // useEffect(() => {
-  //   if (!itemImg) return;
-  //   const nextPreview = URL.createObjectURL(itemImg);
-  //   setPreview(nextPreview);
-  // }, [itemImg]);
+  useEffect(() => {}, [imgPreviewUrl]);
 
   return (
     <div className="img-box">
-      {/* <img src={preview} alt="이미지 미리보기" /> */}
       <label className="item-img-title">
         상품 대표 이미지
         <p>상품 이미지를 첨부해 주세요.</p>
+        {imgPreviewUrl && (
+          <div className="close-img-wrapper">
+            <img
+              className="img-preview"
+              src={imgPreviewUrl}
+              alt="대표 상품 이미지 파일"
+            />
+            <button className="close-img" onClick={handleImgDelete}>
+              <img src={CloseIcon} alt="대표 상품 이미지 삭제" />
+            </button>
+          </div>
+        )}
       </label>
       <div>
         <label htmlFor="itemImgFile" className="item-img-label">
@@ -48,9 +51,9 @@ const ItemImgInput = ({ name, value, onChange }) => {
           name="itemImgFile"
           className="item-img-input"
           type="file"
-          // value={itemImg} // 비제어 컴포넌트
           accept="image/*"
-          onChange={handleFileChange}
+          onChange={handleImgChange}
+          ref={fileInputRef}
         />
       </div>
     </div>

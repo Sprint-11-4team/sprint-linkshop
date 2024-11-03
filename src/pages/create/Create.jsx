@@ -31,7 +31,12 @@ function Create() {
     name: '',
   });
 
+  // 모달 상태 관리
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleNavigateClick = () => {
+    navigate(`/link/{linkid}`);
+  };
 
   // const [shopName, setShopName] = useState();
   // const [Url, setUrl] = useState();
@@ -140,7 +145,9 @@ function Create() {
           height="342px"
           borderRadius="30px"
           isOpen={isModalOpen}
-        ></CrateModal>
+          onClick={handleNavigateClick}
+          modalMessage="등록이 완료되었습니다."
+        />
       </div>
     </div>
   );

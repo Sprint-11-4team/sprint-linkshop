@@ -1,42 +1,53 @@
-// import './CreateModal.css';
+// import React from 'react';
 // import { useNavigate } from 'react-router-dom';
+// import './CreateModal.css';
 
-// const ModalContent = () => {
+// const CreateModal = ({ isOpen, modalType, width, height, borderRadius }) => {
 //   const navigate = useNavigate();
 //   const handleGopageClick = () => {
-//     navigate('/link');
+//     navigate(`/link/{linkid}`);
+//   };
+
+//   if (!isOpen) return null;
+
+//   const modalStyle = {
+//     width: width || '400px',
+//     height: height || '400px',
+//     borderRadius: borderRadius || '8px',
 //   };
 
 //   return (
-//     <div className="detail-modal">
-//       <div className="detail-modal__text">등록이 완료되었습니다.</div>
-//       <button className="detail-create-button" onClick={handleGopageClick}>
-//         확인
-//       </button>
+//     <div className="modal-overlay">
+//       <div
+//         className={`modal ${modalType === 'bottom' ? 'modal-bottom' : ''}`}
+//         style={modalStyle}
+//       >
+//         등록이 완료되었습니다.
+//         <button
+//           className="detail-create-button"
+//           onClick={handleGopageClick}
+//         ></button>
+//       </div>
 //     </div>
 //   );
 // };
 
-// export default ModalContent;
-import React from 'react';
-import './CreateModal.css';
-// import { close } from '../../images/icons';
-
-const Modal = ({
+const CreateModal = ({
   isOpen,
-  // children,
   modalType,
   width,
   height,
   borderRadius,
+  modalMessage,
+  onClick,
 }) => {
-  if (!isOpen) return null;
-
   const modalStyle = {
-    width: width || '400px', // 기본 너비 설정
-    height: height || '400px', // 기본 높이 설정
-    borderRadius: borderRadius || '8px', // 기본 테두리 반경 설정
+    width: width || '400px',
+    height: height || '400px',
+    borderRadius: borderRadius || '8px',
   };
+
+  if (!isOpen) return null;
 
   return (
     <div className="modal-overlay">
@@ -44,10 +55,13 @@ const Modal = ({
         className={`modal ${modalType === 'bottom' ? 'modal-bottom' : ''}`}
         style={modalStyle}
       >
-        {/* {children} */}
+        {modalMessage}
+        <button className="close-button" onClick={onClick}>
+          확인
+        </button>
       </div>
     </div>
   );
 };
 
-export default Modal;
+export default CreateModal;
