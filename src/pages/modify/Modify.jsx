@@ -42,11 +42,18 @@ const Modify = () => {
   );
 
   // 내쇼핑몰 handler
-  const handleChangeShopInput = (e) => {
+  const handleChangeShopInput = (e, data) => {
     const { name, value } = e.target;
     setShopData({
       ...shopData,
       [name]: value,
+    });
+  };
+
+  const handleChangeShopFileInput = (field, value) => {
+    setShopData({
+      ...shopData,
+      [field]: value !== null ? value : '',
     });
   };
 
@@ -114,6 +121,8 @@ const Modify = () => {
     }
   };
 
+  const handleAddButtonClick = (e) => {};
+
   useEffect(() => {
     handleLoadData();
     // eslint-disable-next-line
@@ -127,29 +136,31 @@ const Modify = () => {
     <div>
       <Header buttonName="내 스토어" onButtonClick={() => navigate('/ ')} />
       <form className="form-body" onSubmit={handleSubmit}>
-        <div>
-          <h3 className="create-h3">
-            대표 상품
-            <AddButton />
+        <div className="create-input-wrapper">
+          <div>
+            <div className="create-input-title">
+              <h3 className="create-input-title">대표 상품</h3>
+              <AddButton type="button" onClick={handleAddButtonClick} />
+            </div>
             {products?.map((data, index) => (
-              <ModifyProductInput
-                data={data}
-                onChangeProductInput={handleChangeProductInput}
-                index={index}
-                key={index}
-              />
+              <div key={index}>
+                <ModifyProductInput
+                  data={data}
+                  onChangeProductInput={handleChangeProductInput}
+                  index={index}
+                />
+              </div>
             ))}
-          </h3>
-          <h3 className="create-h3">
-            내 쇼핑몰
+            <h3 className="create-input-title">내 쇼핑몰</h3>
             <MyproductList
               shopData={shopData}
               etcData={etcData}
-              onChangeProductInput={handleChangeShopInput}
+              onChangeShopInput={handleChangeShopInput}
+              onChangeShopFileInput={handleChangeShopFileInput}
               onChangeInput={handleChangeInput}
             />
-          </h3>
-          <ModifyButton type="submit" />
+            <ModifyButton type="submit" />
+          </div>
         </div>
       </form>
     </div>

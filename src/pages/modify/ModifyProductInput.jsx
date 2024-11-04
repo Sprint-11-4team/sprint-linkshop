@@ -29,7 +29,8 @@ const ModifyProductInput = ({ onChangeProductInput, data, index }) => {
     <div className="create-input-package">
       <ItemImgInput
         imageUrl={data.imageUrl}
-        onFileChange={(file) => handleFileChange(file, index)}
+        onFileChange={(file, id) => handleFileChange(file, id)}
+        index={index}
       />
       <CreateInput
         label="상품 이름"

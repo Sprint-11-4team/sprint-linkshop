@@ -168,7 +168,7 @@ function Create() {
               onChange={handlePasswordChange}
             />
           </div>
-          <CreateButton />
+          <CreateButton type="submit" />
         </div>
       </form>
       <div>
