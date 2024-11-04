@@ -6,8 +6,10 @@ import ItemImgInput from './ItemImgInput';
 const MyproductList = ({
   shopData,
   etcData,
-  onChangeProductInput,
+  onChangeShopInput,
+  onChangeShopFileInput,
   onChangeInput,
+  index,
 }) => {
   const handleFileChange = (file) => {
     if (file) {
@@ -18,7 +20,7 @@ const MyproductList = ({
       uploadImageApi(formData)
         .then((data) => {
           console.log('업로드 성공:', data);
-          onChangeProductInput(data.url);
+          onChangeShopFileInput('imageUrl', data.url);
         })
         .catch((error) => {
           console.error('업로드 실패:', error);
@@ -26,6 +28,8 @@ const MyproductList = ({
 
       // 메모리 해제
       return () => URL.revokeObjectURL(itemImageURL);
+    } else {
+      onChangeShopFileInput('imageUrl', null); // 삭제시
     }
   };
 
@@ -34,13 +38,14 @@ const MyproductList = ({
       <ItemImgInput
         imageUrl={shopData?.imageUrl}
         onFileChange={(file) => handleFileChange(file)}
+        index={index}
       />
       <CreateInput
         label="이름"
         name="urlName"
         value={shopData?.urlName}
         placeholder="표시하고 싶은 이름을 입력해 주세요."
-        onChange={onChangeProductInput}
+        onChange={onChangeShopInput}
       />
       <CreateInput
         label="아이디"
@@ -54,7 +59,7 @@ const MyproductList = ({
         name="shopUrl"
         value={shopData?.shopUrl}
         placeholder="Url을 입력해주세요"
-        onChange={onChangeProductInput}
+        onChange={onChangeShopInput}
       />
       <CreateInput
         label="비밀번호"
