@@ -9,7 +9,9 @@ const Header = ({ buttonName, onButtonClick }) => {
   const handleLogoClick = (event) => {
     if (location.pathname === '/list') {
       event.preventDefault();
-      window.location.reload();
+      if (typeof window !== 'undefined') {
+        window.location.reload();
+      }
     }
   };
 
