@@ -10,7 +10,8 @@ const LikeButton = ({ initialLikes, onLikeChange, linkShopId }) => {
     setCountLikes(initialLikes);
   }, [initialLikes]);
 
-  const handleLikeChange = async () => {
+  const handleLikeChange = async (e) => {
+    e.stopPropagation();
     try {
       if (isLiked) {
         await removeLike(linkShopId);
