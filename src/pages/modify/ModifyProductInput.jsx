@@ -1,29 +1,16 @@
 import React from 'react';
-import CreateInput from './CreateInput';
-import './CreateProductInput.css';
+import './ModifyProductInput.css';
+import CreateInput from '../../components/create/CreateInput';
 import ItemImgInput from './ItemImgInput';
-import { uploadImageApi } from '../../api/createApi';
+import { uploadImageApi } from '../../api/modifyApi';
 
-const CreateProductInput = ({ data, onChangeProductInput, index }) => {
-  // const [itemName, setItemName] = useState('');
-  // const [price, setPrice] = useState('');
-
-  // const priceChangeHandler = (e) => {
-  //   const rawPrice = e.target.value.replace(/,/g, '');
-  //   if (isNaN(Number(rawPrice))) {
-  //     setPrice('');
-  //   } else {
-  //     setPrice(Number(rawPrice).toLocaleString('ko-KR'));
-  //   }
-  // };
-
-  //  react-hook-form 적용? 상품 인풋 패키지가 여러 개 추가 되면 렌더링 시 이슈 있을 수도 있음. 있으면 진짜 완성도 높겠지만 지금 중요하진 않음.
-
+const ModifyProductInput = ({ onChangeProductInput, data, index }) => {
   const handleFileChange = (file, index) => {
     if (file) {
       const itemImageURL = URL.createObjectURL(file);
       const formData = new FormData();
       formData.append('image', file); // 실제 파일 객체를 추가
+
       uploadImageApi(formData)
         .then((data) => {
           console.log('업로드 성공:', data);
@@ -32,6 +19,7 @@ const CreateProductInput = ({ data, onChangeProductInput, index }) => {
         .catch((error) => {
           console.error('업로드 실패:', error);
         });
+
       // 메모리 해제
       return () => URL.revokeObjectURL(itemImageURL);
     }
@@ -40,22 +28,21 @@ const CreateProductInput = ({ data, onChangeProductInput, index }) => {
   return (
     <div className="create-input-package">
       <ItemImgInput
-        name="imageUrl"
-        value={data.imageUrl}
-        onFileChange={handleFileChange}
+        imageUrl={data.imageUrl}
+        onFileChange={(file, id) => handleFileChange(file, id)}
         index={index}
       />
       <CreateInput
         label="상품 이름"
-        value={data.name}
         name="name"
+        value={data.name}
         placeholder="상품 이름을 입력해 주세요."
         onChange={(e) => onChangeProductInput(index, 'name', e.target.value)}
       />
       <CreateInput
         label="상품 가격"
-        value={data.price}
         name="price"
+        value={data.price}
         placeholder="원화로 표기해 주세요."
         onChange={(e) => onChangeProductInput(index, 'price', e.target.value)}
       />
@@ -63,4 +50,4 @@ const CreateProductInput = ({ data, onChangeProductInput, index }) => {
   );
 };
 
-export default CreateProductInput;
+export default ModifyProductInput;

@@ -13,53 +13,72 @@ const Home = () => {
   const [searchShop, setSearchShop] = useState('');
   const [shopList, setShopList] = useState([]);
   const [visibleShops, setVisibleShops] = useState([]);
-  const [page, setPage] = useState(1);
+  const [currentCursor, setCurrentCursor] = useState(null);
+  const [isMore, setIsMore] = useState(true);
+  const [isLast, setIsLast] = useState(false);
+  const [pageLoading, setPageLoading] = useState(true);
+  // const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
-  const itemsPerPage = 10;
+
+  const fetchShops = async (cursor) => {
+    setLoading(true);
+
+    try {
+      const { list, nextCursor } = await fetchShopData({
+        cursor,
+        keyword: null,
+      });
+
+      if (!nextCursor) {
+        console.log('[!nextCursor]>>', nextCursor);
+        setIsLast(true);
+      } else {
+        console.log('[nextCursor]>>', nextCursor);
+        setCurrentCursor(nextCursor);
+      }
+      setShopList((prev) => [...prev, ...list]);
+      setVisibleShops((prev) => [...prev, ...list]);
+    } catch (err) {
+      console.error(err.message);
+    } finally {
+      setLoading(false);
+      setIsMore(false);
+      setPageLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchShops = async () => {
-      try {
-        const shopData = await fetchShopData();
-        setShopList(shopData);
-        setVisibleShops(shopData.slice(0, itemsPerPage));
-      } catch (err) {
-        console.error(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchShops();
-  }, []);
+    if (isMore && !isLast) {
+      fetchShops(currentCursor);
+    }
+  }, [currentCursor, isMore, isLast]);
 
   useEffect(() => {
     const filtered = shopList.filter((shop) =>
       shop.name.toLowerCase().includes(searchShop.toLowerCase()),
     );
-    setVisibleShops(filtered.slice(0, page * itemsPerPage));
-  }, [searchShop, shopList, page]);
+    setVisibleShops(filtered);
+  }, [searchShop, shopList]);
 
   const handleSearchChange = (value) => {
     setSearchShop(value);
-    setPage(1);
   };
 
   const handleButtonClick = () => {
     navigate('/linkpost');
   };
 
-  const loadMoreShops = () => {
-    if (visibleShops.length < shopList.length) {
-      setPage((prevPage) => prevPage + 1);
-    }
-  };
-
   const handleSortDataChange = (sortData) => {
     setShopList(sortData);
-    setPage(1);
   };
 
-  if (loading) {
+  const onLoadMore = () => {
+    // 머지오류임시추가
+    console.log('onLoadMore');
+    setIsMore(true);
+  };
+
+  if (pageLoading) {
     return <LoadingSpinner />;
   }
 
@@ -72,7 +91,7 @@ const Home = () => {
       />
       <ShopSort onSortDataChange={handleSortDataChange} />
       <ShopList visibleShops={visibleShops} />
-      <ScrollHandler loadMore={loadMoreShops} />
+      <ScrollHandler loading={loading} onLoadMore={onLoadMore} />
     </>
   );
 };

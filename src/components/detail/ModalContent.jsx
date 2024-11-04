@@ -10,7 +10,7 @@ const ModalContent = ({ types, detailData, onSuccessDel, onFailDel }) => {
 
   const [isLoadingDel, loadingErrorDel, deleteDataAsync] = useAsync(() =>
     fetchDelete({
-      teamId: '10-4',
+      teamId: '11-4',
       linkShopId: `${detailData.id}`,
       currentPassword: inputRef.current.value,
     }),

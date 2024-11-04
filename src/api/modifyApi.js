@@ -1,6 +1,3 @@
-const teamId = '10-4';
-const linkShopId = 54;
-
 // modify 조회 api
 
 export async function updateLinkShop(teamId, linkShopId, updatedData) {
@@ -42,5 +39,24 @@ export async function lookupLinkShop(teamId, linkShopId) {
   } catch (error) {
     console.error('조회 실패:', error);
     throw error;
+  }
+}
+
+// 파일첨부 api
+export async function uploadImageApi(formData) {
+  const url = `https://linkshop-api.vercel.app/images/upload`;
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      body: formData,
+    });
+    if (!response.ok) {
+      throw new Error('네트워크가 응답하지 않습니다.');
+    }
+    const data = await response.json();
+    console.log(data); // 데이터확인
+    return data;
+  } catch (error) {
+    throw new Error(error.message);
   }
 }

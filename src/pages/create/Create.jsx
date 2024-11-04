@@ -7,124 +7,149 @@ import ItemImgInput from '../../components/create/ItemImgInput';
 import CreateProductInput from '../../components/create/CreateProductInput';
 import CreatePasswordButton from '../../components/create/CreatePasswordButton';
 import CreateButton from '../../components/create/CreateButton';
-import CrateModal from '../../components/create/CreateModal';
-import '../../components/create/Create.css';
+import ToastPopup from '../../components/common/ToastPopup';
+import './Create.css';
+import { uploadImageApi } from '../../api/modifyApi';
+
+const initialShop = {
+  imageUrl: '',
+  urlName: '',
+  shopUrl: '',
+};
+
+const initialProduct = {
+  price: '',
+  imageUrl: '',
+  name: '',
+};
+
+const initialUserInfo = {
+  password: '',
+  userId: '',
+  name: '',
+};
 
 function Create() {
-  const [shop, setShop] = useState({
-    imageUrl: '',
-    urlName: '',
-    shopUrl: '',
-  });
-
-  // eslint-disable-next-line
-  const [products, setProducts] = useState({
-    price: '',
-    imageUrl: '',
-    name: '',
-  });
-
-  // eslint-disable-next-line
-  const [userInfo, setUserInfo] = useState({
-    password: '',
-    userId: '',
-    name: '',
-  });
-
-  // 모달 상태 관리
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const handleNavigateClick = () => {
-    navigate(`/link/{linkid}`);
-  };
-
-  // const [shopName, setShopName] = useState();
-  // const [Url, setUrl] = useState();
-
   const navigate = useNavigate();
-  const handleButtonClick = () => {
-    navigate('/linkpost');
-  };
-
+  const [shop, setShop] = useState(initialShop);
   // 대표 상품 인풋 추가 동작
   // 인풋에서 엔터 입력하면 추가 버튼 눌려서 대표 상품 인풋 추가되는 버그 있음
-  const [productInputs, setProductInputs] = useState([{}, {}]);
+  const [productInputs, setProductInputs] = useState([
+    initialProduct,
+    initialProduct,
+  ]);
+  const [userInfo, setUserInfo] = useState(initialUserInfo);
+  // 모달 버튼 클릭 시 주소 이동
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleAddButtonClick = (e) => {
     e.preventDefault(); // 버튼 클릭 시 새로고침 되는 현상 막기 위함(type=button 으로 대체 가능)
     if (productInputs.length < 3) {
-      setProductInputs((prevInputs) => {
-        const NewInputs = [...prevInputs, <CreateProductInput />];
-        return NewInputs;
-      });
+      setProductInputs((prevInputs) => [...prevInputs, { ...initialProduct }]);
     }
   };
 
-  // onChange 작성 중
-  const handleFileChange = (name, value) => {
-    setShop((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+  // 대표 상품
+  const handleChangeProductInput = (index, field, value) => {
+    const updatedProducts = productInputs.map((productInput, i) => {
+      if (i === index) {
+        return { ...productInput, [field]: value };
+      }
+      return productInput;
+    });
+    setProductInputs(updatedProducts);
   };
 
+  // 내 쇼핑몰
   const handleShopChange = (e) => {
     const { name, value } = e.target;
-    handleFileChange(name, value);
-    setShop((prev) => ({
-      ...prev,
+    setShop({
+      ...shop,
       [name]: value,
-    }));
+    });
   };
 
-  const handleProductsChange = (e) => {
+  // 내 쇼핑몰 비밀번호
+  const handleUserChange = (e) => {
     const { name, value } = e.target;
-    setProducts((prev) => ({
-      ...prev,
+    setUserInfo({
+      ...userInfo,
       [name]: value,
-    }));
+    });
   };
 
-  const handleUserInfoChange = (e) => {
-    const { name, value } = e.target;
-    setUserInfo((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+  const handleFileChange = (file) => {
+    if (file) {
+      const itemImageURL = URL.createObjectURL(file);
+      const formData = new FormData();
+      formData.append('image', file); // 실제 파일 객체를 추가
+      uploadImageApi(formData)
+        .then((data) => {
+          console.log('업로드 성공:', data);
+          setShop({ ...shop, imageUrl: data.url });
+        })
+        .catch((error) => {
+          console.error('업로드 실패:', error);
+        });
+      // 메모리 해제
+      return () => URL.revokeObjectURL(itemImageURL);
+    }
   };
 
-  const handleSubmit = (e) => {
+  // 생성하기 버튼 클릭 시 작동
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsModalOpen(true);
-    // console.log({ shop, products, userInfo });
+
+    const formData = {
+      products: productInputs,
+      shop: shop,
+      ...userInfo,
+    };
+
+    console.log(formData, '생성 데이터');
+
+    setIsModalOpen(false);
   };
 
   return (
     <div>
-      <Header buttonName="돌아가기" onButtonClick={handleButtonClick} />
+      <Header buttonName="돌아가기" onButtonClick={() => navigate('/list')} />
       <form className="form-body" onSubmit={handleSubmit}>
         <div className="create-input-wrapper">
           <div className="create-input-title">
             <h3 className="create-input-title">대표 상품</h3>
             <AddButton type="button" onClick={handleAddButtonClick} />
           </div>
-          {/* map 배열에서 언더바를 매개변수로 사용해서 eslint 오류 발생 */}
-          {productInputs.map((_, index) => (
-            <CreateProductInput key={index} onChange={handleProductsChange} />
+          {/* 옵셔널 체이닝 */}
+          {productInputs?.map((data, index) => (
+            <div key={index}>
+              <CreateProductInput
+                index={index}
+                data={data}
+                onChangeProductInput={handleChangeProductInput}
+              />
+            </div>
           ))}
           <h3 className="create-input-title">내 쇼핑몰</h3>
           <div className="create-input-my-shop-wrapper">
             <ItemImgInput
               name="imageUrl"
               value={shop.imageUrl}
-              onChange={handleFileChange}
+              onFileChange={handleFileChange}
             />
             <CreateInput
               label="이름"
-              name="urlName"
-              value={shop.urlName}
+              name="name"
+              value={userInfo.name}
               placeholder="표시하고 싶은 이름을 적어 주세요."
-              onChange={handleShopChange}
+              onChange={handleUserChange}
+            />
+            <CreateInput
+              label="아이디"
+              name="userId"
+              value={userInfo.userId}
+              placeholder="URL로 사용될 아이디를 입력해주세요."
+              onChange={handleUserChange}
             />
             <CreateInput
               label="Url"
@@ -133,21 +158,21 @@ function Create() {
               placeholder="Url을 입력해 주세요."
               onChange={handleShopChange}
             />
-            <CreatePasswordButton onChange={handleUserInfoChange} />
+            <CreatePasswordButton
+              value={userInfo.password}
+              onChange={handleUserChange}
+            />
           </div>
-          <CreateButton />
+          <CreateButton type="submit" />
         </div>
       </form>
       <div>
-        <CrateModal
-          modalType="none"
-          width="438px"
-          height="342px"
-          borderRadius="30px"
+        <ToastPopup
           isOpen={isModalOpen}
-          onClick={handleNavigateClick}
-          modalMessage="등록이 완료되었습니다."
-        />
+          text="등록이 완료되었습니다."
+          isBtnOne={true}
+          onClose={() => navigate('/list/{linkid}')}
+        ></ToastPopup>
       </div>
     </div>
   );

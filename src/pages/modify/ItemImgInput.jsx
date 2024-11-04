@@ -1,9 +1,10 @@
-import { useEffect, useRef, useState } from 'react';
+// import { useState } from 'react';
+import { useRef, useState } from 'react';
 import './ItemImgInput.css';
 import CloseIcon from '../../images/icons/close.png';
 
 const ItemImgInput = ({ index, onFileChange, imageUrl }) => {
-  const [imgPreviewUrl, setImgPreviewUrl] = useState('');
+  const [imgPreviewUrl, setImgPreviewUrl] = useState(imageUrl);
   const fileInputRef = useRef(null);
 
   const handleFileChange = (id, e) => {
@@ -24,8 +25,6 @@ const ItemImgInput = ({ index, onFileChange, imageUrl }) => {
     onFileChange(null);
   };
 
-  useEffect(() => {}, [imgPreviewUrl]);
-
   return (
     <div className="img-box">
       <label className="item-img-title">
@@ -45,12 +44,12 @@ const ItemImgInput = ({ index, onFileChange, imageUrl }) => {
         )}
       </label>
       <div>
-        <label htmlFor="itemImgFile" className="item-img-label">
+        <label htmlFor={`itemImgFile${index}`} className="item-img-label">
           파일 첨부
         </label>
         <input
           id={`itemImgFile${index}`} // 고유한 id 부여
-          name="itemImgFile"
+          name="imageUrl"
           className="item-img-input"
           type="file"
           accept="image/*"

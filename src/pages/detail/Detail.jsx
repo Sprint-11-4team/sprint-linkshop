@@ -97,7 +97,11 @@ const Detail = () => {
           onShareClick={handleShareClick}
           likes={likes}
         />
-        <Bottom linkShopId={id}/>
+        <div className='bottom-text'>
+          대표 상품
+        </div>
+        <Bottom 
+        detailData={detailData} />
       </div>
       <Modal
         modalType="none"
