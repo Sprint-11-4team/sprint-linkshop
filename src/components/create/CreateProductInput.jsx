@@ -2,9 +2,29 @@ import React, { useState } from 'react';
 import CreateInput from './CreateInput';
 import './CreateProductInput.css';
 import ItemImgInput from './ItemImgInput';
+import { uploadImageApi } from '../../api/createApi';
 
-const CreateProductInput = ({ value, onChange }) => {
-  // const [itemName, setItemName] = useState('');
+const CreateProductInput = ({ value, onChange, index }) => {
+  const handleFileChange = (file, index) => {
+    if (file) {
+      const itemImageURL = URL.createObjectURL(file);
+      const formData = new FormData();
+      formData.append('image', file); // 실제 파일 객체를 추가
+
+      uploadImageApi(formData)
+        .then((data) => {
+          console.log('업로드 성공:', data);
+          onChange(index, 'imageUrl', data.url);
+        })
+        .catch((error) => {
+          console.error('업로드 실패:', error);
+        });
+
+      // 메모리 해제
+      return () => URL.revokeObjectURL(itemImageURL);
+    }
+  };
+
   const [price, setPrice] = useState('');
 
   const priceChangeHandler = (e) => {
@@ -16,11 +36,13 @@ const CreateProductInput = ({ value, onChange }) => {
     }
   };
 
-  //  react-hook-form 적용? 상품 인풋 패키지가 여러 개 추가 되면 렌더링 시 이슈 있을 수도 있음. 있으면 진짜 완성도 높겠지만 지금 중요하진 않음.
-
   return (
     <div className="create-input-package">
-      <ItemImgInput name="imageUrl" value={value} onChange={onChange} />
+      <ItemImgInput
+        name="imageUrl"
+        index={index}
+        onFileChange={(file, id) => handleFileChange(file, id)}
+      />
       <CreateInput
         label="상품 이름"
         name="itemName"
