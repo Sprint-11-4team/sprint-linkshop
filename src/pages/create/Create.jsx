@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Header from '../../components/common/Header';
 import CreateInput from '../../components/create/CreateInput';
 import AddButton from '../../components/create/AddButton';
@@ -8,9 +8,15 @@ import CreateProductInput from '../../components/create/CreateProductInput';
 import CreatePasswordButton from '../../components/create/CreatePasswordButton';
 import CreateButton from '../../components/create/CreateButton';
 import CrateModal from '../../components/create/CreateModal';
-import '../../components/create/Create.css';
+import './Create.css';
 
 function Create() {
+  const navigate = useNavigate();
+  // eslint-disable-next-line
+  const location = useLocation();
+  // const { id } = useParams();
+  // const queryParams = new URLSearchParams(location.search);
+
   const [shop, setShop] = useState({
     imageUrl: '',
     urlName: '',
@@ -24,26 +30,22 @@ function Create() {
     name: '',
   });
 
-  // eslint-disable-next-line
   const [userInfo, setUserInfo] = useState({
     password: '',
     userId: '',
     name: '',
   });
 
-  // 모달 상태 관리
+  // 모달 버튼 클릭 시 주소 이동
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleNavigateClick = () => {
     navigate(`/link/{linkid}`);
   };
 
-  // const [shopName, setShopName] = useState();
-  // const [Url, setUrl] = useState();
-
-  const navigate = useNavigate();
+  // 돌아가기 버튼 클릭 시 주소 이동
   const handleButtonClick = () => {
-    navigate('/linkpost');
+    navigate('/list');
   };
 
   // 대표 상품 인풋 추가 동작
@@ -60,43 +62,66 @@ function Create() {
     }
   };
 
-  // onChange 작성 중
-  const handleFileChange = (name, value) => {
-    setShop((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+  // 대표 상품
+  const handleProductsChange = (index, field, value) => {
+    const updatedProducts = productInputs.map((productInput, i) => {
+      if (i === index) {
+        return { ...productInput, [field]: value };
+      }
+      return productInput;
+    });
+    setProductInputs(updatedProducts);
   };
+  // const handleProductsChange = (index, field, value) => {
+  //   const updatedProducts = [...products];
+  //   updatedProducts[index] = { ...updatedProducts[index], [field]: value };
+  //   setProducts(updatedProducts);
+  //   console.log('Updated Products:', updatedProducts);
+  // };
 
+  // 내 쇼핑몰
   const handleShopChange = (e) => {
     const { name, value } = e.target;
-    handleFileChange(name, value);
-    setShop((prev) => ({
-      ...prev,
+    // handleFileChange(name, value);
+    setShop({
       [name]: value,
-    }));
+    });
   };
 
-  const handleProductsChange = (e) => {
-    const { name, value } = e.target;
-    setProducts((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+  // 내 쇼핑몰 비밀번호
+  const handlePasswordChange = (e) => {
+    setUserInfo((prev) => ({ ...prev, password: e.target.value }));
   };
 
+  // eslint-disable-next-line
   const handleUserInfoChange = (e) => {
     const { name, value } = e.target;
-    setUserInfo((prev) => ({
-      ...prev,
+    setUserInfo({
       [name]: value,
-    }));
+    });
   };
 
+  // 생성하기 버튼 클릭 시 작동
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // const formdData = {
+    //   products: products,
+    //   shop: shop,
+    //   ...userInfo,
+    // };
+    // console.log(formData, '생성 데이터');
+
+    // try {
+    //   await updateLinkShop('11-4', detailData.id, formData);
+    // } catch (err) {
+    //   console.error(err.message);
+    // } finally {
+    //   console.log('성공');
+    // }
+
     setIsModalOpen(true);
-    // console.log({ shop, products, userInfo });
+    console.log(shop, products, userInfo);
   };
 
   return (
@@ -108,16 +133,21 @@ function Create() {
             <h3 className="create-input-title">대표 상품</h3>
             <AddButton type="button" onClick={handleAddButtonClick} />
           </div>
-          {/* map 배열에서 언더바를 매개변수로 사용해서 eslint 오류 발생 */}
-          {productInputs.map((_, index) => (
-            <CreateProductInput key={index} onChange={handleProductsChange} />
+          {/* 옵셔널 체이닝 */}
+          {productInputs?.map((data, index) => (
+            <CreateProductInput
+              data={data}
+              key={index}
+              index={index}
+              onChange={handleProductsChange}
+            />
           ))}
           <h3 className="create-input-title">내 쇼핑몰</h3>
           <div className="create-input-my-shop-wrapper">
             <ItemImgInput
               name="imageUrl"
               value={shop.imageUrl}
-              onChange={handleFileChange}
+              // onChange={(file) => handleFileChange(file)}
             />
             <CreateInput
               label="이름"
@@ -133,7 +163,10 @@ function Create() {
               placeholder="Url을 입력해 주세요."
               onChange={handleShopChange}
             />
-            <CreatePasswordButton onChange={handleUserInfoChange} />
+            <CreatePasswordButton
+              value={userInfo.password}
+              onChange={handlePasswordChange}
+            />
           </div>
           <CreateButton />
         </div>

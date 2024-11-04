@@ -3,36 +3,31 @@ import passwordToggleButtonOff from '../../images/icons/password-toggle-off.png'
 import passwordToggleButtonOn from '../../images/icons/password-toggle-on.png';
 import './CreatePasswordButton.css';
 
-const CreatePasswordButton = ({ onChange }) => {
-  const [password, setPassword] = useState('');
+const CreatePasswordButton = ({ value, onChange }) => {
   const [showPassword, setShowPassword] = useState({
     type: 'password',
     visible: false,
   });
 
-  const [isPassword, setIsPassword] = useState(false);
   const [passwordMessage, setPasswordMessage] = useState('');
+  const [isPassword, setIsPassword] = useState(false);
 
-  const showPasswordHandle = (e) => {
-    setShowPassword(() => {
-      if (!showPassword.visible) {
-        return { type: 'text', visible: true };
-      } else {
-        return { type: 'password', visible: false };
-      }
-    });
+  const showPasswordHandle = () => {
+    setShowPassword((prevShowPassword) => ({
+      type: prevShowPassword.visible ? 'password' : 'text',
+      visible: !prevShowPassword.visible,
+    }));
   };
 
   // 유효성 검사
 
-  const onChangePassword = (e) => {
-    const passwordInput = e.target.value.trim();
-    setPassword(passwordInput);
+  const handlePasswordValidation = (e) => {
     const userPasswordRegExp = /^[A-Za-z0-9]{6,}$/;
-    setIsPassword(userPasswordRegExp.test(passwordInput));
+    setIsPassword(userPasswordRegExp.test(e.target.value));
+    onChange(e); // Create에서 상태 관리할 수 있도록 호출
   };
 
-  const handlePassword = () => {
+  const handleBlur = (e) => {
     setPasswordMessage(
       isPassword ? '' : '영문을 포함한 숫자 6자 이상을 입력해주세요.',
     );
@@ -49,9 +44,9 @@ const CreatePasswordButton = ({ onChange }) => {
             className="password-input"
             name="password"
             type={showPassword.type}
-            value={password}
-            onChange={onChangePassword}
-            onBlur={handlePassword}
+            value={value}
+            onChange={handlePasswordValidation}
+            onBlur={handleBlur}
             placeholder="영문+숫자 6자 이상을 입력해주세요."
           ></input>
         </label>
