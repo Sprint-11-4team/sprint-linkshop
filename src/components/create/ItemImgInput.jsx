@@ -10,8 +10,8 @@ const ItemImgInput = () => {
     if (!e.target.files) return;
     const file = e.target.files[0];
     if (file) {
-      const itemImgURL = URL.createObjectURL(file);
-      setImgPreviewUrl(itemImgURL);
+      const itemImageURL = URL.createObjectURL(file);
+      setImgPreviewUrl(itemImageURL);
     }
   };
 
