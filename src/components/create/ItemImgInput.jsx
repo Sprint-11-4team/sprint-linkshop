@@ -2,16 +2,17 @@ import { useEffect, useRef, useState } from 'react';
 import './ItemImgInput.css';
 import CloseIcon from '../../images/icons/close.png';
 
-const ItemImgInput = () => {
-  const [imgPreviewUrl, setImgPreviewUrl] = useState('');
+const ItemImgInput = ({ index, onFileChange, imageUrl }) => {
+  const [imgPreviewUrl, setImgPreviewUrl] = useState(imageUrl);
   const fileInputRef = useRef(null);
 
-  const handleImgChange = (e) => {
+  const handleImgChange = (id, e) => {
     if (!e.target.files) return;
     const file = e.target.files[0];
     if (file) {
-      const itemImageURL = URL.createObjectURL(file);
-      setImgPreviewUrl(itemImageURL);
+      const itemImgURL = URL.createObjectURL(file);
+      setImgPreviewUrl(itemImgURL);
+      onFileChange(file, id);
     }
   };
 
@@ -20,6 +21,7 @@ const ItemImgInput = () => {
     if (fileInputRef.current) {
       fileInputRef.current.value = ''; // input 값 초기화
     }
+    onFileChange(null);
   };
 
   useEffect(() => {}, [imgPreviewUrl]);
@@ -43,16 +45,16 @@ const ItemImgInput = () => {
         )}
       </label>
       <div>
-        <label htmlFor="itemImgFile" className="item-img-label">
+        <label htmlFor={`itemImgFile${index}`} className="item-img-label">
           파일 첨부
         </label>
         <input
-          id="itemImgFile"
+          id={`itemImgFile${index}`} // htmlFor = id, index 지정해야 각 인풋별로 미리보기 잘 됨
           name="itemImgFile"
           className="item-img-input"
           type="file"
           accept="image/*"
-          onChange={handleImgChange}
+          onChange={(e) => handleImgChange(index, e)}
           ref={fileInputRef}
         />
       </div>
