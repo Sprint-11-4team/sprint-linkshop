@@ -3,16 +3,16 @@ import './ItemImgInput.css';
 import CloseIcon from '../../images/icons/close.png';
 
 const ItemImgInput = ({ index, onFileChange, imageUrl }) => {
-  const [imgPreviewUrl, setImgPreviewUrl] = useState(imageUrl);
+  const [imgPreviewUrl, setImgPreviewUrl] = useState('');
   const fileInputRef = useRef(null);
 
-  const handleImgChange = (id, e) => {
+  const handleFileChange = (id, e) => {
     if (!e.target.files) return;
     const file = e.target.files[0];
     if (file) {
       const itemImgURL = URL.createObjectURL(file);
       setImgPreviewUrl(itemImgURL);
-      onFileChange(file, id);
+      onFileChange(file, id); // 부모 컴포넌트로 파일 전달
     }
   };
 
@@ -49,12 +49,12 @@ const ItemImgInput = ({ index, onFileChange, imageUrl }) => {
           파일 첨부
         </label>
         <input
-          id={`itemImgFile${index}`} // htmlFor = id, index 지정해야 각 인풋별로 미리보기 잘 됨
+          id={`itemImgFile${index}`} // 고유한 id 부여
           name="itemImgFile"
           className="item-img-input"
           type="file"
           accept="image/*"
-          onChange={(e) => handleImgChange(index, e)}
+          onChange={(e) => handleFileChange(index, e)}
           ref={fileInputRef}
         />
       </div>

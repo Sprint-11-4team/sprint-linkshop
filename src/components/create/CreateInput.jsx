@@ -12,6 +12,7 @@ const CreateInput = ({ label, name, value, placeholder, onChange, onBlur }) => {
           onChange={onChange}
           onBlur={onBlur}
           placeholder={placeholder}
+          required
         />
       </label>
     </>
