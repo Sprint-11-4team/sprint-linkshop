@@ -3,101 +3,161 @@ import { useNavigate } from 'react-router-dom';
 import Header from '../../components/common/Header';
 import CreateInput from '../../components/create/CreateInput';
 import AddButton from '../../components/create/AddButton';
-import CreateProductInput from '../../components/create/CreateProductInput';
-import CreateButton from '../../components/create/CreateButton';
-// import CreateShopInput from '../../components/create/CreateShopInput';
-import '../../components/create/Create.css';
-import CreatePasswordButton from '../../components/create/CreatePasswordButton';
 import ItemImgInput from '../../components/create/ItemImgInput';
+import CreateProductInput from '../../components/create/CreateProductInput';
+import CreatePasswordButton from '../../components/create/CreatePasswordButton';
+import CreateButton from '../../components/create/CreateButton';
+import CrateModal from '../../components/create/CreateModal';
+import '../../components/create/Create.css';
 
 function Create() {
-  const [shopName, setShopName] = useState();
-  const [Url, setUrl] = useState();
-  // 인풋 초기 상태 저장
-  // const [userName, setUserName] = useState('');
-  // const [userId, setUserId] = useState('');
+  const [shop, setShop] = useState({
+    imageUrl: '',
+    urlName: '',
+    shopUrl: '',
+  });
 
-  // const [userIdMessage, setUserIdMessage] = useState('');
-
-
-  // 유효성 검사
   // eslint-disable-next-line
-  const [isUserId, setIsUserId] = useState(false);
-  // 이름, 상품 가격, 쇼핑몰 URL 에도 유효성 검사를 해야 하는지 고민
+  const [products, setProducts] = useState({
+    price: '',
+    imageUrl: '',
+    name: '',
+  });
 
-  // 이름, 쇼핑몰 URL 에도 유효성 검사를 해야 하는지 고민
+  // eslint-disable-next-line
+  const [userInfo, setUserInfo] = useState({
+    password: '',
+    userId: '',
+    name: '',
+  });
 
-  // const handleUserName = (e) => {
-  //   const currentUserName = e.target.value.trim(); //이름에 공백 허용된다면 trim() 제거해야 함
-  //   setUserName(currentUserName);
-  // };
+  // 모달 상태 관리
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // 입력 시 유효성 검사
-  // const onChangeUserId = (e) => {
-  //   const currentUserId = e.target.value;
-  //   setUserId(currentUserId);
+  const handleNavigateClick = () => {
+    navigate(`/link/{linkid}`);
+  };
 
-  //   const userIdRegExp = /^[A-Za-z0-9]{1,}$/;
-  //   setIsUserId(
-  //     !currentUserId === '' || !userIdRegExp.test(currentUserId) ? false : true,
-  //   );
-  // };
-
-  // focust out 시 메시지 출력
-  // const handleUserId = () => {
-  //   setUserIdMessage(
-  //     isUserId
-  //       ? '사용할 수 있는 아이디입니다.'
-  //       : '아이디에 띄어쓰기, 특수기호를 사용할 수 없습니다.',
-  //   );
-  // };
+  // const [shopName, setShopName] = useState();
+  // const [Url, setUrl] = useState();
 
   const navigate = useNavigate();
   const handleButtonClick = () => {
-    navigate('/list');
+    navigate('/linkpost');
+  };
+
+  // 대표 상품 인풋 추가 동작
+  // 인풋에서 엔터 입력하면 추가 버튼 눌려서 대표 상품 인풋 추가되는 버그 있음
+  const [productInputs, setProductInputs] = useState([{}, {}]);
+
+  const handleAddButtonClick = (e) => {
+    e.preventDefault(); // 버튼 클릭 시 새로고침 되는 현상 막기 위함(type=button 으로 대체 가능)
+    if (productInputs.length < 3) {
+      setProductInputs((prevInputs) => {
+        const NewInputs = [...prevInputs, <CreateProductInput />];
+        return NewInputs;
+      });
+    }
+  };
+
+  // onChange 작성 중
+  const handleFileChange = (name, value) => {
+    setShop((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleShopChange = (e) => {
+    const { name, value } = e.target;
+    handleFileChange(name, value);
+    setShop((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleProductsChange = (e) => {
+    const { name, value } = e.target;
+    setProducts((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleUserInfoChange = (e) => {
+    const { name, value } = e.target;
+    setUserInfo((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setIsModalOpen(true);
+    // console.log({ shop, products, userInfo });
   };
 
   return (
     <div>
       <Header buttonName="돌아가기" onButtonClick={handleButtonClick} />
-      <form className="form-body">
+      <form className="form-body" onSubmit={handleSubmit}>
         <div className="create-input-wrapper">
-          {/* <div className="create-input-package-wrapper"> */}
           <div className="create-input-title">
-            <h3>대표 상품</h3>
-            <AddButton />
+            <h3 className="create-input-title">대표 상품</h3>
+            <AddButton type="button" onClick={handleAddButtonClick} />
           </div>
-          <CreateProductInput />
-          <CreateProductInput />
-          {/* </div> */}
-          {/* <div className="create-input-package-wrapper"> */}
-          {/* <div className="create-input-title"> */}
+          {/* map 배열에서 언더바를 매개변수로 사용해서 eslint 오류 발생 */}
+          {productInputs.map((_, index) => (
+            <CreateProductInput key={index} onChange={handleProductsChange} />
+          ))}
           <h3 className="create-input-title">내 쇼핑몰</h3>
-          {/* </div> */}
           <div className="create-input-my-shop-wrapper">
-            <ItemImgInput />
+            <ItemImgInput
+              name="imageUrl"
+              value={shop.imageUrl}
+              onChange={handleFileChange}
+            />
             <CreateInput
               label="이름"
-              name="shopName"
-              value={shopName}
+              name="urlName"
+              value={shop.urlName}
               placeholder="표시하고 싶은 이름을 적어 주세요."
-              onChange={(e) => setShopName(e.target.value)}
+              onChange={handleShopChange}
             />
             <CreateInput
               label="Url"
-              name="Url"
-              value={Url}
+              name="shopUrl"
+              value={shop.shopUrl}
               placeholder="Url을 입력해 주세요."
-              onChange={(e) => setUrl(e.target.value)}
+              onChange={handleShopChange}
             />
-            <CreatePasswordButton />
+            <CreatePasswordButton onChange={handleUserInfoChange} />
           </div>
-          {/* </div> */}
           <CreateButton />
         </div>
       </form>
+      <div>
+        <CrateModal
+          modalType="none"
+          width="438px"
+          height="342px"
+          borderRadius="30px"
+          isOpen={isModalOpen}
+          onClick={handleNavigateClick}
+          modalMessage="등록이 완료되었습니다."
+        />
+      </div>
     </div>
   );
 }
 
 export default Create;
+
+// onChange 를 전달하기 보다 컴포넌트 자체를 전달
+// 커스텀 훅 제작
+// props drilling
+// 컨택스트 만들고 프로바이더로 감싸고, 상태를 지역적으로 공유할 수 있게
+// onChange 2개일 때? 객체 useState
+// 비밀번호 p 태그 -> position: absolute
