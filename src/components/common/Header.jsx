@@ -9,7 +9,7 @@ const Header = ({ buttonName, onButtonClick }) => {
   const handleLogoClick = (event) => {
     if (location.pathname === '/list') {
       event.preventDefault();
-      window.location.reload(); // 페이지 강제 새로고침
+      window.location.reload();
     }
   };
 

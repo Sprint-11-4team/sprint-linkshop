@@ -70,14 +70,10 @@ const Home = () => {
 
   const handleSortDataChange = (sortData) => {
     setShopList(sortData);
-    // setPage(1);
-    const filtered = sortData.filter((shop) =>
-      shop.name.toLowerCase().includes(searchShop.toLowerCase()),
-    );
-    setVisibleShops(filtered);
   };
 
   const onLoadMore = () => {
+    // 머지오류임시추가
     console.log('onLoadMore');
     setIsMore(true);
   };
