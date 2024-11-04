@@ -1,78 +1,155 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import Header from '../../components/common/Header';
-// import CreateInput from '../../components/create/CreateInput';
 import AddButton from '../../components/create/AddButton';
-// import CreatePasswordButton from '../../components/create/CreatePasswordButton';
 import ModifyButton from '../../components/create/ModifyButton';
-import CreateProductInput from '../../components/create/CreateProductInput';
-// import MyproductList from './MyProductList';
-import ItemImgInput from '../../components/create/ItemImgInput';
-import CreateInput from '../../components/create/CreateInput';
-import CreatePasswordButton from '../../components/create/CreatePasswordButton';
+import MyproductList from './MyProductList';
+import useAsync from '../../api/useAsync';
+import { fetchDetailData } from '../../api/detailApi';
+import ModifyProductInput from './ModifyProductInput';
+import { updateLinkShop } from '../../api/modifyApi';
+import LoadingSpinner from '../../components/common/LoadingSpinner';
 
 const Modify = () => {
-  // const [userInfo, setUserInfo] = useState({
-  //   name: '',
-  //   userId: '',
-  //   password: '',
-  // });
-
-  // const handleInputChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setUserInfo((userInfo) => ({
-  //     ...userInfo,
-  //     [name]: value,
-  //   }));
-  // };
-  const [shopName, setShopName] = useState();
-  const [Url, setUrl] = useState();
-  const { id } = useParams();
-  const location = useLocation();
-  const queryParams = new URLSearchParams(location.search);
-  const pwd = queryParams.get('pwd'); // pwd 값을 가져옵니다.
-  console.log(id + ' 확인' + pwd);
-
   const navigate = useNavigate();
-  const handleButtonClick = () => {
-    navigate('/ ');
+  const location = useLocation();
+  const { id } = useParams();
+  const queryParams = new URLSearchParams(location.search);
+  const paramsPwd = queryParams.get('pwd');
+  // eslint-disable-next-line
+  const [pwd, setPwd] = useState(paramsPwd);
+
+  const [detailData, setDetailData] = useState({}); //조회 state
+  const [products, setProducts] = useState([]);
+  // 내쇼핑몰 state
+  const [shopData, setShopData] = useState({
+    urlName: '',
+    shopUrl: '',
+    imageUrl: '',
+  });
+  // ect state
+  const [etcData, setEtcData] = useState({
+    currentPassword: '',
+    userId: '',
+    name: '',
+  });
+
+  const [isLoading, loadingError, getDetailDataAsync] = useAsync(() =>
+    fetchDetailData({
+      teamId: '11-4',
+      linkShopId: id,
+    }),
+  );
+
+  // 내쇼핑몰 handler
+  const handleChangeShopInput = (e) => {
+    const { name, value } = e.target;
+    setShopData({
+      ...shopData,
+      [name]: value,
+    });
   };
 
-  // const { name, userId, password } = userInfo;
+  // 대표상품 handler
+  const handleChangeProductInput = (index, field, value) => {
+    const updatedProducts = products.map((product, i) => {
+      if (i === index) {
+        return { ...product, [field]: value }; // 필드 업데이트
+      }
+      return product;
+    });
+    setProducts(updatedProducts); // 상태 업데이트
+  };
+
+  // etc handler
+  const handleChangeInput = (e) => {
+    const { name, value } = e.target;
+    setEtcData({
+      ...etcData,
+      [name]: value,
+    });
+  };
+
+  const getProductData = (products) => {
+    return products.map(({ imageUrl, name, price }) => ({
+      imageUrl,
+      name,
+      price,
+    }));
+  };
+
+  const handleLoadData = async () => {
+    let result = await getDetailDataAsync();
+    if (!result) return;
+    setDetailData(result);
+    setProducts(getProductData(result.products));
+    setShopData({
+      imageUrl: result.shop.imageUrl,
+      urlName: result.shop.urlName,
+      shopUrl: result.shop.shopUrl,
+    });
+    setEtcData({
+      currentPassword: pwd,
+      userId: result.userId,
+      name: result.name,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const formData = {
+      products: products,
+      shop: shopData,
+      ...etcData,
+    };
+    console.log(formData, '수정시보내는데이터');
+
+    try {
+      await updateLinkShop('11-4', detailData.id, formData);
+    } catch (err) {
+      console.error(err.message);
+    } finally {
+      console.log('성공');
+    }
+  };
+
+  useEffect(() => {
+    handleLoadData();
+    // eslint-disable-next-line
+  }, []);
+
+  if (isLoading || loadingError) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <div>
-      <Header buttonName="돌아가기" onButtonClick={handleButtonClick} />
-      <form className="form-body">
-        <div className="create-input-wrapper">
-          {/* <div className="create-input-package-wrapper"> */}
-          <div className="create-input-title">
-            <h3>대표 상품</h3>
+      <Header buttonName="내 스토어" onButtonClick={() => navigate('/ ')} />
+      <form className="form-body" onSubmit={handleSubmit}>
+        <div>
+          <h3 className="create-h3">
+            대표 상품
             <AddButton />
-          </div>
-          <CreateProductInput />
-          <CreateProductInput />
-          {/* h3 대신 SectionTitle로? */}
-          <h3 className="create-h3">내 쇼핑몰</h3>
-          <div className="create-input-my-shop-wrapper">
-            <ItemImgInput />
-            <CreateInput
-              label="이름"
-              name="shopName"
-              value={shopName}
-              placeholder="표시하고 싶은 이름을 적어 주세요."
-              onChange={(e) => setShopName(e.target.value)}
+            {products?.map((data, index) => (
+              <ModifyProductInput
+                data={data}
+                onChangeProductInput={handleChangeProductInput}
+                index={index}
+                key={index}
+              />
+            ))}
+          </h3>
+          <h3 className="create-h3">
+            내 쇼핑몰
+            <MyproductList
+              shopData={shopData}
+              etcData={etcData}
+              onChangeProductInput={handleChangeShopInput}
+              onChangeInput={handleChangeInput}
             />
-            <CreateInput
-              label="Url"
-              name="Url"
-              value={Url}
-              placeholder="Url을 입력해 주세요."
-              onChange={(e) => setUrl(e.target.value)}
-            />
-            <CreatePasswordButton />
-          </div>
-          <ModifyButton />
+          </h3>
+          <ModifyButton type="submit" />
         </div>
       </form>
     </div>

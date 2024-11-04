@@ -14,9 +14,9 @@ const ShopInfo = ({
   linkShopId,
 }) => {
   return (
-    <div className="shop-card-info">
+    <div className="shop-card-info" onClick={onCardClick}>
       <div className="shop-container">
-        <div className="shop-profile-products" onClick={onCardClick}>
+        <div className="shop-profile-products">
           <div className="shop-profile">
             <img
               src={shop.imageUrl}
@@ -39,7 +39,7 @@ const ShopInfo = ({
           <p className="likes-count">{likes}</p>
         </div>
       </div>
-      <div onClick={onCardClick}>
+      <div>
         <ProductImages products={products} />
       </div>
     </div>

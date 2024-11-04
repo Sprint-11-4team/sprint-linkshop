@@ -1,12 +1,14 @@
 import ShopCardInfo from './ShopCardInfo';
 import './CardList.css';
 
-const CardList = ({ shops }) => {
+const CardList = ({ shops, renderKey }) => {
   return (
     <div className="shop-card-list-parent">
       <div className="shop-card-list">
         {shops.map((shop) => (
-          <ShopCardInfo key={shop.id} shopData={shop} />
+          <div key={shop.id}>
+            <ShopCardInfo shopData={shop} />
+          </div>
         ))}
       </div>
     </div>

@@ -24,7 +24,7 @@ const Detail = () => {
   const [likes, setLikes] = useState(0);
   const [types, setTypes] = useState();
   const navigate = useNavigate();
-  
+
   let { id } = useParams();
 
   const params = {
@@ -114,16 +114,20 @@ const Detail = () => {
         <ModalContent
           types={types}
           detailData={detailData}
-          onSuccessDel={() => setOpenPopup(true)}
+          onSuccessDel={() => {
+            setOpenPopup(true);
+          }}
           onFailDel={() => setOpenDelPopup(true)}
         />
       </Modal>
       <ToastPopup
         isOpen={openPopup}
-        onClose={() => setOpenPopup(false)}
+        onClose={() => {
+          setOpenPopup(false);
+          navigate('/list');
+        }}
         text="삭제가 완료되었습니다."
         isBtnOne={true}
-        onClick={() => navigate('/list')}
       ></ToastPopup>
       <ToastPopup
         isOpen={openDelPopup}

@@ -30,27 +30,3 @@
 .item-img-input {
   display: none;
 }
-
-.img-preview {
-  width: 95px;
-  height: 95px;
-}
-
-.close-img-wrapper {
-  position: relative;
-}
-
-.close-img {
-  position: absolute;
-  top: 8px;
-  left: 71px;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  cursor: pointer;
-  border: none;
-}
-
-.close-img:hover {
-  background-color: #888790;
-}

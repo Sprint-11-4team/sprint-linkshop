@@ -58,12 +58,24 @@ export const fetchDeleteLike = async ({ teamId = '', linkShopId = '' }) => {
 };
 
 // 삭제 api
-export const fetchDelete = async ({ teamId = '', linkShopId = '' }) => {
+export const fetchDelete = async ({
+  teamId = '',
+  linkShopId = '',
+  currentPassword = '',
+}) => {
+  console.log(currentPassword);
   try {
     const response = await fetch(
       `${BASE_URL}/${teamId}/linkshops/${linkShopId}`,
       {
         method: 'DELETE',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          currentPassword: currentPassword,
+        }),
       },
     );
     const data = await response.json();
