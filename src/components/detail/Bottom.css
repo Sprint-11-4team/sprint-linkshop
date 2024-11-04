@@ -35,6 +35,7 @@
     font-weight: 400;
     color: #14151A;
     line-height: 20.29px;
+    font: var(--font-pretendard-SemiBold-17);
 }
 
 .product-price {
@@ -68,6 +69,6 @@
 }
 
 .product-name{
-    font: var(--font-pretendard-medium-17);
+    font: var(--font-pretendard-SemiBold-17);
 }
 }
