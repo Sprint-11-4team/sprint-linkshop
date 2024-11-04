@@ -66,4 +66,8 @@
         width: 100%;
         margin: 5px auto;
 }
+
+.product-name{
+    font: var(--font-pretendard-medium-17);
+}
 }
