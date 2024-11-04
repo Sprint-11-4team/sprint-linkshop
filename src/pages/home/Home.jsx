@@ -70,16 +70,6 @@ const Home = () => {
 
   const handleSortDataChange = (sortData) => {
     setShopList(sortData);
-    // setPage(1);
-    const filtered = sortData.filter((shop) =>
-      shop.name.toLowerCase().includes(searchShop.toLowerCase()),
-    );
-    setVisibleShops(filtered);
-  };
-
-  const onLoadMore = () => {
-    console.log('onLoadMore');
-    setIsMore(true);
   };
 
   if (pageLoading) {
