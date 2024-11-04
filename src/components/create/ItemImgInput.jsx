@@ -42,7 +42,7 @@ const ItemImgInput = () => {
           </div>
         )}
       </label>
-      <div>
+      <div className="item-img-div">
         <label htmlFor="itemImgFile" className="item-img-label">
           파일 첨부
         </label>

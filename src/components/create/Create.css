@@ -92,7 +92,8 @@
     margin-bottom: 8px;
   }
 
-  .password-input-wrapper {
+  .password-input-wrapper,
+  .create-label {
     width: 100%;
     box-sizing: border-box;
   }
