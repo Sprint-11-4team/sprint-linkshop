@@ -1,7 +1,7 @@
 const BASE_URL = 'https://linkshop-api.vercel.app';
 
-export async function createLinkShop(teamId, linkShopId, createData) {
-  const url = `${BASE_URL}/${teamId}/linkshops/${linkShopId}`;
+export async function createLinkShop(teamId, createData) {
+  const url = `${BASE_URL}/${teamId}/linkshops`;
   const res = await fetch(url, {
     method: 'POST',
     headers: {

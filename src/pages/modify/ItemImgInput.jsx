@@ -54,6 +54,7 @@ const ItemImgInput = ({ index, onFileChange, imageUrl }) => {
           type="file"
           accept="image/*"
           onChange={(e) => handleFileChange(index, e)}
+          ref={fileInputRef}
         />
       </div>
     </div>
