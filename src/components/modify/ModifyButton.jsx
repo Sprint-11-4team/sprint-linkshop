@@ -26,7 +26,7 @@ const ModifyButton = ({ itemId }) => {
         isOpen={isToastOpen}
         onClose={() => setIsToastOpen(false)}
         text="수정이 완료되었습니다."
-        isBtnOne={false}
+        isBtnOne={true}
         onClick={handleConfirmClick}
       />
     </div>

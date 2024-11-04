@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import Header from '../../components/common/Header';
 import AddButton from '../../components/create/AddButton';
-import ModifyButton from '../modify/ModifyButton';
+import ModifyButton from '../../components/modify/ModifyButton';
 import CreateProductInput from '../../components/create/CreateProductInput';
 import ItemImgInput from '../../components/create/ItemImgInput';
 import CreateInput from '../../components/create/CreateInput';
