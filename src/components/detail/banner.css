@@ -6,5 +6,6 @@
 
 .banner-image {
   width: 100%;
-  height: auto;
+  height: 70px;
+  object-fit: contain;
 }
