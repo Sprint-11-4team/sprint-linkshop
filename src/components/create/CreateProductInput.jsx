@@ -3,9 +3,8 @@ import CreateInput from './CreateInput';
 import './CreateProductInput.css';
 import ItemImgInput from './ItemImgInput';
 
-const CreateProductInput = () => {
-  // const [itemImg, setItemImg] = useState('');
-  const [itemName, setItemName] = useState('');
+const CreateProductInput = ({ value, onChange }) => {
+  // const [itemName, setItemName] = useState('');
   const [price, setPrice] = useState('');
 
   const priceChangeHandler = (e) => {
@@ -21,13 +20,13 @@ const CreateProductInput = () => {
 
   return (
     <div className="create-input-package">
-      <ItemImgInput />
+      <ItemImgInput name="imageUrl" value={value} onChange={onChange} />
       <CreateInput
         label="상품 이름"
         name="itemName"
-        value={itemName}
+        value={value}
         placeholder="상품 이름을 입력해 주세요."
-        onChange={(e) => setItemName(e.target.value)}
+        onChange={onChange}
       />
       <CreateInput
         label="상품 가격"

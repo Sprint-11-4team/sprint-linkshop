@@ -1,7 +1,7 @@
 @import url('../../css/typography.css');
 
 .form-body {
-  margin: 140px 612px 0;
+  margin: 140px;
   display: flex;
   justify-content: center;
   align-items: center;

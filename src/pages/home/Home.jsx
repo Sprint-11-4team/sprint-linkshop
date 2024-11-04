@@ -57,10 +57,6 @@ const Home = () => {
   const handleSortDataChange = (sortData) => {
     setShopList(sortData);
     setPage(1);
-    const filtered = sortData.filter((shop) =>
-      shop.name.toLowerCase().includes(searchShop.toLowerCase()),
-    );
-    setVisibleShops(filtered.slice(0, itemsPerPage));
   };
 
   if (loading) {
