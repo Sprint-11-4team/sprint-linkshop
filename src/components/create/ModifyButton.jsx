@@ -1,9 +1,11 @@
 import './CreateButton.css';
 
-const ModifyButton = () => {
+const ModifyButton = ({ type }) => {
   return (
     <div>
-      <button className="create-button">수정하기</button>
+      <button type={type} className="create-button">
+        수정하기
+      </button>
     </div>
   );
 };
