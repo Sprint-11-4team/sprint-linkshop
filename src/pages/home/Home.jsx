@@ -72,6 +72,12 @@ const Home = () => {
     setShopList(sortData);
   };
 
+  const onLoadMore = () => {
+    // 머지오류임시추가
+    console.log('onLoadMore');
+    setIsMore(true);
+  };
+
   if (pageLoading) {
     return <LoadingSpinner />;
   }
