@@ -42,15 +42,6 @@ function Create() {
   // 모달 버튼 클릭 시 주소 이동
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleNavigateClick = () => {
-    navigate(`/link/{linkid}`);
-  };
-
-  // 돌아가기 버튼 클릭 시 주소 이동
-  const handleButtonClick = () => {
-    navigate('/list');
-  };
-
   const handleAddButtonClick = (e) => {
     e.preventDefault(); // 버튼 클릭 시 새로고침 되는 현상 막기 위함(type=button 으로 대체 가능)
     if (productInputs.length < 3) {
@@ -117,7 +108,7 @@ function Create() {
 
     console.log(formData, '생성 데이터');
 
-    // setIsModalOpen(true);
+    setIsModalOpen(false);
   };
 
   return (
