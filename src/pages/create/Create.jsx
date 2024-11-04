@@ -7,7 +7,7 @@ import ItemImgInput from '../../components/create/ItemImgInput';
 import CreateProductInput from '../../components/create/CreateProductInput';
 import CreatePasswordButton from '../../components/create/CreatePasswordButton';
 import CreateButton from '../../components/create/CreateButton';
-import CrateModal from '../../components/create/CreateModal';
+import ToastPopup from '../../components/common/ToastPopup';
 import './Create.css';
 import { uploadImageApi } from '../../api/modifyApi';
 
@@ -72,7 +72,6 @@ function Create() {
   // 내 쇼핑몰
   const handleShopChange = (e) => {
     const { name, value } = e.target;
-    // handleFileChange(name, value);
     setShop({
       ...shop,
       [name]: value,
@@ -118,12 +117,12 @@ function Create() {
 
     console.log(formData, '생성 데이터');
 
-    setIsModalOpen(false);
+    // setIsModalOpen(true);
   };
 
   return (
     <div>
-      <Header buttonName="돌아가기" onButtonClick={handleButtonClick} />
+      <Header buttonName="돌아가기" onButtonClick={() => navigate('/list')} />
       <form className="form-body" onSubmit={handleSubmit}>
         <div className="create-input-wrapper">
           <div className="create-input-title">
@@ -177,15 +176,12 @@ function Create() {
         </div>
       </form>
       <div>
-        <CrateModal
-          modalType="none"
-          width="438px"
-          height="342px"
-          borderRadius="30px"
+        <ToastPopup
           isOpen={isModalOpen}
-          onClick={handleNavigateClick}
-          modalMessage="등록이 완료되었습니다."
-        />
+          text="등록이 완료되었습니다."
+          isBtnOne={true}
+          onClose={() => navigate('/list/{linkid}')}
+        ></ToastPopup>
       </div>
     </div>
   );

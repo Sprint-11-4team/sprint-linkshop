@@ -2,7 +2,7 @@ import React from 'react';
 import CreateInput from './CreateInput';
 import './CreateProductInput.css';
 import ItemImgInput from './ItemImgInput';
-import { uploadImageApi } from '../../api/modifyApi';
+import { uploadImageApi } from '../../api/createApi';
 
 const CreateProductInput = ({ data, onChangeProductInput, index }) => {
   // const [itemName, setItemName] = useState('');
