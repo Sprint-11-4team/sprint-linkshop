@@ -10,6 +10,7 @@ import CreateButton from '../../components/create/CreateButton';
 import ToastPopup from '../../components/common/ToastPopup';
 import './Create.css';
 import { uploadImageApi } from '../../api/modifyApi';
+import { createLinkShop } from '../../api/createApi';
 
 const initialShop = {
   imageUrl: '',
@@ -159,6 +160,7 @@ function Create() {
               onChange={handleShopChange}
             />
             <CreatePasswordButton
+              name="password"
               value={userInfo.password}
               onChange={handleUserChange}
             />

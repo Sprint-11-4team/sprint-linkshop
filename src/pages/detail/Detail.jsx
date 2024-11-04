@@ -5,11 +5,7 @@ import './Detail.css';
 import { back } from '../../images/icons';
 import Modal from '../../components/common/Modal';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import {
-  fetchDeleteLike,
-  fetchDetailData,
-  fetchLike,
-} from '../../api/detailApi';
+import { fetchDetailData } from '../../api/detailApi';
 import useAsync from '../../api/useAsync';
 import Bottom from '../../components/detail/Bottom';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
@@ -24,7 +20,7 @@ const Detail = () => {
   const [likes, setLikes] = useState(0);
   const [types, setTypes] = useState();
   const navigate = useNavigate();
-  
+
   let { id } = useParams();
 
   const params = {
@@ -37,16 +33,8 @@ const Detail = () => {
   );
 
   // 좋아요클릭
-  const handleLikeChange = async (newCount, isLiked) => {
+  const handleLikeChange = async (newCount) => {
     setLikes(newCount);
-    const fetchFunction = isLiked ? fetchLike : fetchDeleteLike;
-
-    try {
-      await fetchFunction(params); // API 호출
-    } catch (error) {
-      console.error('error', error);
-      setLikes((prevLikes) => (isLiked ? prevLikes - 1 : prevLikes + 1));
-    }
   };
 
   // 공유하기
@@ -97,11 +85,8 @@ const Detail = () => {
           onShareClick={handleShareClick}
           likes={likes}
         />
-        <div className='bottom-text'>
-          대표 상품
-        </div>
-        <Bottom 
-        detailData={detailData} />
+        <div className="bottom-text">대표 상품</div>
+        <Bottom detailData={detailData} />
       </div>
       <Modal
         modalType="none"
@@ -114,7 +99,10 @@ const Detail = () => {
         <ModalContent
           types={types}
           detailData={detailData}
-          onSuccessDel={() => setOpenPopup(true)}
+          onSuccessDel={() => {
+            setOpenPopup(true);
+            navigate('/list');
+          }}
           onFailDel={() => setOpenDelPopup(true)}
         />
       </Modal>

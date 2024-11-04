@@ -19,7 +19,11 @@ const ShopCard = ({
       <div className="shopcard-content">
         <div className="shopcard-header">
           <div className="shopcard-header__heart">
-            <LikeButton initialLikes={likes} onLikeChange={onLikeChange} />
+            <LikeButton
+              initialLikes={likes}
+              onLikeChange={onLikeChange}
+              linkShopId={id}
+            />
             <p className="likes-count">{likes}</p>
           </div>
           <div className="shopcard-header__iconarea">

@@ -11,7 +11,7 @@ const ShopCardInfo = ({ shopData }) => {
   };
 
   const handleCardClick = () => {
-    detailNavigate(`/detail/${shopData.id}`);
+    detailNavigate(`/link/${shopData.id}`);
   };
 
   return (
