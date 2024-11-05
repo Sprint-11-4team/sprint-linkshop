@@ -9,6 +9,7 @@ import CreatePasswordButton from '../../components/create/CreatePasswordButton';
 import CreateButton from '../../components/create/CreateButton';
 import ToastPopup from '../../components/common/ToastPopup';
 import './Create.css';
+import { createLinkShop } from '../../api/createApi';
 import { uploadImageApi } from '../../api/modifyApi';
 
 const initialShop = {
@@ -32,14 +33,15 @@ const initialUserInfo = {
 function Create() {
   const navigate = useNavigate();
   const [shop, setShop] = useState(initialShop);
-  // 대표 상품 인풋 추가 동작
   // 인풋에서 엔터 입력하면 추가 버튼 눌려서 대표 상품 인풋 추가되는 버그 있음
   const [productInputs, setProductInputs] = useState([
     initialProduct,
     initialProduct,
   ]);
   const [userInfo, setUserInfo] = useState(initialUserInfo);
-  // 모달 버튼 클릭 시 주소 이동
+
+  // const [createData, setCreateData] = useState({});
+
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleAddButtonClick = (e) => {
@@ -108,7 +110,42 @@ function Create() {
 
     console.log(formData, '생성 데이터');
 
-    setIsModalOpen(false);
+    if (!userInfo.name) {
+      console.error('사용자 이름이 필요합니다.');
+      return;
+    }
+
+    if (
+      userInfo.password.length < 6 ||
+      !/[A-Za-z]/.test(userInfo.password) ||
+      !/\d/.test(userInfo.password)
+    ) {
+      console.error(
+        '비밀번호는 최소 6자 이상이어야 하며, 영문과 숫자를 포함해야 합니다.',
+      );
+      return;
+    }
+
+    if (
+      !userInfo.userId ||
+      /\s/.test(userInfo.userId) ||
+      /[^A-Za-z0-9]/.test(userInfo.userId)
+    ) {
+      console.error(
+        '유저 아이디는 중복 불가, 띄어쓰기 및 특수 기호를 사용할 수 없습니다.',
+      );
+      return;
+    }
+
+    try {
+      await createLinkShop('11-4', formData);
+    } catch (err) {
+      console.error(err.message);
+    } finally {
+      console.log('성공');
+    }
+
+    setIsModalOpen(true);
   };
 
   return (
