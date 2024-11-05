@@ -17,12 +17,12 @@ const ItemImgInput = ({ index, onFileChange, imageUrl }) => {
     }
   };
 
-  const handleImgDelete = () => {
+  const handleImgDelete = (id) => {
     setImgPreviewUrl('');
     if (fileInputRef.current) {
       fileInputRef.current.value = ''; // input 값 초기화
     }
-    onFileChange(null);
+    onFileChange(null, id);
   };
 
   return (
@@ -37,7 +37,10 @@ const ItemImgInput = ({ index, onFileChange, imageUrl }) => {
               src={imgPreviewUrl}
               alt="대표 상품 이미지 파일"
             />
-            <button className="close-img" onClick={handleImgDelete}>
+            <button
+              className="close-img"
+              onClick={(e) => handleImgDelete(index, e)}
+            >
               <img src={CloseIcon} alt="대표 상품 이미지 삭제" />
             </button>
           </div>

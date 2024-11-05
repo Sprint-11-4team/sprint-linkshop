@@ -2,10 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import Header from '../../components/common/Header';
 import AddButton from '../../components/create/AddButton';
-// import CreateProductInput from '../../components/create/CreateProductInput';
-// import ItemImgInput from '../../components/create/ItemImgInput';
-// import CreateInput from '../../components/create/CreateInput';
-// import CreatePasswordButton from '../../components/create/CreatePasswordButton';
 import ModifyButton from '../../components/create/ModifyButton';
 import MyproductList from './MyProductList';
 import useAsync from '../../api/useAsync';
@@ -42,6 +38,7 @@ const Modify = () => {
   // eslint-disable-next-line
   const [pwd, setPwd] = useState(paramsPwd);
   const [openPopup, setOpenPopup] = useState(false);
+  const [validationOpenPopup, setValidationOpenPopup] = useState(false);
   const [detailData, setDetailData] = useState({}); //조회 state
   const [products, setProducts] = useState([initialProduct]);
   // 내쇼핑몰 state
@@ -76,7 +73,7 @@ const Modify = () => {
   const handleChangeShopFileInput = (field, value) => {
     setShopData({
       ...shopData,
-      [field]: value !== null ? value : '',
+      [field]: value,
     });
   };
 
@@ -125,8 +122,29 @@ const Modify = () => {
     });
   };
 
+  const isImageUrlEmpty = (url) => {
+    return !url || url.trim() === null;
+  };
+
+  // 파일공백검사체크
+  const checkFileEmpty = () => {
+    const firstInvalidIndex = products.findIndex((product) =>
+      isImageUrlEmpty(product.imageUrl),
+    );
+    if (firstInvalidIndex !== -1 || shopData.imageUrl === null) {
+      return true;
+    }
+    return false;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (checkFileEmpty()) {
+      setValidationOpenPopup(true);
+      return;
+    }
+
     setOpenPopup(true);
   };
 
@@ -154,7 +172,7 @@ const Modify = () => {
 
   return (
     <div>
-      <Header buttonName="내 스토어" onButtonClick={() => navigate('/')} />{' '}
+      <Header buttonName="내 스토어" onButtonClick={() => navigate('/')} />
       {/* 경로의 공백 제거 */}
       <form className="form-body" onSubmit={handleSubmit}>
         <div className="create-input-wrapper">
@@ -184,6 +202,12 @@ const Modify = () => {
           </div>
         </div>
       </form>
+      <ToastPopup
+        isOpen={validationOpenPopup}
+        onClose={() => setValidationOpenPopup(false)}
+        text="이미지를 모두 등록해주세요"
+        isBtnOne={true}
+      ></ToastPopup>
       <ToastPopup
         isOpen={openPopup}
         onClose={() => setOpenPopup(false)}

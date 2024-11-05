@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './ModifyProductInput.css';
 import CreateInput from '../../components/create/CreateInput';
 import ItemImgInput from './ItemImgInput';
 import { uploadImageApi } from '../../api/modifyApi';
 
 const ModifyProductInput = ({ onChangeProductInput, data, index }) => {
+  const [price, setPrice] = useState(data.price);
+
   const handleFileChange = (file, index) => {
     if (file) {
       const itemImageURL = URL.createObjectURL(file);
@@ -22,7 +24,20 @@ const ModifyProductInput = ({ onChangeProductInput, data, index }) => {
 
       // 메모리 해제
       return () => URL.revokeObjectURL(itemImageURL);
+    } else {
+      onChangeProductInput(index, 'imageUrl', null);
     }
+  };
+
+  const handleChange = (e, index) => {
+    let inputValue = e.target.value;
+    inputValue = inputValue.replace(/[^\d]/g, '');
+    inputValue = inputValue.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    // 상태 업데이트
+    setPrice(inputValue);
+
+    let inputNum = inputValue.replace(/[^\d]/g, '');
+    onChangeProductInput(index, 'price', inputNum);
   };
 
   return (
@@ -42,9 +57,9 @@ const ModifyProductInput = ({ onChangeProductInput, data, index }) => {
       <CreateInput
         label="상품 가격"
         name="price"
-        value={data.price}
+        value={price.toLocaleString()}
         placeholder="원화로 표기해 주세요."
-        onChange={(e) => onChangeProductInput(index, 'price', e.target.value)}
+        onChange={(e) => handleChange(e, index)}
       />
     </div>
   );
