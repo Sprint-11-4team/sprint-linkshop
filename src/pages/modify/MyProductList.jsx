@@ -1,5 +1,6 @@
 import { uploadImageApi } from '../../api/modifyApi';
 import CreateInput from '../../components/create/CreateInput';
+import CreatePasswordButton from '../../components/create/CreatePasswordButton';
 import '../../components/create/CreateProductInput.css';
 import ItemImgInput from './ItemImgInput';
 
@@ -42,10 +43,10 @@ const MyproductList = ({
       />
       <CreateInput
         label="이름"
-        name="urlName"
-        value={shopData?.urlName}
+        name="name"
+        value={etcData?.name}
         placeholder="표시하고 싶은 이름을 입력해 주세요."
-        onChange={onChangeShopInput}
+        onChange={onChangeInput}
       />
       <CreateInput
         label="아이디"
@@ -61,7 +62,7 @@ const MyproductList = ({
         placeholder="Url을 입력해주세요"
         onChange={onChangeShopInput}
       />
-      <CreateInput
+      <CreatePasswordButton
         label="비밀번호"
         name="currentPassword"
         value={etcData.currentPassword}

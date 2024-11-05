@@ -3,7 +3,7 @@ import passwordToggleButtonOff from '../../images/icons/password-toggle-off.png'
 import passwordToggleButtonOn from '../../images/icons/password-toggle-on.png';
 import './CreatePasswordButton.css';
 
-const CreatePasswordButton = ({ value, onChange }) => {
+const CreatePasswordButton = ({ value, onChange, name }) => {
   const [showPassword, setShowPassword] = useState({
     type: 'password',
     visible: false,
@@ -42,7 +42,7 @@ const CreatePasswordButton = ({ value, onChange }) => {
           비밀번호
           <input
             className="password-input"
-            name="password"
+            name={name}
             type={showPassword.type}
             value={value}
             onChange={handlePasswordValidation}

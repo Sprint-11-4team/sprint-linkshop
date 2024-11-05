@@ -159,6 +159,7 @@ function Create() {
               onChange={handleShopChange}
             />
             <CreatePasswordButton
+              name="password"
               value={userInfo.password}
               onChange={handleUserChange}
             />

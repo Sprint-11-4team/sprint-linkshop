@@ -45,7 +45,7 @@ const ItemImgInput = ({ index, onFileChange, imageUrl }) => {
         )}
       </label>
       <div>
-        <label htmlFor="itemImgFile" className="item-img-label">
+        <label htmlFor={`itemImgFile${index}`} className="item-img-label">
           파일 첨부
         </label>
         <input
