@@ -3,14 +3,13 @@ import passwordToggleButtonOff from '../../images/icons/password-toggle-off.png'
 import passwordToggleButtonOn from '../../images/icons/password-toggle-on.png';
 import './CreatePasswordButton.css';
 
-const CreatePasswordButton = ({ value, onChange, name }) => {
+const CreatePasswordButton = ({ value, onChange, name, onValidityChange }) => {
   const [showPassword, setShowPassword] = useState({
     type: 'password',
     visible: false,
   });
 
   const [passwordMessage, setPasswordMessage] = useState('');
-  const [isPassword, setIsPassword] = useState(false);
 
   const showPasswordHandle = () => {
     setShowPassword((prevShowPassword) => ({
@@ -19,17 +18,22 @@ const CreatePasswordButton = ({ value, onChange, name }) => {
     }));
   };
 
-  // 유효성 검사
+  const chkValidation = (value) => {
+    const userPasswordRegExp = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
+    return userPasswordRegExp.test(value);
+  };
 
+  // 유효성 검사
   const handlePasswordValidation = (e) => {
-    const userPasswordRegExp = /^[A-Za-z0-9]{6,}$/;
-    setIsPassword(userPasswordRegExp.test(e.target.value));
+    const validate = chkValidation(e.target.value);
+
+    onValidityChange(validate, e.target.name); // 유효성검사
     onChange(e); // Create에서 상태 관리할 수 있도록 호출
   };
 
   const handleBlur = (e) => {
     setPasswordMessage(
-      isPassword ? '' : '영문을 포함한 숫자 6자 이상을 입력해주세요.',
+      chkValidation(value) ? '' : '영문을 포함한 숫자 6자 이상을 입력해주세요.',
     );
   };
 

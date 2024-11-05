@@ -40,13 +40,10 @@ const ModalContent = ({ types, detailData, onSuccessDel, onFailDel }) => {
   };
 
   const handleChangeInput = () => {
-    //   // 비밀번호, 영문+숫자 최소 6자 이상
+    // 비밀번호, 영문+숫자 최소 6자 이상
     const password = inputRef.current.value;
-    if (
-      password.length < 6 ||
-      !/[A-Za-z]/.test(password) ||
-      !/\d/.test(password)
-    ) {
+    const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
+    if (!regex.test(password)) {
       setError(true);
       setPasswordMessage('영문을 포함한 숫자 6자 이상을 입력해주세요.');
     } else {

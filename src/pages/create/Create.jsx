@@ -80,6 +80,8 @@ function Create() {
     });
   };
 
+  const onValidityChange = () => {};
+
   const handleFileChange = (file) => {
     if (file) {
       const itemImageURL = URL.createObjectURL(file);
@@ -199,6 +201,7 @@ function Create() {
               name="password"
               value={userInfo.password}
               onChange={handleUserChange}
+              onValidityChange={onValidityChange}
             />
           </div>
           <CreateButton type="submit" />

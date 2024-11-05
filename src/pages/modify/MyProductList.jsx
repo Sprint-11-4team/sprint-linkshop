@@ -11,6 +11,7 @@ const MyproductList = ({
   onChangeShopFileInput,
   onChangeInput,
   index,
+  onValidityChange,
 }) => {
   const handleFileChange = (file) => {
     if (file) {
@@ -34,6 +35,20 @@ const MyproductList = ({
     }
   };
 
+  const handleChangeShopInput = (e) => {
+    const regex = /^https?:\/\//;
+    const validate = regex.test(e.target.value);
+    onValidityChange(validate, e.target.name);
+    onChangeShopInput(e);
+  };
+
+  const handleChangeUserIdInput = (e) => {
+    const regex = /^[A-Za-z0-9]+$/;
+    const validate = regex.test(e.target.value);
+    onValidityChange(validate, e.target.name);
+    onChangeInput(e);
+  };
+
   return (
     <div className="create-input-package">
       <ItemImgInput
@@ -53,14 +68,14 @@ const MyproductList = ({
         name="userId"
         value={etcData.userId}
         placeholder="URL로 사용될 아이디를 입력해주세요."
-        onChange={onChangeInput}
+        onChange={handleChangeUserIdInput}
       />
       <CreateInput
         label="url"
         name="shopUrl"
         value={shopData?.shopUrl}
         placeholder="Url을 입력해주세요"
-        onChange={onChangeShopInput}
+        onChange={handleChangeShopInput}
       />
       <CreatePasswordButton
         label="비밀번호"
@@ -69,6 +84,7 @@ const MyproductList = ({
         placeholder="비밀번호를 입력해주세요."
         onChange={onChangeInput}
         type="password"
+        onValidityChange={onValidityChange}
       />
     </div>
   );

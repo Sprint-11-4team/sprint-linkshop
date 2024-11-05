@@ -39,25 +39,24 @@ const Modify = () => {
   const [pwd, setPwd] = useState(paramsPwd);
   const [openPopup, setOpenPopup] = useState(false);
   const [validationOpenPopup, setValidationOpenPopup] = useState(false);
+  const [validationOpenPopupText, setValidationOpenPopupText] = useState('');
   const [detailData, setDetailData] = useState({}); //조회 state
   const [products, setProducts] = useState([initialProduct]);
   // 내쇼핑몰 state
   const [shopData, setShopData] = useState(initialShop);
   // ect state
   const [etcData, setEtcData] = useState(initialUserInfo);
+  // 유효성검사
+  const [validationState, setValidationState] = useState({
+    currentPassword: true, // 비밀번호 검증 결과
+    shopUrl: true,
+    userId: true,
+  });
 
   const [isLoading, loadingError, getDetailDataAsync] = useAsync(() =>
     fetchDetailData({
       teamId: '11-4',
       linkShopId: id,
-    }),
-  );
-
-  const [isLoadingUpdate, loadingErrorUpdate, getReviewsAsync] = useAsync(() =>
-    updateLinkShop('11-4', detailData.id, {
-      products: products,
-      shop: shopData,
-      ...etcData,
     }),
   );
 
@@ -112,7 +111,7 @@ const Modify = () => {
     setProducts(getProductData(result.products));
     setShopData({
       imageUrl: result.shop.imageUrl,
-      urlName: result.shop.urlName,
+      urlName: 'test',
       shopUrl: result.shop.shopUrl,
     });
     setEtcData({
@@ -137,10 +136,43 @@ const Modify = () => {
     return false;
   };
 
+  const handleValidity = (test, type) => {
+    setValidationState((prevState) => ({
+      ...prevState,
+      [type]: test,
+    }));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(validationState);
 
+    const { currentPassword, shopUrl, userId } = validationState;
+    if (!shopUrl) {
+      setValidationOpenPopupText('url을 https:// 형식에 맞춰주세요');
+      setValidationOpenPopup(true);
+      return;
+    }
+
+    if (!currentPassword) {
+      setValidationOpenPopupText(
+        '비밀번호 영문+숫자 최소 6자 이상 입력해주세요',
+      );
+      setValidationOpenPopup(true);
+      return;
+    }
+
+    if (!userId) {
+      setValidationOpenPopupText(
+        '아이디는 띄어쓰기, 특수기호 사용불가 합니다.',
+      );
+      setValidationOpenPopup(true);
+      return;
+    }
+
+    // 파일체크
     if (checkFileEmpty()) {
+      setValidationOpenPopupText('이미지를 모두 등록해주세요');
       setValidationOpenPopup(true);
       return;
     }
@@ -149,9 +181,18 @@ const Modify = () => {
   };
 
   const submit = async () => {
-    let result = await getReviewsAsync();
-    if (!result) return;
-    navigate(`/link/${id}`);
+    try {
+      let result = await updateLinkShop('11-4', detailData.id, {
+        products: products,
+        shop: shopData,
+        ...etcData,
+      });
+      if (!result) return;
+      navigate(`/link/${id}`);
+    } catch (error) {
+      console.error('수정 실패:', error.message);
+      alert(error.message);
+    }
   };
 
   const handleAddButtonClick = (e) => {
@@ -161,12 +202,27 @@ const Modify = () => {
     }
   };
 
+  // 버튼 활성화 여부 체크
+  const isFormValid = () => {
+    return (
+      products.every(
+        (product) => product.imageUrl && product.name && product.price,
+      ) &&
+      shopData.imageUrl &&
+      shopData.shopUrl &&
+      shopData.urlName &&
+      etcData.currentPassword &&
+      etcData.userId &&
+      etcData.name
+    );
+  };
+
   useEffect(() => {
     handleLoadData();
     // eslint-disable-next-line
   }, []);
 
-  if (isLoading || loadingError || isLoadingUpdate || loadingErrorUpdate) {
+  if (isLoading || loadingError) {
     return <LoadingSpinner />;
   }
 
@@ -197,15 +253,16 @@ const Modify = () => {
               onChangeShopInput={handleChangeShopInput}
               onChangeShopFileInput={handleChangeShopFileInput}
               onChangeInput={handleChangeInput}
+              onValidityChange={(test, type) => handleValidity(test, type)}
             />
-            <ModifyButton type="submit" />
+            <ModifyButton type="submit" addClass={isFormValid()} />
           </div>
         </div>
       </form>
       <ToastPopup
         isOpen={validationOpenPopup}
         onClose={() => setValidationOpenPopup(false)}
-        text="이미지를 모두 등록해주세요"
+        text={validationOpenPopupText}
         isBtnOne={true}
       ></ToastPopup>
       <ToastPopup
