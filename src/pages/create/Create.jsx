@@ -178,22 +178,22 @@ function Create() {
               label="이름"
               name="name"
               value={userInfo.name}
-              placeholder="표시하고 싶은 이름을 적어 주세요."
-              onChange={handleUserChange}
-            />
-            <CreateInput
-              label="아이디"
-              name="userId"
-              value={userInfo.userId}
-              placeholder="URL로 사용될 아이디를 입력해주세요."
+              placeholder="표시하고 싶은 이름을 적어주세요."
               onChange={handleUserChange}
             />
             <CreateInput
               label="Url"
               name="shopUrl"
               value={shop.shopUrl}
-              placeholder="Url을 입력해 주세요."
+              placeholder="Url을 입력해주세요."
               onChange={handleShopChange}
+            />
+            <CreateInput
+              label="유저 ID"
+              name="userId"
+              value={userInfo.userId}
+              placeholder="유저 ID를 입력해주세요."
+              onChange={handleUserChange}
             />
             <CreatePasswordButton
               name="password"

@@ -49,14 +49,14 @@ const CreateProductInput = ({ data, onChangeProductInput, index }) => {
         label="상품 이름"
         value={data.name}
         name="name"
-        placeholder="상품 이름을 입력해 주세요."
+        placeholder="상품 이름을 입력해주세요."
         onChange={(e) => onChangeProductInput(index, 'name', e.target.value)}
       />
       <CreateInput
         label="상품 가격"
         value={data.price}
         name="price"
-        placeholder="원화로 표기해 주세요."
+        placeholder="원화로 표기해주세요."
         onChange={(e) => onChangeProductInput(index, 'price', e.target.value)}
       />
     </div>
