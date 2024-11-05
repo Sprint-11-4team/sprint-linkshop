@@ -6,7 +6,7 @@ const CardList = ({ shops, renderKey }) => {
     <div className="shop-card-list-parent">
       <div className="shop-card-list">
         {shops.map((shop) => (
-          <div key={shop.id}>
+          <div key={`${shop.id}-${shop.name}`}>
             <ShopCardInfo shopData={shop} />
           </div>
         ))}

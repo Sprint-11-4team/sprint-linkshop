@@ -18,7 +18,7 @@ const InfiniteScrollList = ({ onLoadMore, loading }) => {
   );
 
   useEffect(() => {
-    const option = { threshold: 1.0 };
+    const option = { threshold: 0.5 };
     const observer = new IntersectionObserver(handleObserver, option);
 
     if (observerRef.current) observer.observe(observerRef.current);

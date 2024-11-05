@@ -4,7 +4,7 @@ import Header from '../../components/common/Header';
 import SearchInput from '../../components/home/SearchInput';
 import ShopList from '../../components/home/ShopList';
 import LoadingSpinner from '../../components/common/LoadingSpinner';
-import ScrollHandler from '../../components/home/ScrollHandler';
+import InfiniteScrollList from '../../components/home/ScrollHandler';
 import { fetchShopData } from '../../api/homeApi';
 import ShopSort from '../../components/home/ShopSort';
 
@@ -17,8 +17,7 @@ const Home = () => {
   const [isMore, setIsMore] = useState(true);
   const [isLast, setIsLast] = useState(false);
   const [pageLoading, setPageLoading] = useState(true);
-  // const [page, setPage] = useState(1);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
   const fetchShops = async (cursor) => {
     setLoading(true);
@@ -51,7 +50,7 @@ const Home = () => {
     if (isMore && !isLast) {
       fetchShops(currentCursor);
     }
-  }, [currentCursor, isMore, isLast]);
+  }, [isMore, currentCursor, isLast]);
 
   useEffect(() => {
     const filtered = shopList.filter((shop) =>
@@ -70,6 +69,7 @@ const Home = () => {
 
   const handleSortDataChange = (sortData) => {
     setShopList(sortData);
+    setVisibleShops(sortData);
   };
 
   const onLoadMore = () => {
@@ -91,7 +91,7 @@ const Home = () => {
       />
       <ShopSort onSortDataChange={handleSortDataChange} />
       <ShopList visibleShops={visibleShops} />
-      <ScrollHandler loading={loading} onLoadMore={onLoadMore} />
+      <InfiniteScrollList loading={loading} onLoadMore={onLoadMore} />{' '}
     </>
   );
 };

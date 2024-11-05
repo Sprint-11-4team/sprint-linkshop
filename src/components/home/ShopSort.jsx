@@ -9,6 +9,7 @@ const ShopSort = ({ onSortDataChange }) => {
   const [sortModalOpen, setSortModalOpen] = useState(false);
   const [sortButtonText, setSortButtonText] = useState('상세 필터');
   const [selecteSort, setSeleteSort] = useState('recent');
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
   const sortOptions = {
     recent: { label: '최신순' },
@@ -38,6 +39,17 @@ const ShopSort = ({ onSortDataChange }) => {
     // eslint-disable-next-line
   }, [orderBy]);
 
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
   return (
     <div className="sort-container">
       <div className="shop-sort-filter">
@@ -50,11 +62,12 @@ const ShopSort = ({ onSortDataChange }) => {
         </button>
       </div>
       <Modal
-        width="375px"
+        width={isMobile ? '100%' : '375px'}
         height="300px"
-        borderRadius="24px"
+        borderRadius={isMobile ? '24px 24px 0 0' : '24px'}
         isOpen={sortModalOpen}
         onClose={() => setSortModalOpen(false)}
+        modalType={isMobile ? 'bottom' : 'center'}
         className="sort-modal"
       >
         <p className="filter">정렬</p>

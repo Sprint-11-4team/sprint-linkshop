@@ -39,7 +39,7 @@ const LikeButton = ({ initialLikes, onLikeChange, linkShopId }) => {
         src={isLiked ? heartFill : heartEmpty}
         alt="likes"
         onClick={handleLikeChange}
-        style={{ cursor: isLoading ? 'not-allowed' : 'pointer' }}
+        style={{ cursor: 'pointer' }}
       />
     </div>
   );
