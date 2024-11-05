@@ -5,6 +5,7 @@ import './ShopInfo.css';
 
 const ShopInfo = ({
   shop,
+  name,
   userId,
   likes,
   productsCount,
@@ -18,13 +19,9 @@ const ShopInfo = ({
       <div className="shop-container">
         <div className="shop-profile-products">
           <div className="shop-profile">
-            <img
-              src={shop.imageUrl}
-              alt={shop.urlName}
-              className="shop-image-url"
-            />
+            <img src={shop.imageUrl} alt={name} className="shop-image-url" />
             <div className="shop-name-id">
-              <p className="shop-name">{shop.urlName}</p>
+              <p className="shop-name">{name}</p>
               <p className="shop-id">@{userId}</p>
             </div>
           </div>
