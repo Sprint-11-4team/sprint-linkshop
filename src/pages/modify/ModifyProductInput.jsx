@@ -22,6 +22,8 @@ const ModifyProductInput = ({ onChangeProductInput, data, index }) => {
 
       // 메모리 해제
       return () => URL.revokeObjectURL(itemImageURL);
+    } else {
+      onChangeProductInput(index, 'imageUrl', null);
     }
   };
 
