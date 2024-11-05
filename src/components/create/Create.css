@@ -1,0 +1,104 @@
+@import url('../../css/typography.css');
+
+.create-form-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.create-input-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.create-product-input-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.create-input-title {
+  font-family: var(--font-pretendard-semibold-16);
+  margin: 24px 0 8px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.create-input-my-shop-wrapper {
+  margin: 8px 0;
+  background-color: #fafafb;
+  border-radius: 25px;
+}
+
+.create-input-my-shop-wrapper label {
+  margin: 0;
+}
+
+.create-input-my-shop-wrapper div {
+  margin: 0;
+}
+
+/* .create-input-my-shop-wrapper .password-message {
+  margin: 0;
+  background-color: white;
+  border-radius: 25px;
+} */
+
+@media (max-width: 767px) {
+  .form-body {
+    padding: 10px;
+  }
+
+  .create-input-wrapper {
+    width: 100%;
+    padding: 0;
+  }
+
+  .create-input-title {
+    font-size: 1rem;
+  }
+
+  .create-input-my-shop-wrapper,
+  .create-input-package-wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .create-h3 {
+    font-size: 1.2em;
+  }
+
+  .AddButton,
+  .CreateButton {
+    width: 100%;
+    font-size: 1rem;
+  }
+
+  .create-input-wrapper img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  input[type='text'],
+  input[type='password'] {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .create-input-wrapper > * {
+    margin-bottom: 8px;
+  }
+
+  .password-input-wrapper,
+  .create-label {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .password-input {
+    width: 100%;
+  }
+}
