@@ -31,20 +31,39 @@ const initialUserInfo = {
 };
 
 function Create() {
-  const navigate = useNavigate();
   const [shop, setShop] = useState(initialShop);
-  // 인풋에서 엔터 입력하면 추가 버튼 눌려서 대표 상품 인풋 추가되는 버그 있음
+  // 버그: 인풋에서 엔터 입력 시 대표 상품 인풋 세트 추가됨
   const [productInputs, setProductInputs] = useState([
     initialProduct,
     initialProduct,
   ]);
   const [userInfo, setUserInfo] = useState(initialUserInfo);
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
   // 유효성 검사 규칙
   const urlPattern = /^(https:\/\/)[\w-]+(\.[\w-]+)+([/?#].*)?$/;
   const userIdPattern = /^[A-Za-z0-9]+$/;
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate();
+  // const [isButtonActive, setIsButtonActive] = useState(false);
+
+  // // 각 인풋 필드가 유효한지 확인하는 상태 배열
+  // const [inputValidations, setInputValidations] = useState({
+  //   shopUrl: false,
+  //   userId: false,
+  //   password: false,
+  //   // 초기화 등등 다른 인풋 필드들 추가
+  // });
+
+  // // 모든 필드가 유효할 때만 버튼을 활성화하는 useEffect
+  // useEffect(() => {
+  //   const allValid = Object.values(inputValidations).every(Boolean);
+  //   setIsButtonActive(allValid);
+  // }, [inputValidations]);
+
+  // const handleValidationChange = (fieldName, isValid) => {
+  //   setInputValidations((prev) => ({ ...prev, [fieldName]: isValid }));
+  // };
 
   const handleAddButtonClick = (e) => {
     e.preventDefault(); // 버튼 클릭 시 새로고침 되는 현상 막기 위함(type=button 으로 대체 가능)
@@ -111,6 +130,10 @@ function Create() {
     };
 
     console.log(formData, '생성 데이터');
+    if (!shop.imageUrl) {
+      alert('상품 대표 이미지를 업로드해주세요.');
+      return;
+    }
 
     if (!userInfo.name) {
       console.error('사용자 이름이 필요합니다.');
