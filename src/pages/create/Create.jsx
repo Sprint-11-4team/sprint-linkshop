@@ -40,9 +40,11 @@ function Create() {
   ]);
   const [userInfo, setUserInfo] = useState(initialUserInfo);
 
-  // const [createData, setCreateData] = useState({});
-
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // 유효성 검사 규칙
+  const urlPattern = /^(https:\/\/)[\w-]+(\.[\w-]+)+([/?#].*)?$/;
+  const userIdPattern = /^[A-Za-z0-9]+$/;
 
   const handleAddButtonClick = (e) => {
     e.preventDefault(); // 버튼 클릭 시 새로고침 되는 현상 막기 위함(type=button 으로 대체 가능)
@@ -71,7 +73,7 @@ function Create() {
     });
   };
 
-  // 내 쇼핑몰 비밀번호
+  // 내 쇼핑몰 user info
   const handleUserChange = (e) => {
     const { name, value } = e.target;
     setUserInfo({
@@ -187,6 +189,8 @@ function Create() {
               value={shop.shopUrl}
               placeholder="Url을 입력해주세요."
               onChange={handleShopChange}
+              errorMessage="https://example.com/...와 같은 형식으로 적어주세요."
+              validationRule={urlPattern}
             />
             <CreateInput
               label="유저 ID"
@@ -194,6 +198,8 @@ function Create() {
               value={userInfo.userId}
               placeholder="유저 ID를 입력해주세요."
               onChange={handleUserChange}
+              errorMessage="유저 ID는 중복, 띄어쓰기, 특수기호 사용 불가입니다."
+              validationRule={userIdPattern}
             />
             <CreatePasswordButton
               name="password"

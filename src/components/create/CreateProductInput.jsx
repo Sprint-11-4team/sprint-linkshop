@@ -17,8 +17,6 @@ const CreateProductInput = ({ data, onChangeProductInput, index }) => {
   //   }
   // };
 
-  //  react-hook-form 적용? 상품 인풋 패키지가 여러 개 추가 되면 렌더링 시 이슈 있을 수도 있음. 있으면 진짜 완성도 높겠지만 지금 중요하진 않음.
-
   const handleFileChange = (file, index) => {
     if (file) {
       const itemImageURL = URL.createObjectURL(file);
