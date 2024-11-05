@@ -45,6 +45,7 @@ function Create() {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
+  const [linkId, setLinkId] = useState(null); // 생성하기 버튼 누르면 생성되는 link id
   // const [isButtonActive, setIsButtonActive] = useState(false);
 
   // // 각 인풋 필드가 유효한지 확인하는 상태 배열
@@ -101,7 +102,7 @@ function Create() {
     });
   };
 
-  const handleFileChange = (file) => {
+  const handleFileChange = (file, index) => {
     if (file) {
       const itemImageURL = URL.createObjectURL(file);
       const formData = new FormData();
@@ -151,14 +152,14 @@ function Create() {
     }
 
     try {
-      await createLinkShop('11-4', formData);
+      const response = await createLinkShop('11-4', formData);
+      setLinkId(response.id);
+      setIsModalOpen(true);
     } catch (err) {
       console.error(err.message);
     } finally {
       console.log('성공');
     }
-
-    setIsModalOpen(true);
   };
 
   return (
@@ -226,7 +227,7 @@ function Create() {
           isOpen={isModalOpen}
           text="등록이 완료되었습니다."
           isBtnOne={true}
-          onClose={() => navigate('/list/{linkid}')}
+          onClose={() => navigate(`/link/${linkId}`)}
         ></ToastPopup>
       </div>
     </div>
