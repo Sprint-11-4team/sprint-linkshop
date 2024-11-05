@@ -40,3 +40,11 @@
 .create-input-my-shop-wrapper div {
   margin: 0;
 }
+
+.create-label {
+  font-weight: 600;
+}
+
+.create-input {
+  font-weight: 400;
+}
