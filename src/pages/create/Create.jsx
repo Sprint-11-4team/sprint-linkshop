@@ -31,18 +31,39 @@ const initialUserInfo = {
 };
 
 function Create() {
-  const navigate = useNavigate();
   const [shop, setShop] = useState(initialShop);
-  // 인풋에서 엔터 입력하면 추가 버튼 눌려서 대표 상품 인풋 추가되는 버그 있음
+  // 버그: 인풋에서 엔터 입력 시 대표 상품 인풋 세트 추가됨
   const [productInputs, setProductInputs] = useState([
     initialProduct,
     initialProduct,
   ]);
   const [userInfo, setUserInfo] = useState(initialUserInfo);
 
-  // const [createData, setCreateData] = useState({});
+  // 유효성 검사 규칙
+  const urlPattern = /^(https:\/\/)[\w-]+(\.[\w-]+)+([/?#].*)?$/;
+  const userIdPattern = /^[A-Za-z0-9]+$/;
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate();
+  // const [isButtonActive, setIsButtonActive] = useState(false);
+
+  // // 각 인풋 필드가 유효한지 확인하는 상태 배열
+  // const [inputValidations, setInputValidations] = useState({
+  //   shopUrl: false,
+  //   userId: false,
+  //   password: false,
+  //   // 초기화 등등 다른 인풋 필드들 추가
+  // });
+
+  // // 모든 필드가 유효할 때만 버튼을 활성화하는 useEffect
+  // useEffect(() => {
+  //   const allValid = Object.values(inputValidations).every(Boolean);
+  //   setIsButtonActive(allValid);
+  // }, [inputValidations]);
+
+  // const handleValidationChange = (fieldName, isValid) => {
+  //   setInputValidations((prev) => ({ ...prev, [fieldName]: isValid }));
+  // };
 
   const handleAddButtonClick = (e) => {
     e.preventDefault(); // 버튼 클릭 시 새로고침 되는 현상 막기 위함(type=button 으로 대체 가능)
@@ -71,7 +92,7 @@ function Create() {
     });
   };
 
-  // 내 쇼핑몰 비밀번호
+  // 내 쇼핑몰 user info
   const handleUserChange = (e) => {
     const { name, value } = e.target;
     setUserInfo({
@@ -109,6 +130,10 @@ function Create() {
     };
 
     console.log(formData, '생성 데이터');
+    if (!shop.imageUrl) {
+      alert('상품 대표 이미지를 업로드해주세요.');
+      return;
+    }
 
     if (!userInfo.name) {
       console.error('사용자 이름이 필요합니다.');
@@ -178,22 +203,26 @@ function Create() {
               label="이름"
               name="name"
               value={userInfo.name}
-              placeholder="표시하고 싶은 이름을 적어 주세요."
-              onChange={handleUserChange}
-            />
-            <CreateInput
-              label="아이디"
-              name="userId"
-              value={userInfo.userId}
-              placeholder="URL로 사용될 아이디를 입력해주세요."
+              placeholder="표시하고 싶은 이름을 적어주세요."
               onChange={handleUserChange}
             />
             <CreateInput
               label="Url"
               name="shopUrl"
               value={shop.shopUrl}
-              placeholder="Url을 입력해 주세요."
+              placeholder="Url을 입력해주세요."
               onChange={handleShopChange}
+              errorMessage="https://example.com/...와 같은 형식으로 적어주세요."
+              validationRule={urlPattern}
+            />
+            <CreateInput
+              label="유저 ID"
+              name="userId"
+              value={userInfo.userId}
+              placeholder="유저 ID를 입력해주세요."
+              onChange={handleUserChange}
+              errorMessage="유저 ID는 중복, 띄어쓰기, 특수기호 사용 불가입니다."
+              validationRule={userIdPattern}
             />
             <CreatePasswordButton
               name="password"
