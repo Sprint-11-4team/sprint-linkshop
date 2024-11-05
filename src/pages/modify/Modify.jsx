@@ -2,6 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import Header from '../../components/common/Header';
 import AddButton from '../../components/create/AddButton';
+// import CreateProductInput from '../../components/create/CreateProductInput';
+// import ItemImgInput from '../../components/create/ItemImgInput';
+// import CreateInput from '../../components/create/CreateInput';
+// import CreatePasswordButton from '../../components/create/CreatePasswordButton';
 import ModifyButton from '../../components/create/ModifyButton';
 import MyproductList from './MyProductList';
 import useAsync from '../../api/useAsync';
@@ -150,12 +154,13 @@ const Modify = () => {
 
   return (
     <div>
-      <Header buttonName="내 스토어" onButtonClick={() => navigate('/ ')} />
+      <Header buttonName="내 스토어" onButtonClick={() => navigate('/')} />{' '}
+      {/* 경로의 공백 제거 */}
       <form className="form-body" onSubmit={handleSubmit}>
         <div className="create-input-wrapper">
           <div>
             <div className="create-input-title">
-              <h3 className="create-input-title">대표 상품</h3>
+              <h3>대표 상품</h3>
               <AddButton type="button" onClick={handleAddButtonClick} />
             </div>
             {products?.map((data, index) => (
@@ -175,7 +180,7 @@ const Modify = () => {
               onChangeShopFileInput={handleChangeShopFileInput}
               onChangeInput={handleChangeInput}
             />
-            <ModifyButton type={submit} />
+            <ModifyButton type="submit" />
           </div>
         </div>
       </form>
