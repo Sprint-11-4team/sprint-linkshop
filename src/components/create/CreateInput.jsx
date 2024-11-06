@@ -9,6 +9,7 @@ const CreateInput = ({
   onChange,
   errorMessage,
   validationRule,
+  onValidityChange = () => {},
 }) => {
   const [errorCheck, setErrorCheck] = useState(false);
 
@@ -30,6 +31,7 @@ const CreateInput = ({
     }
 
     setErrorCheck(isValid ? '' : errorMessage); // 에러가 있으면 errorMessage 설정
+    onValidityChange(isValid); // 부모 컴포넌트로 유효성 결과 전달
   };
 
   return (
