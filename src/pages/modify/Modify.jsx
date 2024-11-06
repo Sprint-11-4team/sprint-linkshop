@@ -145,28 +145,9 @@ const Modify = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(validationState);
 
     const { currentPassword, shopUrl, userId } = validationState;
-    if (!shopUrl) {
-      setValidationOpenPopupText('url을 https:// 형식에 맞춰주세요');
-      setValidationOpenPopup(true);
-      return;
-    }
-
-    if (!currentPassword) {
-      setValidationOpenPopupText(
-        '비밀번호 영문+숫자 최소 6자 이상 입력해주세요',
-      );
-      setValidationOpenPopup(true);
-      return;
-    }
-
-    if (!userId) {
-      setValidationOpenPopupText(
-        '아이디는 띄어쓰기, 특수기호 사용불가 합니다.',
-      );
-      setValidationOpenPopup(true);
+    if (!shopUrl || !currentPassword || !userId) {
       return;
     }
 
@@ -213,7 +194,10 @@ const Modify = () => {
       shopData.urlName &&
       etcData.currentPassword &&
       etcData.userId &&
-      etcData.name
+      etcData.name &&
+      validationState.currentPassword &&
+      validationState.shopUrl &&
+      validationState.userId
     );
   };
 
