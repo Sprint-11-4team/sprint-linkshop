@@ -19,19 +19,16 @@ const CreateInput = ({
 
   const handleErrorMessage = (e) => {
     const inputValue = e.target.value;
-    let isValid = true;
-
-    // validationRule이 존재할 때 유효성 검사 실행
-    if (validationRule) {
-      if (typeof validationRule === 'function') {
-        isValid = validationRule(inputValue);
-      } else if (validationRule instanceof RegExp) {
-        isValid = validationRule.test(inputValue);
-      }
-    }
+    const isValid = validationRule
+      ? typeof validationRule === 'function'
+        ? validationRule(inputValue)
+        : validationRule.test(inputValue)
+      : inputValue.trim() !== '';
 
     setErrorCheck(isValid ? '' : errorMessage); // 에러가 있으면 errorMessage 설정
     onValidityChange(isValid); // 부모 컴포넌트로 유효성 결과 전달
+
+    console.log('필드별 유효성 검사', isValid);
   };
 
   return (

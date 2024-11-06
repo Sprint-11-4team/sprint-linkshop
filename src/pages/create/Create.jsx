@@ -48,30 +48,19 @@ function Create() {
   const [isUserIdValid, setIsUserIdValid] = useState(false);
   const [isPasswordValid, setIsPasswordValid] = useState(false);
 
-  const isFormValid = isShopUrlValid && isUserIdValid && isPasswordValid;
+  const isFormValid =
+    productInputs.every(
+      ({ imageUrl, name, price }) => imageUrl && name && price,
+    ) &&
+    shop.imageUrl &&
+    userInfo.name &&
+    isShopUrlValid &&
+    isUserIdValid &&
+    isPasswordValid;
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
   const [linkId, setLinkId] = useState(null); // 생성하기 버튼 누르면 생성되는 link id
-  // const [isButtonActive, setIsButtonActive] = useState(false);
-
-  // // 각 인풋 필드가 유효한지 확인하는 상태 배열
-  // const [inputValidations, setInputValidations] = useState({
-  //   shopUrl: false,
-  //   userId: false,
-  //   password: false,
-  //   // 초기화 등등 다른 인풋 필드들 추가
-  // });
-
-  // // 모든 필드가 유효할 때만 버튼을 활성화하는 useEffect
-  // useEffect(() => {
-  //   const allValid = Object.values(inputValidations).every(Boolean);
-  //   setIsButtonActive(allValid);
-  // }, [inputValidations]);
-
-  // const handleValidationChange = (fieldName, isValid) => {
-  //   setInputValidations((prev) => ({ ...prev, [fieldName]: isValid }));
-  // };
 
   const handleAddButtonClick = (e) => {
     e.preventDefault(); // 버튼 클릭 시 새로고침 되는 현상 막기 위함(type=button 으로 대체 가능)
@@ -109,7 +98,7 @@ function Create() {
     });
   };
 
-  const handleFileChange = (file, index) => {
+  const handleFileChange = (file) => {
     if (file) {
       const itemImageURL = URL.createObjectURL(file);
       const formData = new FormData();
@@ -124,6 +113,9 @@ function Create() {
         });
       // 메모리 해제
       return () => URL.revokeObjectURL(itemImageURL);
+    } else {
+      // 이미지 삭제 처리
+      setShop({ ...shop, imageUrl: null }); // 이미지 삭제 시 null로 설정
     }
   };
 
@@ -185,6 +177,7 @@ function Create() {
                 index={index}
                 data={data}
                 onChangeProductInput={handleChangeProductInput}
+                imageUrl={data.imageUrl}
               />
             </div>
           ))}
@@ -248,10 +241,3 @@ function Create() {
 }
 
 export default Create;
-
-// onChange 를 전달하기 보다 컴포넌트 자체를 전달
-// 커스텀 훅 제작
-// props drilling
-// 컨택스트 만들고 프로바이더로 감싸고, 상태를 지역적으로 공유할 수 있게
-// onChange 2개일 때? 객체 useState
-// 비밀번호 p 태그 -> position: absolute
