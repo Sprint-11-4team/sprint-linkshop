@@ -42,3 +42,9 @@
   font-size: 12px;
   font-weight: 400;
 }
+
+@media (max-width: 768px) {
+  .form-body {
+    margin: 140px 0;
+  }
+}
