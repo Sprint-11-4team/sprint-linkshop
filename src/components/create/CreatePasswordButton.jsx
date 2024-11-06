@@ -16,7 +16,6 @@ const CreatePasswordButton = ({
   });
 
   const [passwordMessage, setPasswordMessage] = useState('');
-  const [isPassword, setIsPassword] = useState(false);
 
   const showPasswordHandle = () => {
     setShowPassword((prevShowPassword) => ({
@@ -25,21 +24,26 @@ const CreatePasswordButton = ({
     }));
   };
 
+  const chkValidation = (value) => {
+    const userPasswordRegExp = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
+    return userPasswordRegExp.test(value);
+  };
+
   const handlePasswordValidation = (e) => {
     const inputValue = e.target.value;
     const isValidPassword = validationRule
       ? validationRule.test(inputValue)
       : true;
 
-    setIsPassword(isValidPassword);
+    // setIsPassword(isValidPassword); 여기 사용안해서 주석걸어놨어요
 
     onChange(e); // 부모 컴포넌트에 상태 업데이트
-    onValidityChange(isValidPassword); // 유효성 검사 결과 전달
+    onValidityChange(isValidPassword, e.target.name); // 유효성 검사 결과 전달
   };
 
   const handleBlur = (e) => {
     setPasswordMessage(
-      isPassword ? '' : '영문을 포함한 숫자 6자 이상을 입력해주세요.',
+      chkValidation(value) ? '' : '영문을 포함한 숫자 6자 이상을 입력해주세요.',
     );
   };
 

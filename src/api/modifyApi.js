@@ -2,20 +2,35 @@
 
 export async function updateLinkShop(teamId, linkShopId, updatedData) {
   const url = `https://linkshop-api.vercel.app/${teamId}/linkshops/${linkShopId}`;
-  const res = await fetch(url, {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(updatedData),
-  });
 
-  if (!res.ok) {
-    throw new Error('수정하는 데 실패했습니다.');
+  try {
+    const res = await fetch(url, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(updatedData),
+    });
+
+    if (!res.ok) {
+      console.log(res.status);
+      if (res.status === 400) {
+        const errorData = await res.json();
+        const errorMessage =
+          errorData.details?.name?.message || '수정하는 데 실패했습니다.';
+        throw new Error(errorMessage);
+      }
+
+      const errorData = await res.json();
+      throw new Error(errorData.message || '수정하는 데 실패했습니다.');
+    }
+
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.error('Error occurred:', error.message);
+    throw error;
   }
-
-  const data = await res.json();
-  return data;
 }
 
 // modify 조회 api

@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import './ModalContent.css';
 import { useNavigate } from 'react-router-dom';
 import useAsync from '../../api/useAsync';
@@ -7,6 +7,8 @@ import { fetchDelete } from '../../api/detailApi';
 const ModalContent = ({ types, detailData, onSuccessDel, onFailDel }) => {
   const navigate = useNavigate();
   const inputRef = useRef(null);
+  const [error, setError] = useState(true);
+  const [passwordMessage, setPasswordMessage] = useState('');
 
   const [isLoadingDel, loadingErrorDel, deleteDataAsync] = useAsync(() =>
     fetchDelete({
@@ -37,6 +39,19 @@ const ModalContent = ({ types, detailData, onSuccessDel, onFailDel }) => {
     }
   };
 
+  const handleChangeInput = () => {
+    // 비밀번호, 영문+숫자 최소 6자 이상
+    const password = inputRef.current.value;
+    const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
+    if (!regex.test(password)) {
+      setError(true);
+      setPasswordMessage('영문을 포함한 숫자 6자 이상을 입력해주세요.');
+    } else {
+      setError(false);
+      setPasswordMessage('');
+    }
+  };
+
   return (
     <div className="detail-modal">
       <div className="detail-modal__label">비밀번호 입력</div>
@@ -45,7 +60,9 @@ const ModalContent = ({ types, detailData, onSuccessDel, onFailDel }) => {
       </div>
       <div>
         <div style={{ width: '392px' }}>
-          <label className="detail-create-label">
+          <label
+            className={`detail-create-label ${passwordMessage !== '' ? 'error' : ''}`}
+          >
             비밀번호
             <input
               type="password"
@@ -53,16 +70,28 @@ const ModalContent = ({ types, detailData, onSuccessDel, onFailDel }) => {
               placeholder="비밀번호를 입력해 주세요."
               ref={inputRef}
               required
+              onBlur={handleChangeInput}
             />
           </label>
         </div>
       </div>
+      <div style={{ width: '100%' }}>
+        <p className="detail-password-message">{passwordMessage}</p>
+      </div>
       {types === 'modify' ? (
-        <button className="detail-create-button" onClick={handleGopageClick}>
+        <button
+          className="detail-create-button"
+          onClick={handleGopageClick}
+          disabled={error}
+        >
           편집 시작하기
         </button>
       ) : (
-        <button className="detail-create-button" onClick={handleDelete}>
+        <button
+          className="detail-create-button"
+          onClick={handleDelete}
+          disabled={error}
+        >
           삭제하기
         </button>
       )}

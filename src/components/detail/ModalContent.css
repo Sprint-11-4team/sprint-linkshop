@@ -35,6 +35,7 @@
   background-color: #fafafb;
   color: #888790;
   border: none;
+  outline: none;
 }
 
 .detail-create-button {
@@ -47,3 +48,18 @@
 }
 
 /* ----- */
+
+.detail-password-message {
+  margin-bottom: 10px;
+  color: #fb545b;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.detail-create-label.error {
+  border: 1px solid #fb545b;
+}
+
+.detail-create-button:disabled {
+  background-color: var(--gray-700);
+}
