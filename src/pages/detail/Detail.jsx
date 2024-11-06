@@ -42,6 +42,7 @@ const Detail = () => {
     const { shop } = detailData;
     try {
       await navigator.clipboard.writeText(shop.shopUrl);
+      alert('url이 복사되었습니다.');
     } catch (error) {
       console.error('복사 실패!');
     }
