@@ -3,7 +3,13 @@ import passwordToggleButtonOff from '../../images/icons/password-toggle-off.png'
 import passwordToggleButtonOn from '../../images/icons/password-toggle-on.png';
 import './CreatePasswordButton.css';
 
-const CreatePasswordButton = ({ value, onChange, name, onValidityChange }) => {
+const CreatePasswordButton = ({
+  value,
+  onChange,
+  name,
+  validationRule,
+  onValidityChange = () => {},
+}) => {
   const [showPassword, setShowPassword] = useState({
     type: 'password',
     visible: false,
@@ -23,12 +29,16 @@ const CreatePasswordButton = ({ value, onChange, name, onValidityChange }) => {
     return userPasswordRegExp.test(value);
   };
 
-  // 유효성 검사
   const handlePasswordValidation = (e) => {
-    const validate = chkValidation(e.target.value);
+    const inputValue = e.target.value;
+    const isValidPassword = validationRule
+      ? validationRule.test(inputValue)
+      : true;
 
-    onValidityChange(validate, e.target.name); // 유효성검사
-    onChange(e); // Create에서 상태 관리할 수 있도록 호출
+    // setIsPassword(isValidPassword); 여기 사용안해서 주석걸어놨어요
+
+    onChange(e); // 부모 컴포넌트에 상태 업데이트
+    onValidityChange(isValidPassword, e.target.name); // 유효성 검사 결과 전달
   };
 
   const handleBlur = (e) => {

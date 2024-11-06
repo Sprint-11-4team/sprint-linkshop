@@ -35,18 +35,16 @@
   border: 1px solid #fb545b;
 }
 
-.create-label.valid {
-  border: 1px solid #3e45ec;
-}
-
-.errorUserId {
+.error-message {
+  /* position: absolute; */
+  margin: 8px 0 0;
   color: #fb545b;
   font-size: 12px;
   font-weight: 400;
 }
 
-.validUserId {
-  color: #3e45ec;
-  font-size: 12px;
-  font-weight: 400;
+@media (max-width: 768px) {
+  .form-body {
+    margin: 140px 0;
+  }
 }

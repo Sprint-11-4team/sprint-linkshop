@@ -11,7 +11,7 @@
 
 @media (max-width: 767px) {
   .create-button {
-    width: 344px;
+    width: 100%;
     border: none;
     border-radius: 37px;
     padding: 15px 135px;
@@ -25,3 +25,5 @@
 .create-button.active {
   background-color: #3e45ec;
 }
+
+

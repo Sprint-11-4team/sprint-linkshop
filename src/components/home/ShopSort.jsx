@@ -1,49 +1,29 @@
 import { useEffect, useState } from 'react';
 import { filterBtn, check } from '../../images/icons';
 import Modal from '../common/Modal';
-import { fetchSortData } from '../../api/shopSortApi';
 import './ShopSort.css';
 
-const ShopSort = ({ onSortDataChange }) => {
-  const [orderBy, setOrderBy] = useState('recent');
+const ShopSort = ({ orderBy, onSortChange }) => {
   const [sortModalOpen, setSortModalOpen] = useState(false);
   const [sortButtonText, setSortButtonText] = useState('상세 필터');
-  const [selecteSort, setSeleteSort] = useState('recent');
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
   const sortOptions = {
     recent: { label: '최신순' },
     likes: { label: '좋아요순' },
-    productsCount: { label: '등록된 쇼핑몰순' },
+    productsCount: { label: '등록된 상품순' },
   };
 
   const handleSortChange = (sortOption) => {
-    setOrderBy(sortOption);
-    setSeleteSort(sortOption);
+    onSortChange(sortOption);
     setSortButtonText(sortOptions[sortOption].label);
-
     setSortModalOpen(false);
   };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const sortResult = await fetchSortData(orderBy);
-        onSortDataChange(sortResult.list);
-      } catch (err) {
-        console.error(err.message);
-      }
-    };
-
-    fetchData();
-    // eslint-disable-next-line
-  }, [orderBy]);
 
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
     };
-
     window.addEventListener('resize', handleResize);
     return () => {
       window.removeEventListener('resize', handleResize);
@@ -75,11 +55,11 @@ const ShopSort = ({ onSortDataChange }) => {
           <div className="sort-option">
             <button
               onClick={() => handleSortChange('recent')}
-              className={`filter-name ${selecteSort === 'recent' ? 'selecte' : ''}`}
+              className={`filter-name ${orderBy === 'recent' ? 'selecte' : ''}`}
             >
               {sortOptions.recent.label}
             </button>
-            {selecteSort === 'recent' && (
+            {orderBy === 'recent' && (
               <img src={check} alt="선택" className="selecte-image" />
             )}
           </div>
@@ -87,11 +67,11 @@ const ShopSort = ({ onSortDataChange }) => {
           <div className="sort-option">
             <button
               onClick={() => handleSortChange('likes')}
-              className={`filter-name ${selecteSort === 'likes' ? 'selecte' : ''}`}
+              className={`filter-name ${orderBy === 'likes' ? 'selecte' : ''}`}
             >
               {sortOptions.likes.label}
             </button>
-            {selecteSort === 'likes' && (
+            {orderBy === 'likes' && (
               <img src={check} alt="선택" className="selecte-image" />
             )}
           </div>
@@ -99,11 +79,11 @@ const ShopSort = ({ onSortDataChange }) => {
           <div className="sort-option">
             <button
               onClick={() => handleSortChange('productsCount')}
-              className={`filter-name ${selecteSort === 'productsCount' ? 'selecte' : ''}`}
+              className={`filter-name ${orderBy === 'productsCount' ? 'selecte' : ''}`}
             >
               {sortOptions.productsCount.label}
             </button>
-            {selecteSort === 'productsCount' && (
+            {orderBy === 'productsCount' && (
               <img src={check} alt="선택" className="selecte-image" />
             )}
           </div>

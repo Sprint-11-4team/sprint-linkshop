@@ -5,7 +5,7 @@ import { addLike, removeLike } from '../../api/likeApi';
 const LikeButton = ({ initialLikes, onLikeChange, linkShopId }) => {
   const [isLiked, setIsLiked] = useState(false);
   const [countLikes, setCountLikes] = useState(initialLikes);
-  const [isLoading, setIsLoading] = useState(false); // 로딩 상태 추가
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     setCountLikes(initialLikes);

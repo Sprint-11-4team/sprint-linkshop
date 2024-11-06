@@ -55,8 +55,7 @@
 .close-img:hover {
   background-color: #888790;
 }
-@media (max-width: 767px) {
-  .item-img-label {
-    font-size: 14px;
-  }
+
+.item-img-label {
+  font-size: 14px;
 }
