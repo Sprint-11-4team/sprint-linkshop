@@ -1,22 +1,14 @@
-import React from 'react';
 import CreateInput from './CreateInput';
 import './CreateProductInput.css';
 import ItemImgInput from './ItemImgInput';
 import { uploadImageApi } from '../../api/createApi';
 
-const CreateProductInput = ({ data, onChangeProductInput, index }) => {
-  // const [itemName, setItemName] = useState('');
-  // const [price, setPrice] = useState('');
-
-  // const priceChangeHandler = (e) => {
-  //   const rawPrice = e.target.value.replace(/,/g, '');
-  //   if (isNaN(Number(rawPrice))) {
-  //     setPrice('');
-  //   } else {
-  //     setPrice(Number(rawPrice).toLocaleString('ko-KR'));
-  //   }
-  // };
-
+const CreateProductInput = ({
+  data: { price, imageUrl, name },
+  onChangeProductInput,
+  index,
+  onValidityChange = () => {},
+}) => {
   const handleFileChange = (file, index) => {
     if (file) {
       const itemImageURL = URL.createObjectURL(file);
@@ -32,6 +24,9 @@ const CreateProductInput = ({ data, onChangeProductInput, index }) => {
         });
       // 메모리 해제
       return () => URL.revokeObjectURL(itemImageURL);
+    } else {
+      // 이미지 삭제 처리
+      onChangeProductInput(index, 'imageUrl', null); // 이미지 삭제 시 null로 설정
     }
   };
 
@@ -39,23 +34,25 @@ const CreateProductInput = ({ data, onChangeProductInput, index }) => {
     <div className="create-input-package">
       <ItemImgInput
         name="imageUrl"
-        value={data.imageUrl}
+        value={imageUrl}
         onFileChange={handleFileChange}
         index={index}
       />
       <CreateInput
         label="상품 이름"
-        value={data.name}
+        value={name}
         name="name"
         placeholder="상품 이름을 입력해주세요."
         onChange={(e) => onChangeProductInput(index, 'name', e.target.value)}
+        onValidityChange={(isValid) => onValidityChange(isValid)}
       />
       <CreateInput
         label="상품 가격"
-        value={data.price}
+        value={price}
         name="price"
         placeholder="원화로 표기해주세요."
         onChange={(e) => onChangeProductInput(index, 'price', e.target.value)}
+        onValidityChange={(isValid) => onValidityChange(isValid)}
       />
     </div>
   );

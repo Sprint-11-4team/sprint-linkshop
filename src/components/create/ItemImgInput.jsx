@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import './ItemImgInput.css';
 import { deleteIcon } from '../../images/icons';
 
-const ItemImgInput = ({ index, onFileChange, imageUrl }) => {
+const ItemImgInput = ({ index, onFileChange }) => {
   const [imgPreviewUrl, setImgPreviewUrl] = useState('');
   const fileInputRef = useRef(null);
 
@@ -17,11 +17,11 @@ const ItemImgInput = ({ index, onFileChange, imageUrl }) => {
   };
 
   const handleImgDelete = () => {
-    setImgPreviewUrl('');
+    setImgPreviewUrl(''); // 미리보기 이미지 초기화
     if (fileInputRef.current) {
       fileInputRef.current.value = ''; // input 값 초기화
     }
-    onFileChange(null);
+    onFileChange(null, index);
   };
 
   useEffect(() => {}, [imgPreviewUrl]);
