@@ -45,6 +45,7 @@ function Create() {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
+  const [linkId, setLinkId] = useState(null); // 생성하기 버튼 누르면 생성되는 link id
   // const [isButtonActive, setIsButtonActive] = useState(false);
 
   // // 각 인풋 필드가 유효한지 확인하는 상태 배열
@@ -101,7 +102,7 @@ function Create() {
     });
   };
 
-  const handleFileChange = (file) => {
+  const handleFileChange = (file, index) => {
     if (file) {
       const itemImageURL = URL.createObjectURL(file);
       const formData = new FormData();
@@ -130,8 +131,18 @@ function Create() {
     };
 
     console.log(formData, '생성 데이터');
+
+    // 각 상품의 이미지가 업로드되지 않았는지 체크
+    const productImageUrlCheck = productInputs.some(
+      (product) => !product.imageUrl,
+    );
+    if (productImageUrlCheck) {
+      alert('모든 상품에 대표 이미지를 업로드해주세요.');
+      return;
+    }
+
     if (!shop.imageUrl) {
-      alert('상품 대표 이미지를 업로드해주세요.');
+      alert('내 쇼핑몰 대표 이미지를 업로드해주세요.');
       return;
     }
 
@@ -140,37 +151,15 @@ function Create() {
       return;
     }
 
-    if (
-      userInfo.password.length < 6 ||
-      !/[A-Za-z]/.test(userInfo.password) ||
-      !/\d/.test(userInfo.password)
-    ) {
-      console.error(
-        '비밀번호는 최소 6자 이상이어야 하며, 영문과 숫자를 포함해야 합니다.',
-      );
-      return;
-    }
-
-    if (
-      !userInfo.userId ||
-      /\s/.test(userInfo.userId) ||
-      /[^A-Za-z0-9]/.test(userInfo.userId)
-    ) {
-      console.error(
-        '유저 아이디는 중복 불가, 띄어쓰기 및 특수 기호를 사용할 수 없습니다.',
-      );
-      return;
-    }
-
     try {
-      await createLinkShop('11-4', formData);
+      const response = await createLinkShop('11-4', formData);
+      setLinkId(response.id);
+      setIsModalOpen(true);
     } catch (err) {
       console.error(err.message);
     } finally {
       console.log('성공');
     }
-
-    setIsModalOpen(true);
   };
 
   return (
@@ -238,7 +227,7 @@ function Create() {
           isOpen={isModalOpen}
           text="등록이 완료되었습니다."
           isBtnOne={true}
-          onClose={() => navigate('/list/{linkid}')}
+          onClose={() => navigate(`/link/${linkId}`)}
         ></ToastPopup>
       </div>
     </div>
