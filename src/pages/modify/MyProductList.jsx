@@ -13,6 +13,11 @@ const MyproductList = ({
   index,
   onValidityChange,
 }) => {
+  // 유효성 검사 규칙
+  const urlPattern = /^(https:\/\/)[\w-]+(\.[\w-]+)+([/?#].*)?$/;
+  const userIdPattern = /^[A-Za-z0-9]+$/;
+  const userPasswordRegExp = /^[A-Za-z0-9]{6,}$/;
+
   const handleFileChange = (file) => {
     if (file) {
       const itemImageURL = URL.createObjectURL(file);
@@ -36,15 +41,19 @@ const MyproductList = ({
   };
 
   const handleChangeShopInput = (e) => {
-    const regex = /^https?:\/\//;
-    const validate = regex.test(e.target.value);
+    const validate = urlPattern.test(e.target.value);
     onValidityChange(validate, e.target.name);
     onChangeShopInput(e);
   };
 
   const handleChangeUserIdInput = (e) => {
-    const regex = /^[A-Za-z0-9]+$/;
-    const validate = regex.test(e.target.value);
+    const validate = userIdPattern.test(e.target.value);
+    onValidityChange(validate, e.target.name);
+    onChangeInput(e);
+  };
+
+  const handleChangePasswordInput = (e) => {
+    const validate = userPasswordRegExp.test(e.target.value);
     onValidityChange(validate, e.target.name);
     onChangeInput(e);
   };
@@ -64,27 +73,30 @@ const MyproductList = ({
         onChange={onChangeInput}
       />
       <CreateInput
-        label="아이디"
-        name="userId"
-        value={etcData.userId}
-        placeholder="URL로 사용될 아이디를 입력해주세요."
-        onChange={handleChangeUserIdInput}
-      />
-      <CreateInput
         label="url"
         name="shopUrl"
         value={shopData?.shopUrl}
         placeholder="Url을 입력해주세요"
         onChange={handleChangeShopInput}
+        errorMessage="https://example.com/...와 같은 형식으로 적어주세요."
+        validationRule={urlPattern}
       />
+      <CreateInput
+        label="아이디"
+        name="userId"
+        value={etcData.userId}
+        placeholder="유저 ID를 입력해주세요."
+        onChange={handleChangeUserIdInput}
+        errorMessage="유저 ID는 중복, 띄어쓰기, 특수기호 사용 불가입니다."
+        validationRule={userIdPattern}
+      />
+
       <CreatePasswordButton
         label="비밀번호"
         name="currentPassword"
         value={etcData.currentPassword}
-        placeholder="비밀번호를 입력해주세요."
-        onChange={onChangeInput}
-        type="password"
-        onValidityChange={onValidityChange}
+        onChange={handleChangePasswordInput}
+        validationRule={userPasswordRegExp}
       />
     </div>
   );
