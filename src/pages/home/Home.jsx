@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../../components/common/Header';
 import SearchInput from '../../components/home/SearchInput';
@@ -18,39 +18,44 @@ const Home = () => {
   const [isLast, setIsLast] = useState(false);
   const [pageLoading, setPageLoading] = useState(true);
   const [loading, setLoading] = useState(false);
+  const [orderBy, setOrderBy] = useState('recent');
 
-  const fetchShops = async (cursor) => {
-    setLoading(true);
+  const resetCursor = useCallback(() => {
+    setShopList([]);
+    setVisibleShops([]);
+    setCurrentCursor(null);
+    setIsLast(false);
+    setIsMore(true);
+  }, []);
 
-    try {
-      const { list, nextCursor } = await fetchShopData({
-        cursor,
-        keyword: null,
-      });
-
-      if (!nextCursor) {
-        console.log('[!nextCursor]>>', nextCursor);
-        setIsLast(true);
-      } else {
-        console.log('[nextCursor]>>', nextCursor);
-        setCurrentCursor(nextCursor);
+  const fetchShops = useCallback(
+    async (cursor) => {
+      setLoading(true);
+      try {
+        const { list, nextCursor } = await fetchShopData({ cursor, orderBy });
+        if (!nextCursor) {
+          setIsLast(true);
+        } else {
+          setCurrentCursor(nextCursor);
+        }
+        setShopList((prev) => [...prev, ...list]);
+        setVisibleShops((prev) => [...prev, ...list]);
+      } catch (err) {
+        console.error(err.message);
+      } finally {
+        setLoading(false);
+        setIsMore(false);
+        setPageLoading(false);
       }
-      setShopList((prev) => [...prev, ...list]);
-      setVisibleShops((prev) => [...prev, ...list]);
-    } catch (err) {
-      console.error(err.message);
-    } finally {
-      setLoading(false);
-      setIsMore(false);
-      setPageLoading(false);
-    }
-  };
+    },
+    [orderBy],
+  );
 
   useEffect(() => {
     if (isMore && !isLast) {
       fetchShops(currentCursor);
     }
-  }, [isMore, currentCursor, isLast]);
+  }, [isMore, currentCursor, isLast, orderBy, fetchShops]);
 
   useEffect(() => {
     const filtered = shopList.filter((shop) =>
@@ -67,14 +72,12 @@ const Home = () => {
     navigate('/linkpost');
   };
 
-  const handleSortDataChange = (sortData) => {
-    setShopList(sortData);
-    setVisibleShops(sortData);
+  const handleSortChange = (newOrderBy) => {
+    setOrderBy(newOrderBy);
+    resetCursor();
   };
 
   const onLoadMore = () => {
-    // 머지오류임시추가
-    console.log('onLoadMore');
     setIsMore(true);
   };
 
@@ -89,9 +92,9 @@ const Home = () => {
         searchTerm={searchShop}
         onSearchChange={handleSearchChange}
       />
-      <ShopSort onSortDataChange={handleSortDataChange} />
+      <ShopSort orderBy={orderBy} onSortChange={handleSortChange} />
       <ShopList visibleShops={visibleShops} />
-      <InfiniteScrollList loading={loading} onLoadMore={onLoadMore} />{' '}
+      <InfiniteScrollList loading={loading} onLoadMore={onLoadMore} />
     </>
   );
 };
