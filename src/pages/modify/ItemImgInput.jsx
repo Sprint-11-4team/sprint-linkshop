@@ -26,27 +26,12 @@ const ItemImgInput = ({ index, onFileChange, imageUrl }) => {
   };
 
   return (
-    <div className="img-box">
-      <label className="item-img-title">
-        상품 대표 이미지
-        <p>상품 이미지를 첨부해 주세요.</p>
-        {imgPreviewUrl && (
-          <div className="close-img-wrapper">
-            <img
-              className="img-preview"
-              src={imgPreviewUrl}
-              alt="대표 상품 이미지 파일"
-            />
-            <button
-              className="close-img"
-              onClick={(e) => handleImgDelete(index, e)}
-            >
-              <img src={CloseIcon} alt="대표 상품 이미지 삭제" />
-            </button>
-          </div>
-        )}
-      </label>
-      <div>
+    <div className="img-file-box">
+      <div className="img-file">
+        <label className="item-img-title">
+          상품 대표 이미지
+          <p>상품 이미지를 첨부해 주세요.</p>
+        </label>
         <label htmlFor={`itemImgFile${index}`} className="item-img-label">
           파일 첨부
         </label>
@@ -60,6 +45,21 @@ const ItemImgInput = ({ index, onFileChange, imageUrl }) => {
           ref={fileInputRef}
         />
       </div>
+      {imgPreviewUrl && (
+        <div className="close-img-wrapper">
+          <img
+            className="img-preview"
+            src={imgPreviewUrl}
+            alt="대표 상품 이미지 파일"
+          />
+          <button
+            className="close-img"
+            onClick={(e) => handleImgDelete(index, e)}
+          >
+            <img src={CloseIcon} alt="대표 상품 이미지 삭제" />
+          </button>
+        </div>
+      )}
     </div>
   );
 };

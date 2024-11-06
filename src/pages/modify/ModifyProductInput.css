@@ -8,4 +8,9 @@
 
 .create-input-package .create-label {
   margin: 0;
+  font-weight: 600;
+}
+
+.create-input-package .create-input {
+  font-weight: 400;
 }
