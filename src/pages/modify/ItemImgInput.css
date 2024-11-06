@@ -54,19 +54,18 @@
   position: relative;
 }
 
-.close-img {
+.delete-icon {
   position: absolute;
-  top: 8px;
+  top: 18px;
   left: 71px;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
+  right: 8px;
   cursor: pointer;
   border: none;
+  background: none;
 }
 
-.close-img:hover {
-  background-color: #888790;
+.delete-icon:hover {
+  filter: brightness(1.2);
 }
 
 .item-img-label {
