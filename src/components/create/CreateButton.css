@@ -9,10 +9,6 @@
   margin: 64px 0 213px;
 }
 
-.create-button .active {
-  background-color: #3e45ec;
-}
-
 @media (max-width: 767px) {
   .create-button {
     width: 100%;
@@ -25,3 +21,9 @@
     margin: 64px 0 213px;
   }
 }
+
+.create-button.active {
+  background-color: #3e45ec;
+}
+
+

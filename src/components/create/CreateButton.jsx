@@ -12,7 +12,7 @@ const CreateButton = ({ onChange, disabled }) => {
   return (
     <div>
       <button
-        className={`create-button ${isActive ? 'active' : 'disabled'}`}
+        className={`create-button ${!disabled ? 'active' : 'disabled'}`}
         onChange={handleActiveButton}
         disabled={disabled}
       >

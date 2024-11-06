@@ -42,6 +42,13 @@ function Create() {
   // 유효성 검사 규칙
   const urlPattern = /^(https:\/\/)[\w-]+(\.[\w-]+)+([/?#].*)?$/;
   const userIdPattern = /^[A-Za-z0-9]+$/;
+  const userPasswordRegExp = /^[A-Za-z0-9]{6,}$/;
+
+  const [isShopUrlValid, setIsShopUrlValid] = useState(false);
+  const [isUserIdValid, setIsUserIdValid] = useState(false);
+  const [isPasswordValid, setIsPasswordValid] = useState(false);
+
+  const isFormValid = isShopUrlValid && isUserIdValid && isPasswordValid;
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
@@ -203,6 +210,7 @@ function Create() {
               onChange={handleShopChange}
               errorMessage="https://example.com/...와 같은 형식으로 적어주세요."
               validationRule={urlPattern}
+              onValidityChange={(isValid) => setIsShopUrlValid(isValid)}
             />
             <CreateInput
               label="유저 ID"
@@ -212,14 +220,19 @@ function Create() {
               onChange={handleUserChange}
               errorMessage="유저 ID는 중복, 띄어쓰기, 특수기호 사용 불가입니다."
               validationRule={userIdPattern}
+              onValidityChange={(isValid) => setIsUserIdValid(isValid)}
             />
             <CreatePasswordButton
               name="password"
               value={userInfo.password}
               onChange={handleUserChange}
+              validationRule={userPasswordRegExp}
+              onValidityChange={(isValidPassword) =>
+                setIsPasswordValid(isValidPassword)
+              }
             />
           </div>
-          <CreateButton type="submit" />
+          <CreateButton type="submit" disabled={!isFormValid} />
         </div>
       </form>
       <div>
