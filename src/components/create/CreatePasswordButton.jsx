@@ -3,7 +3,7 @@ import passwordToggleButtonOff from '../../images/icons/password-toggle-off.png'
 import passwordToggleButtonOn from '../../images/icons/password-toggle-on.png';
 import './CreatePasswordButton.css';
 
-const CreatePasswordButton = ({ value, onChange, name }) => {
+const CreatePasswordButton = ({ value, onChange, name, validationRule }) => {
   const [showPassword, setShowPassword] = useState({
     type: 'password',
     visible: false,
@@ -22,8 +22,11 @@ const CreatePasswordButton = ({ value, onChange, name }) => {
   // 유효성 검사
 
   const handlePasswordValidation = (e) => {
-    const userPasswordRegExp = /^[A-Za-z0-9]{6,}$/;
-    setIsPassword(userPasswordRegExp.test(e.target.value));
+    const isValidPassword = validationRule
+      ? validationRule.test(e.target.value)
+      : true;
+    // const userPasswordRegExp = /^[A-Za-z0-9]{6,}$/;
+    setIsPassword(isValidPassword);
     onChange(e); // Create에서 상태 관리할 수 있도록 호출
   };
 

@@ -42,6 +42,7 @@ function Create() {
   // 유효성 검사 규칙
   const urlPattern = /^(https:\/\/)[\w-]+(\.[\w-]+)+([/?#].*)?$/;
   const userIdPattern = /^[A-Za-z0-9]+$/;
+  const userPasswordRegExp = /^[A-Za-z0-9]{6,}$/;
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
@@ -217,6 +218,7 @@ function Create() {
               name="password"
               value={userInfo.password}
               onChange={handleUserChange}
+              validationRule={userPasswordRegExp}
             />
           </div>
           <CreateButton type="submit" />
