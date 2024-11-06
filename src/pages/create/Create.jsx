@@ -156,6 +156,7 @@ function Create() {
       setIsModalOpen(true);
     } catch (err) {
       console.error(err.message);
+      alert(err.message); // api응답오류 메시지노출
     } finally {
       console.log('성공');
     }
