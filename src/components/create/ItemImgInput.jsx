@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import './ItemImgInput.css';
-import CloseIcon from '../../images/icons/close.png';
+import { deleteIcon } from '../../images/icons';
 
 const ItemImgInput = ({ index, onFileChange, imageUrl }) => {
   const [imgPreviewUrl, setImgPreviewUrl] = useState('');
@@ -38,9 +38,12 @@ const ItemImgInput = ({ index, onFileChange, imageUrl }) => {
               src={imgPreviewUrl}
               alt="대표 상품 이미지 파일"
             />
-            <button className="close-img" onClick={handleImgDelete}>
-              <img src={CloseIcon} alt="대표 상품 이미지 삭제" />
-            </button>
+            <img
+              src={deleteIcon}
+              className="delete-icon"
+              onClick={handleImgDelete}
+              alt="대표 상품 이미지 삭제"
+            />
           </div>
         )}
       </label>

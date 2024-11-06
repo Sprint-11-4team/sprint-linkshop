@@ -5,6 +5,7 @@ import notFound from './not-found.png';
 import back from './back.png';
 import check from './check.png';
 import close from './close.png';
+import deleteIcon from './deleteIcon.png';
 import edit from './edit.png';
 import filterBtn from './filter-btn.png';
 import search from './search.png';
@@ -24,6 +25,7 @@ export {
   back,
   check,
   close,
+  deleteIcon,
   edit,
   filterBtn,
   search,
